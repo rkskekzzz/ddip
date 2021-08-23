@@ -6,11 +6,19 @@
 //
 
 import UIKit
+import FloatingPanel
 
 class SearchViewController: UIViewController {
 	
+
+	@IBOutlet weak var visualEffectView: UIVisualEffectView!
+
+
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
+
 		
 	}
 }
