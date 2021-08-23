@@ -87,6 +87,7 @@ extension MapViewController {
     func allTest() {
         
         print("call all test")
+        print("call all test2")
         let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
         centerToLocation(initialLocation)
         
