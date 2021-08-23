@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69A6ED6526D407B300C1A4D5 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6ED6426D407B300C1A4D5 /* Annotation.swift */; };
+		69A6ED6726D407EA00C1A4D5 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */; };
+		69A6ED6D26D409C000C1A4D5 /* PublicArt.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */; };
 		904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6626D3CDEE00FDC55D /* AppDelegate.swift */; };
 		904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6826D3CDEE00FDC55D /* SceneDelegate.swift */; };
 		904C4B6B26D3CDEE00FDC55D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6A26D3CDEE00FDC55D /* MainViewController.swift */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69A6ED6426D407B300C1A4D5 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Annotation.swift; path = ProjectDDIP/Model/Annotation.swift; sourceTree = SOURCE_ROOT; };
+		69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnnotationView.swift; path = ProjectDDIP/Model/AnnotationView.swift; sourceTree = SOURCE_ROOT; };
+		69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PublicArt.geojson; sourceTree = "<group>"; };
 		904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectDDIP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904C4B6626D3CDEE00FDC55D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		904C4B6826D3CDEE00FDC55D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +47,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		69A6ED6926D4098200C1A4D5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		69A6ED6E26D409F900C1A4D5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				69A6ED6426D407B300C1A4D5 /* Annotation.swift */,
+				69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		904C4B5A26D3CDED00FDC55D = {
 			isa = PBXGroup;
 			children = (
@@ -60,7 +83,8 @@
 		904C4B6526D3CDEE00FDC55D /* ProjectDDIP */ = {
 			isa = PBXGroup;
 			children = (
-				904C4B8126D3D65C00FDC55D /* Model */,
+				69A6ED6E26D409F900C1A4D5 /* Model */,
+				69A6ED6926D4098200C1A4D5 /* Resources */,
 				904C4B7A26D3CDF800FDC55D /* View */,
 				904C4B8026D3D64700FDC55D /* ViewModel */,
 				904C4B7B26D3CE0100FDC55D /* Controller */,
@@ -96,13 +120,6 @@
 				904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		904C4B8126D3D65C00FDC55D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +182,7 @@
 				904C4B7326D3CDF000FDC55D /* LaunchScreen.storyboard in Resources */,
 				904C4B7026D3CDF000FDC55D /* Assets.xcassets in Resources */,
 				904C4B6E26D3CDEE00FDC55D /* Main.storyboard in Resources */,
+				69A6ED6D26D409C000C1A4D5 /* PublicArt.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +196,9 @@
 				904C4B6B26D3CDEE00FDC55D /* MainViewController.swift in Sources */,
 				904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */,
 				904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */,
+				69A6ED6726D407EA00C1A4D5 /* AnnotationView.swift in Sources */,
 				904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */,
+				69A6ED6526D407B300C1A4D5 /* Annotation.swift in Sources */,
 				904C4B7D26D3CF4A00FDC55D /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
