@@ -52,6 +52,37 @@
             </objects>
             <point key="canvasLocation" x="864" y="100"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="o2n-QE-FrH">
+            <objects>
+                <viewController storyboardIdentifier="SearchViewController" id="44e-AE-ReH" customClass="SearchViewController" customModule="ProjectDDIP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZT7-V8-FuV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LT-nc-ydc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zx7-MS-slJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="14R-bB-pg9"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0LT-nc-ydc" firstAttribute="top" secondItem="ZT7-V8-FuV" secondAttribute="top" id="1eH-xc-Eqk"/>
+                            <constraint firstItem="0LT-nc-ydc" firstAttribute="bottom" secondItem="ZT7-V8-FuV" secondAttribute="bottom" id="8WM-dw-tjz"/>
+                            <constraint firstItem="0LT-nc-ydc" firstAttribute="leading" secondItem="14R-bB-pg9" secondAttribute="leading" id="9WL-l3-UpF"/>
+                            <constraint firstItem="0LT-nc-ydc" firstAttribute="trailing" secondItem="14R-bB-pg9" secondAttribute="trailing" id="nGp-KA-rhm"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rzr-8P-kkZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1675" y="77"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

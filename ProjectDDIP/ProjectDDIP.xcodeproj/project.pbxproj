@@ -10,6 +10,7 @@
 		69A6ED6526D407B300C1A4D5 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6ED6426D407B300C1A4D5 /* Annotation.swift */; };
 		69A6ED6726D407EA00C1A4D5 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */; };
 		69A6ED6D26D409C000C1A4D5 /* PublicArt.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */; };
+		70F4760A26D423DB00905070 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4760926D423DB00905070 /* SearchViewController.swift */; };
 		904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6626D3CDEE00FDC55D /* AppDelegate.swift */; };
 		904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6826D3CDEE00FDC55D /* SceneDelegate.swift */; };
 		904C4B6B26D3CDEE00FDC55D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6A26D3CDEE00FDC55D /* MainViewController.swift */; };
@@ -24,6 +25,7 @@
 		69A6ED6426D407B300C1A4D5 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Annotation.swift; path = ProjectDDIP/Model/Annotation.swift; sourceTree = SOURCE_ROOT; };
 		69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnnotationView.swift; path = ProjectDDIP/Model/AnnotationView.swift; sourceTree = SOURCE_ROOT; };
 		69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PublicArt.geojson; sourceTree = "<group>"; };
+		70F4760926D423DB00905070 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectDDIP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904C4B6626D3CDEE00FDC55D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		904C4B6826D3CDEE00FDC55D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				904C4B6A26D3CDEE00FDC55D /* MainViewController.swift */,
 				904C4B7C26D3CF4A00FDC55D /* MapViewController.swift */,
+				70F4760926D423DB00905070 /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				904C4B6B26D3CDEE00FDC55D /* MainViewController.swift in Sources */,
 				904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */,
+				70F4760A26D423DB00905070 /* SearchViewController.swift in Sources */,
 				904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */,
 				69A6ED6726D407EA00C1A4D5 /* AnnotationView.swift in Sources */,
 				904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */,
