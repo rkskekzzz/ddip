@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import FloatingPanel
 
 struct MainViewContainer {
     
+
     static var share: MainViewContainer? = nil
     var mapViewController: MapViewController? = nil
 	var searchViewController: SearchViewController? = nil
