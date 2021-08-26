@@ -9,13 +9,9 @@ import UIKit
 import FloatingPanel
 
 struct MainViewContainer {
-	typealias PanelDelegate = FloatingPanelControllerDelegate & UIGestureRecognizerDelegate
     
     var mapViewController: MapViewController
 	var searchViewController: SearchViewController
-    
-	lazy var searchViewFpc = FloatingPanelController()
-	lazy var searchViewFpcDelegate: PanelDelegate = SearchViewPanelDelegate(owner: mapViewController)
 	
     // guard 처리 하는게 맞는지?
     init(storyboard: UIStoryboard?) {
