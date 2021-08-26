@@ -8,8 +8,17 @@
 import UIKit
 import MapKit
 
+protocol MapViewControllerDelegate {
+//    func didUpdateMapVCAnnotation(_ mapViewController: MapViewController, annotationObject: AnnotationObject)
+    func didUpdateMapVCAnnotation(annotationObject: AnnotationObject)
+//    func didUpdateMapVCAnnotationFail(error: Error)
+}
+
 class MapViewController: UIViewController {
     
+    let viewContainer = MainViewContainer.share
+    var delegate: MapViewControllerDelegate?
+
     @IBOutlet weak var mapView: MKMapView!
     private var annotations: [AnnotationObject] = []
     
@@ -68,10 +77,17 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
         guard let annotationObject = view.annotation as? AnnotationObject else { return }
 
         let driving = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         annotationObject.mapItem?.openInMaps(launchOptions: driving)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        guard let annotationObject = view.annotation as? AnnotationObject else { return }
+        delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
     }
 }
 
@@ -86,9 +102,6 @@ extension MapViewController {
     
     func allTest() {
         
-        print("call all test")
-        print("call all test2")
-     		print("call all test42? no")
         let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
         centerToLocation(initialLocation)
         
