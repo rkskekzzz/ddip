@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(mainViewContainer.mapViewController.view)
+        view.addSubview(mainViewContainer.searchViewController.view)
     }
 }
 

@@ -110,11 +110,18 @@ extension SearchViewController: UITableViewDelegate{
         
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
-            if let item = getMapItem() {
-                print("item coordinate = \(item.placemark.coordinate)")
-            }
         }
+        guard let places = places else {
+            return
+        }
+        let annotationData = MapItemData(
+            loc: places.placemark.coordinate.latitude,
+            lloc: places.placemark.coordinate.longitude)
+        
+        NotificationCenter.default.post(name:NSNotification.Name(rawValue: "getAnnotationData"), object: nil, userInfo: annotationData.getData())
+        
     }
+    
     
     private func search(for suggestedCompletion: MKLocalSearchCompletion) {
         let searchRequest = MKLocalSearch.Request(completion: suggestedCompletion)
@@ -122,6 +129,7 @@ extension SearchViewController: UITableViewDelegate{
     }
 
     private func search(using searchRequest: MKLocalSearch.Request){
+        
         // 검색 지역 설정
         searchRequest.region = searchRegion
         // 검색 유형 설정
@@ -133,13 +141,11 @@ extension SearchViewController: UITableViewDelegate{
             guard error == nil else {
                 return
             }
+            
             // 검색한 결과 : reponse의 mapItems 값을 가져온다.
             places = response?.mapItems[0]
 //          print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
+            
         }
-    }
-    
-    func getMapItem() -> MKMapItem? {
-        return self.places
     }
 }

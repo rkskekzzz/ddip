@@ -136,6 +136,7 @@
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="xnx-mg-Ta4" id="1jp-Ne-dV3"/>
+                        <outlet property="tableView" destination="DwD-8W-EiR" id="yOC-4Q-SKo"/>
                         <outlet property="tablelView" destination="DwD-8W-EiR" id="fML-Ze-bdc"/>
                     </connections>
                 </viewController>
