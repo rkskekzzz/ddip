@@ -79,8 +79,8 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        completerResults = nil
         searchBar.text = nil
+        completerResults = nil
         searchCompleter?.queryFragment = ""
         searchBar.resignFirstResponder()
     }
