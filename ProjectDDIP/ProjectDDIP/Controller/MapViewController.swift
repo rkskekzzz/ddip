@@ -16,7 +16,7 @@ protocol MapViewControllerDelegate {
 
 class MapViewController: UIViewController {
     
-    let viewContainer = MainViewContainer.share
+//    let viewContainer = MainViewContainer.share
     var delegate: MapViewControllerDelegate?
 
     @IBOutlet weak var mapView: MKMapView!

@@ -11,14 +11,14 @@ import FloatingPanel
 class MainViewController: UIViewController {
 	typealias PanelDelegate = FloatingPanelControllerDelegate & UIGestureRecognizerDelegate
 	
-    lazy var mainViewContainer = MainViewContainer(storyboard: storyboard)
+    lazy var mainViewContainer = MainViewContainer(storyBoard: storyboard)
 	
 	lazy var fpc = FloatingPanelController()
 	lazy var fpcDelegate: PanelDelegate = SearchViewPanelDelegate(owner: self)
 		
     override func viewDidLoad() {
         super.viewDidLoad()
-		mainViewContainer.mapViewController?.delegate = self
+		mainViewContainer.mapViewController.delegate = self
 		self.addChild(mainViewContainer.mapViewController)
 		self.view.addSubview(mainViewContainer.mapViewController.view)
 
@@ -27,11 +27,7 @@ class MainViewController: UIViewController {
 		fpc.layout = ychaPanelPhoneLayout()
 		fpc.setAppearanceForPhone()
 
-
-		// Add and show the views managed by the `FloatingPanelController` object to self.view.
 		fpc.addPanel(toParent: self)
-
-		
     }
 }
 
