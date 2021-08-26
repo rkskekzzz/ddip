@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6924CFDF26D769D7004828AB /* DataFormats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924CFDE26D769D7004828AB /* DataFormats.swift */; };
 		69A6ED6526D407B300C1A4D5 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6ED6426D407B300C1A4D5 /* Annotation.swift */; };
 		69A6ED6726D407EA00C1A4D5 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */; };
 		69A6ED6D26D409C000C1A4D5 /* PublicArt.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6924CFDE26D769D7004828AB /* DataFormats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFormats.swift; sourceTree = "<group>"; };
 		69A6ED6426D407B300C1A4D5 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Annotation.swift; path = ProjectDDIP/Model/Annotation.swift; sourceTree = SOURCE_ROOT; };
 		69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnnotationView.swift; path = ProjectDDIP/Model/AnnotationView.swift; sourceTree = SOURCE_ROOT; };
 		69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PublicArt.geojson; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				69A6ED6426D407B300C1A4D5 /* Annotation.swift */,
 				69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */,
+				6924CFDE26D769D7004828AB /* DataFormats.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */,
 				70F4760A26D423DB00905070 /* SearchViewController.swift in Sources */,
 				904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */,
+				6924CFDF26D769D7004828AB /* DataFormats.swift in Sources */,
 				69A6ED6726D407EA00C1A4D5 /* AnnotationView.swift in Sources */,
 				904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */,
 				69A6ED6526D407B300C1A4D5 /* Annotation.swift in Sources */,
