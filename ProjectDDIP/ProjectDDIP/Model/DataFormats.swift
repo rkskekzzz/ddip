@@ -21,4 +21,12 @@ struct MapAnnotationData: Encodable {
                      "description": description] as [String : Any]
         return table
     }
+    
+//    func getData() -> NSDictionary  {
+//        let table = ["name": name,
+//                     "loc": loc,
+//                     "lloc": lloc,
+//                     "description": description] as [String : Any]
+//        return table as NSDictionary
+//    }
 }

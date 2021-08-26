@@ -10,29 +10,21 @@ import UIKit
 class MainViewController: UIViewController {
 
     lazy var mainViewContainer = MainViewContainer(storyboard: storyboard)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(mainViewContainer.mapViewController.view)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.getAnnotationDetail), name: NSNotification.Name(rawValue:"getAnnotationData"), object:nil)
+        mainViewContainer.mapViewController?.delegate = self
+        view.addSubview(mainViewContainer.mapViewController!.view)
     }
+}
 
-    @objc func getAnnotationDetail(_ notification: Notification) {
-        // update instance here
-        let data = notification.userInfo!
-        
+extension MainViewController: MapViewControllerDelegate {
+    func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
         DispatchQueue.main.async {
-            // update view here
-            
-            // test start
-            print("--> getAnnotationDetail start <--")
-            print(data["name"] as! String)
-            print(data["loc"] as! Double)
-            print(data["lloc"] as! Double)
-            print(data["description"] as! String)
-            print("==> getAnnotationDetail end <==")
-            // test end
+            print(annotationObject.locationName as Any)
+            print(annotationObject.coordinate.latitude)
+            print(annotationObject.coordinate.longitude)
+            print(annotationObject.discipline as Any)
         }
     }
 }
@@ -46,3 +38,4 @@ class MainViewController: UIViewController {
 //        }
 //    }
 //}
+
