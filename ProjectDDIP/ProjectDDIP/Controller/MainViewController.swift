@@ -17,17 +17,18 @@ class MainViewController: UIViewController {
 	lazy var fpcDelegate: PanelDelegate = SearchViewPanelDelegate(owner: self)
 		
     override func viewDidLoad() {
-        super.viewDidLoad()
-		mainViewContainer.mapViewController.delegate = self
-		self.addChild(mainViewContainer.mapViewController)
-		self.view.addSubview(mainViewContainer.mapViewController.view)
+      super.viewDidLoad()
 
-		fpc.delegate = fpcDelegate
-		fpc.set(contentViewController: mainViewContainer.searchViewController)
-		fpc.layout = ychaPanelPhoneLayout()
-		fpc.setAppearanceForPhone()
+      mainViewContainer.mapViewController.delegate = self
+      self.addChild(mainViewContainer.mapViewController)
+      self.view.addSubview(mainViewContainer.mapViewController.view)
 
-		fpc.addPanel(toParent: self)
+      fpc.delegate = fpcDelegate
+      fpc.set(contentViewController: mainViewContainer.searchViewController)
+      fpc.layout = ychaPanelPhoneLayout()
+      fpc.setAppearanceForPhone()
+
+      fpc.addPanel(toParent: self)
     }
 }
 

@@ -10,9 +10,8 @@ import FloatingPanel
 
 struct MainViewContainer {
     
-//    static var share: MainViewContainer? = nil
     let mapViewController: MapViewController
-	let searchViewController: SearchViewController
+  	let searchViewController: SearchViewController
     
     // guard 처리 하는게 맞는지?
     init(storyBoard: UIStoryboard?) {
