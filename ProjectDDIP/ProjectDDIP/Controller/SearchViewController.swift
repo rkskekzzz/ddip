@@ -70,13 +70,27 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: UISearchBarDelegate {
-	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-		if searchText == "" {
-			completerResults = nil
-		}
-		print("text: \(searchText)")
-		searchCompleter?.queryFragment = searchText
-	}
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            completerResults = nil
+        }
+        print("text: \(searchText)")
+        searchCompleter?.queryFragment = searchText
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        completerResults = nil
+        searchBar.text = nil
+        searchCompleter?.queryFragment = ""
+        searchBar.resignFirstResponder()
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true
+    }
 }
 
 // searchCompleter?.queryFragment 값을 토대로 Location 검색
@@ -91,7 +105,7 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         if let error = error as NSError? {
             print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription). The query fragment is: \"\(completer.queryFragment)\"")
-
+            tableView.reloadData()
         }
     }
 }

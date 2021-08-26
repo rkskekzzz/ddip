@@ -60,49 +60,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LT-nc-ydc">
+                            <visualEffectView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LT-nc-ydc">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zx7-MS-slJ">
+                                <view key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zx7-MS-slJ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QQ8-bb-dFF">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <stackView contentMode="bottom" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QQ8-bb-dFF">
+                                            <rect key="frame" x="0.0" y="6" width="414" height="890"/>
                                             <subviews>
-                                                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="xnx-mg-Ta4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="xnx-mg-Ta4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="44e-AE-ReH" id="N3t-d3-Ozo"/>
                                                     </connections>
                                                 </searchBar>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DwD-8W-EiR">
-                                                    <rect key="frame" x="0.0" y="51" width="414" height="845"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <rect key="frame" x="0.0" y="55" width="414" height="835"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <prototypes>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="7wr-Vy-2kv" detailTextLabel="hhA-m4-0nQ" style="IBUITableViewCellStyleSubtitle" id="QlF-3T-zhK" customClass="Cell" customModule="ProjectDDIP" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QlF-3T-zhK" id="5YB-Ga-nfT">
+                                                            <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QlF-3T-zhK" id="5YB-Ga-nfT">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7wr-Vy-2kv">
+                                                                    <label multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7wr-Vy-2kv">
                                                                         <rect key="frame" x="20" y="6" width="25" height="14.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hhA-m4-0nQ">
+                                                                    <label multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hhA-m4-0nQ">
                                                                         <rect key="frame" x="20" y="22.5" width="40.5" height="13.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </tableViewCellContentView>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
                                                                 <outlet property="subtitleLabel" destination="hhA-m4-0nQ" id="egc-Bg-4us"/>
                                                                 <outlet property="titleLabel" destination="7wr-Vy-2kv" id="JhU-SJ-eMR"/>
@@ -115,6 +120,7 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="DwD-8W-EiR" secondAttribute="trailing" id="exv-Ek-eLg"/>
                                                 <constraint firstAttribute="bottom" secondItem="DwD-8W-EiR" secondAttribute="bottom" id="her-gC-AKD"/>
@@ -122,11 +128,12 @@
                                             </constraints>
                                         </stackView>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="QQ8-bb-dFF" firstAttribute="leading" secondItem="Zx7-MS-slJ" secondAttribute="leading" id="K6T-Ge-9jm"/>
                                         <constraint firstAttribute="bottom" secondItem="QQ8-bb-dFF" secondAttribute="bottom" id="fxB-X1-1kr"/>
                                         <constraint firstAttribute="trailing" secondItem="QQ8-bb-dFF" secondAttribute="trailing" id="p2B-fN-kYX"/>
-                                        <constraint firstItem="QQ8-bb-dFF" firstAttribute="top" secondItem="Zx7-MS-slJ" secondAttribute="top" id="yCh-a6-dyJ"/>
+                                        <constraint firstItem="QQ8-bb-dFF" firstAttribute="top" secondItem="Zx7-MS-slJ" secondAttribute="top" constant="6" id="yCh-a6-dyJ"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="systemUltraThinMaterial"/>
