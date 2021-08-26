@@ -10,7 +10,6 @@ import MapKit
 
 class SearchViewController: UIViewController {
 	
-	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var visualEffectView: UIVisualEffectView!
@@ -148,7 +147,7 @@ extension SearchViewController: UITableViewDelegate{
             }
             // 검색한 결과 : reponse의 mapItems 값을 가져온다.
             places = response?.mapItems[0]
-          print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
+//          print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
         }
     }
 }
