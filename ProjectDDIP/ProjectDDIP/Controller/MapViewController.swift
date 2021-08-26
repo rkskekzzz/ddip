@@ -8,8 +8,17 @@
 import UIKit
 import MapKit
 
+protocol MapViewControllerDelegate {
+//    func didUpdateMapVCAnnotation(_ mapViewController: MapViewController, annotationObject: AnnotationObject)
+    func didUpdateMapVCAnnotation(annotationObject: AnnotationObject)
+//    func didUpdateMapVCAnnotationFail(error: Error)
+}
+
 class MapViewController: UIViewController {
     
+    let viewContainer = MainViewContainer.share
+    var delegate: MapViewControllerDelegate?
+
     @IBOutlet weak var mapView: MKMapView!
     private var annotations: [AnnotationObject] = []
     
@@ -78,15 +87,7 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         guard let annotationObject = view.annotation as? AnnotationObject else { return }
-        
-        // test data start
-        let annotationDetail = MapAnnotationData(
-            name: annotationObject.locationName!,
-            loc: annotationObject.coordinate.latitude,
-            lloc: annotationObject.coordinate.longitude,
-            description: annotationObject.discipline!)
-        // test data end
-        NotificationCenter.default.post(name:NSNotification.Name(rawValue: "getAnnotationData"), object: nil, userInfo: annotationDetail.getData())
+        delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
     }
 }
 
