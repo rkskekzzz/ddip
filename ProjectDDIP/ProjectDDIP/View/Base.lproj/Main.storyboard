@@ -72,27 +72,30 @@
                                                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="xnx-mg-Ta4">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="44e-AE-ReH" id="N3t-d3-Ozo"/>
+                                                    </connections>
                                                 </searchBar>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DwD-8W-EiR">
                                                     <rect key="frame" x="0.0" y="51" width="414" height="845"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <prototypes>
-                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Xg5-27-cbg" detailTextLabel="5JO-fq-9ee" rowHeight="66" style="IBUITableViewCellStyleSubtitle" id="yNK-ZU-FNJ" customClass="Cell" customModule="ProjectDDIP" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="24.5" width="414" height="66"/>
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="7wr-Vy-2kv" detailTextLabel="hhA-m4-0nQ" style="IBUITableViewCellStyleSubtitle" id="QlF-3T-zhK" customClass="Cell" customModule="ProjectDDIP" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yNK-ZU-FNJ" id="Lqv-ui-ZTq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
+                                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QlF-3T-zhK" id="5YB-Ga-nfT">
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xg5-27-cbg">
-                                                                        <rect key="frame" x="20" y="17" width="25" height="14.5"/>
+                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7wr-Vy-2kv">
+                                                                        <rect key="frame" x="20" y="6" width="25" height="14.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5JO-fq-9ee">
-                                                                        <rect key="frame" x="20" y="33.5" width="40.5" height="13.5"/>
+                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hhA-m4-0nQ">
+                                                                        <rect key="frame" x="20" y="22.5" width="40.5" height="13.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                         <nil key="textColor"/>
@@ -101,11 +104,15 @@
                                                                 </subviews>
                                                             </tableViewCellContentView>
                                                             <connections>
-                                                                <outlet property="subtitlelabel" destination="5JO-fq-9ee" id="egI-jy-nEf"/>
-                                                                <outlet property="titleLabel" destination="Xg5-27-cbg" id="nQf-yo-gSX"/>
+                                                                <outlet property="subtitleLabel" destination="hhA-m4-0nQ" id="egc-Bg-4us"/>
+                                                                <outlet property="titleLabel" destination="7wr-Vy-2kv" id="JhU-SJ-eMR"/>
                                                             </connections>
                                                         </tableViewCell>
                                                     </prototypes>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="44e-AE-ReH" id="JLf-i5-tGW"/>
+                                                        <outlet property="delegate" destination="44e-AE-ReH" id="O4Y-1z-mEQ"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                             <constraints>
@@ -135,9 +142,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchBar" destination="xnx-mg-Ta4" id="1jp-Ne-dV3"/>
-                        <outlet property="tableView" destination="DwD-8W-EiR" id="yOC-4Q-SKo"/>
-                        <outlet property="tablelView" destination="DwD-8W-EiR" id="fML-Ze-bdc"/>
+                        <outlet property="searchBar" destination="xnx-mg-Ta4" id="6bx-Ys-R5x"/>
+                        <outlet property="tableView" destination="DwD-8W-EiR" id="Da5-l2-s6s"/>
+                        <outlet property="visualEffectView" destination="0LT-nc-ydc" id="gTm-D6-J2y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rzr-8P-kkZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

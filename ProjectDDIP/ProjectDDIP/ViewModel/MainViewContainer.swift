@@ -19,6 +19,7 @@ struct MainViewContainer {
 		
 		mapViewController = storyboard.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
 		searchViewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+//		print(searchViewController)
 		
 //        if (MainViewContainer.share == nil) { MainViewContainer.share = self }
 //        MainViewContainer.share = self

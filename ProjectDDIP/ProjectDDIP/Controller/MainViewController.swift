@@ -11,25 +11,27 @@ import FloatingPanel
 class MainViewController: UIViewController {
 	typealias PanelDelegate = FloatingPanelControllerDelegate & UIGestureRecognizerDelegate
 	
-    lazy var mainViewContainer = MainViewContainer(storyBoard: storyboard)
+	lazy var mainViewContainer = MainViewContainer(storyBoard: storyboard)
 	
 	lazy var fpc = FloatingPanelController()
 	lazy var fpcDelegate: PanelDelegate = SearchViewPanelDelegate(owner: self)
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
-    override func viewDidLoad() {
-      super.viewDidLoad()
-
-      mainViewContainer.mapViewController.delegate = self
-      self.addChild(mainViewContainer.mapViewController)
-      self.view.addSubview(mainViewContainer.mapViewController.view)
-
-      fpc.delegate = fpcDelegate
-      fpc.set(contentViewController: mainViewContainer.searchViewController)
-      fpc.layout = ychaPanelPhoneLayout()
-      fpc.setAppearanceForPhone()
-
-      fpc.addPanel(toParent: self)
-    }
+		mainViewContainer.mapViewController.delegate = self
+		self.addChild(mainViewContainer.mapViewController)
+		self.view.addSubview(mainViewContainer.mapViewController.view)
+		
+		fpc.delegate = fpcDelegate
+		
+		fpc.set(contentViewController: mainViewContainer.searchViewController)
+		fpc.track(scrollView: mainViewContainer.searchViewController.tableView)
+		fpc.layout = ychaPanelPhoneLayout()
+		fpc.setAppearanceForPhone()
+		
+		fpc.addPanel(toParent: self)
+	}
 }
 
 
@@ -61,12 +63,12 @@ class ychaPanelPhoneLayout: FloatingPanelLayout {
 }
 
 extension MainViewController: MapViewControllerDelegate {
-    func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
-        DispatchQueue.main.async {
-            print(annotationObject.locationName as Any)
-            print(annotationObject.coordinate.latitude)
-            print(annotationObject.coordinate.longitude)
-            print(annotationObject.discipline as Any)
-        }
-    }
+	func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
+		DispatchQueue.main.async {
+			print(annotationObject.locationName as Any)
+			print(annotationObject.coordinate.latitude)
+			print(annotationObject.coordinate.longitude)
+			print(annotationObject.discipline as Any)
+		}
+	}
 }

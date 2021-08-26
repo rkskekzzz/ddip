@@ -10,9 +10,11 @@ import MapKit
 
 class SearchViewController: UIViewController {
 	
-    
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
+	
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var searchBar: UISearchBar!
+	@IBOutlet weak var visualEffectView: UIVisualEffectView!
+
     
     // 검색을 도와주는 변수
     private var searchCompleter: MKLocalSearchCompleter?
@@ -42,6 +44,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
 		super.viewDidLoad()
+
         // Do any additional setup after loading the view.
         searchCompleter = MKLocalSearchCompleter()
         searchCompleter?.delegate = self
@@ -56,6 +59,7 @@ class SearchViewController: UIViewController {
 //        searchCompleter?.region = mapView.region
 //        searchRegion 변수가 가지고 있는 지역 기준으로 검색지역 설정
         searchCompleter?.region = searchRegion
+		
 	}
     
     // Completer 참조 해제
@@ -66,6 +70,15 @@ class SearchViewController: UIViewController {
     
 }
 
+extension SearchViewController: UISearchBarDelegate {
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		if searchText == "" {
+			completerResults = nil
+		}
+		print("text: \(searchText)")
+		searchCompleter?.queryFragment = searchText
+	}
+}
 
 // searchCompleter?.queryFragment 값을 토대로 Location 검색
 extension SearchViewController: MKLocalSearchCompleterDelegate {
@@ -87,18 +100,21 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
 extension SearchViewController: UITableViewDataSource{
     // 결과 count 값 리턴, 없으면 default 0
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("\(completerResults?.count ?? 0)")
+//        print("\(completerResults?.count ?? 0)")
         return completerResults?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? Cell else { return UITableViewCell()}
-        
-        if let suggestion = completerResults?[indexPath.row] {
-            cell.titleLabel.text = suggestion.title
-            cell.subtitleLabel.text = suggestion.subtitle
-            print(suggestion.title)
+
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? Cell else { return UITableViewCell() }
+		
+		if let suggestion = completerResults?[indexPath.row] {
+//			print(suggestion.title)
+//			print(suggestion.subtitle)
+//			print("------------------")
+			cell.titleLabel.text = suggestion.title
+			cell.subtitleLabel.text = suggestion.subtitle
+            
         }
         return cell
     }
@@ -107,21 +123,11 @@ extension SearchViewController: UITableViewDataSource{
 extension SearchViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) // 선택 표시 해제
-        
+		
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
         }
-        guard let places = places else {
-            return
-        }
-        let annotationData = MapItemData(
-            loc: places.placemark.coordinate.latitude,
-            lloc: places.placemark.coordinate.longitude)
-        
-        NotificationCenter.default.post(name:NSNotification.Name(rawValue: "getAnnotationData"), object: nil, userInfo: annotationData.getData())
-        
     }
-    
     
     private func search(for suggestedCompletion: MKLocalSearchCompletion) {
         let searchRequest = MKLocalSearch.Request(completion: suggestedCompletion)
@@ -129,7 +135,6 @@ extension SearchViewController: UITableViewDelegate{
     }
 
     private func search(using searchRequest: MKLocalSearch.Request){
-        
         // 검색 지역 설정
         searchRequest.region = searchRegion
         // 검색 유형 설정
@@ -141,11 +146,9 @@ extension SearchViewController: UITableViewDelegate{
             guard error == nil else {
                 return
             }
-            
             // 검색한 결과 : reponse의 mapItems 값을 가져온다.
             places = response?.mapItems[0]
-//          print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
-            
+          print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
         }
     }
 }
