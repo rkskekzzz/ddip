@@ -10,7 +10,6 @@ import UIKit
 struct MainViewContainer {
     
     var mapViewController: MapViewController
-	
 	var searchViewController: SearchViewController
     
     // guard 처리 하는게 맞는지?

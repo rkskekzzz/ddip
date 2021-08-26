@@ -19,6 +19,7 @@
 		904C4B7326D3CDF000FDC55D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904C4B7126D3CDF000FDC55D /* LaunchScreen.storyboard */; };
 		904C4B7D26D3CF4A00FDC55D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7C26D3CF4A00FDC55D /* MapViewController.swift */; };
 		904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */; };
+		904C4B8326D64B7900FDC55D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B8226D64B7900FDC55D /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		904C4B7426D3CDF000FDC55D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		904C4B7C26D3CF4A00FDC55D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContainer.swift; sourceTree = "<group>"; };
+		904C4B8226D64B7900FDC55D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */,
+				904C4B8226D64B7900FDC55D /* Cell.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				70F4760A26D423DB00905070 /* SearchViewController.swift in Sources */,
 				904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */,
 				69A6ED6726D407EA00C1A4D5 /* AnnotationView.swift in Sources */,
+				904C4B8326D64B7900FDC55D /* Cell.swift in Sources */,
 				904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */,
 				69A6ED6526D407B300C1A4D5 /* Annotation.swift in Sources */,
 				904C4B7D26D3CF4A00FDC55D /* MapViewController.swift in Sources */,
