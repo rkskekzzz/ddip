@@ -20,6 +20,14 @@ class MainViewController: UIViewController {
 		super.viewDidLoad()
 		
 		mainViewContainer.mapViewController.delegate = self
+        mainViewContainer.searchViewController.panelUp = {
+            print("in closure")
+            self.fpc.move(to: .full, animated: true)
+        }
+        mainViewContainer.searchViewController.panelDown = {
+            print("in closure")
+            self.fpc.move(to: .tip, animated: true)
+        }
 		self.addChild(mainViewContainer.mapViewController)
 		self.view.addSubview(mainViewContainer.mapViewController.view)
 		

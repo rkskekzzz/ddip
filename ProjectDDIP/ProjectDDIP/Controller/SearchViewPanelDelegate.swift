@@ -43,3 +43,4 @@ class SearchViewPanelDelegate: NSObject, FloatingPanelControllerDelegate, UIGest
 		fpc.contentMode = .fitToBounds
 	}
 }
+
