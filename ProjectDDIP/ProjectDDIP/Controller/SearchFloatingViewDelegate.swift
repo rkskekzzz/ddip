@@ -47,15 +47,5 @@ class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIG
 			owner.mainViewContainer.searchViewController.tableView.alpha = 1.0
 		}
 	}
-
-	func floatingPanelWillEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetState: UnsafeMutablePointer<FloatingPanelState>) {
-		if targetState.pointee == .tip {
-			vc.contentMode = .static
-		}
-	}
-	
-	func floatingPanelDidEndAttracting(_ fpc: FloatingPanelController) {
-		fpc.contentMode = .fitToBounds
-	}
 }
 

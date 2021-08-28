@@ -29,21 +29,11 @@ class MeetingFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UI
 		
 		return MeetingFloatingViewLayout()
 	}
-	
+
 	func floatingPanelDidMove(_ vc: FloatingPanelController) {
 		let loc = vc.surfaceLocation
-		let maxY = vc.surfaceLocation(for: .half).y
-		vc.surfaceLocation = CGPoint(x: loc.x, y: min(loc.y, maxY))
-	}
-	
-	func floatingPanelWillEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetState: UnsafeMutablePointer<FloatingPanelState>) {
-		if targetState.pointee == .tip {
-			vc.contentMode = .static
-		}
-	}
-	
-	func floatingPanelDidEndAttracting(_ fpc: FloatingPanelController) {
-		fpc.contentMode = .fitToBounds
+		let minY = vc.surfaceLocation(for: .half).y
+		vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
 	}
 }
 

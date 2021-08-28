@@ -9,8 +9,6 @@ import UIKit
 import FloatingPanel
 
 class MainViewController: UIViewController {
-	typealias PanelDelegate = FloatingPanelControllerDelegate & UIGestureRecognizerDelegate
-	
 	lazy var mainViewContainer = MainViewContainer(storyBoard: storyboard)
 	
 	override func viewDidLoad() {
@@ -22,7 +20,7 @@ class MainViewController: UIViewController {
 	}
 }
 
-extension MainViewController {
+private extension MainViewController {
 	func initMainView() {
 		mainViewContainer.mapViewController.delegate = mainViewContainer.meetingViewController
 		addChild(mainViewContainer.mapViewController)
@@ -32,9 +30,11 @@ extension MainViewController {
 	func initSearchView() {
 		// SearchFloatingView
 		let fpc = mainViewContainer.searchFloatingViewController
-		let fpcDelegate: PanelDelegate = SearchFloatingViewDelegate(owner: self)
+		let fpcDelegate = SearchFloatingViewDelegate(owner: self)
 		
+		mainViewContainer.searchFloatingViewDelegate = fpcDelegate
 		fpc.delegate = fpcDelegate
+		fpc.contentMode = .fitToBounds
 		fpc.set(contentViewController: mainViewContainer.searchViewController)
 		fpc.track(scrollView: mainViewContainer.searchViewController.tableView)
 		fpc.addPanel(toParent: self)
@@ -52,9 +52,11 @@ extension MainViewController {
 	func initMeetingView() {
 		// MeetingFloatingView
 		let fpc = mainViewContainer.meetingFloatingViewController
-		let fpcDelegate: PanelDelegate = MeetingFloatingViewDelegate(owner: self)
+		let fpcDelegate = MeetingFloatingViewDelegate(owner: self)
 		
+		mainViewContainer.meetingFloatingViewDelegate = fpcDelegate
 		fpc.delegate = fpcDelegate
+		fpc.contentMode = .fitToBounds
 		fpc.set(contentViewController: mainViewContainer.meetingViewController)
 		fpc.isRemovalInteractionEnabled = true
 
