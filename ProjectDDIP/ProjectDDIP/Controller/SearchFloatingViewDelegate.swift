@@ -8,7 +8,7 @@
 import UIKit
 import FloatingPanel
 
-class SearchViewPanelDelegate: NSObject, FloatingPanelControllerDelegate, UIGestureRecognizerDelegate {
+class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIGestureRecognizerDelegate {
 	unowned let owner: MainViewController
 
 	init(owner: MainViewController) {
@@ -17,23 +17,38 @@ class SearchViewPanelDelegate: NSObject, FloatingPanelControllerDelegate, UIGest
 
 	func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
 		let appearance = vc.surfaceView.appearance
+
+		if #available(iOS 13.0, *) {
+			appearance.cornerCurve = .continuous
+		}
 		appearance.borderWidth = 0.0
 		appearance.borderColor = nil
+		appearance.cornerRadius = 8.0
+		appearance.backgroundColor = .clear
 		vc.surfaceView.appearance = appearance
-		return FloatingPanelBottomLayout()
+		
+		return SearchFloatingViewLayout()
 	}
 
 	func floatingPanelDidMove(_ vc: FloatingPanelController) {
-		debugPrint("surfaceLocation: ", vc.surfaceLocation)
-		debugPrint("NearbyState : ",vc.nearbyState)
-	}
+		let loc = vc.surfaceLocation
 
-	func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) {
+		if vc.isAttracting == false {
+			let minY = vc.surfaceLocation(for: .full).y - 6.0
+			let maxY = vc.surfaceLocation(for: .tip).y + 6.0
+			vc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
+		}
+
+		let tipY = vc.surfaceLocation(for: .tip).y
+		if loc.y > tipY - 44.0 {
+			let progress = max(0.0, min((tipY  - loc.y) / 44.0, 1.0))
+			owner.mainViewContainer.searchViewController.tableView.alpha = progress
+		} else {
+			owner.mainViewContainer.searchViewController.tableView.alpha = 1.0
+		}
 	}
 
 	func floatingPanelWillEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetState: UnsafeMutablePointer<FloatingPanelState>) {
-		if targetState.pointee != .full {
-		}
 		if targetState.pointee == .tip {
 			vc.contentMode = .static
 		}

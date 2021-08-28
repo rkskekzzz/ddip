@@ -9,8 +9,11 @@ import UIKit
 import FloatingPanel
 
 struct MainViewContainer {
-    
+	typealias PanelDelegate = FloatingPanelControllerDelegate & UIGestureRecognizerDelegate
+	
     let mapViewController: MapViewController
+	
+	let searchFloatingViewController = FloatingPanelController()
   	let searchViewController: SearchViewController
     
     // guard 처리 하는게 맞는지?
@@ -19,19 +22,6 @@ struct MainViewContainer {
 		
 		mapViewController = storyboard.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
 		searchViewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-//		print(searchViewController)
 		
-//        if (MainViewContainer.share == nil) { MainViewContainer.share = self }
-//        MainViewContainer.share = self
-        
-//        if (MainViewContainer.share == nil) {
-//            mapViewController = storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController
-//            searchViewController = storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-//            MainViewContainer.share = self
-//        }
-        
-//        mapViewController = storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-//        searchViewController = storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-//        MainViewContainer.share = self
     }
 }
