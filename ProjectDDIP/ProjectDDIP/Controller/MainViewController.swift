@@ -16,35 +16,52 @@ class MainViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		// MainView
-		mainViewContainer.mapViewController.delegate = self
-		addChild(mainViewContainer.mapViewController)
-		view.addSubview(mainViewContainer.mapViewController.view)
-		
-		// SearchFloatingView
-		let fpcDelegate: PanelDelegate = SearchFloatingViewDelegate(owner: self)
-		mainViewContainer.searchFloatingViewController.delegate = fpcDelegate
-		mainViewContainer.searchFloatingViewController.set(contentViewController: mainViewContainer.searchViewController)
-		mainViewContainer.searchFloatingViewController.track(scrollView: mainViewContainer.searchViewController.tableView)
-		mainViewContainer.searchFloatingViewController.addPanel(toParent: self)
-		
-		// SearchView
-        mainViewContainer.searchViewController.panelUp = {
-			self.mainViewContainer.searchFloatingViewController.move(to: .full, animated: true)
-        }
-        mainViewContainer.searchViewController.panelDown = {
-			self.mainViewContainer.searchFloatingViewController.move(to: .tip, animated: true)
-        }
+		initMainView()
+		initSearchView()
+		initMeetingView()
 	}
 }
 
-extension MainViewController: MapViewControllerDelegate {
-	func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
-		DispatchQueue.main.async {
-			print(annotationObject.locationName as Any)
-			print(annotationObject.coordinate.latitude)
-			print(annotationObject.coordinate.longitude)
-			print(annotationObject.discipline as Any)
+extension MainViewController {
+	func initMainView() {
+		mainViewContainer.mapViewController.delegate = mainViewContainer.meetingViewController
+		addChild(mainViewContainer.mapViewController)
+		view.addSubview(mainViewContainer.mapViewController.view)
+	}
+	
+	func initSearchView() {
+		// SearchFloatingView
+		let fpc = mainViewContainer.searchFloatingViewController
+		let fpcDelegate: PanelDelegate = SearchFloatingViewDelegate(owner: self)
+		
+		fpc.delegate = fpcDelegate
+		fpc.set(contentViewController: mainViewContainer.searchViewController)
+		fpc.track(scrollView: mainViewContainer.searchViewController.tableView)
+		fpc.addPanel(toParent: self)
+		
+		// SearchView
+		mainViewContainer.searchViewController.view.backgroundColor = .clear
+		mainViewContainer.searchViewController.panelUp = {
+			fpc.move(to: .full, animated: true)
+		}
+		mainViewContainer.searchViewController.panelDown = {
+			fpc.move(to: .tip, animated: true)
+		}
+	}
+	
+	func initMeetingView() {
+		// MeetingFloatingView
+		let fpc = mainViewContainer.meetingFloatingViewController
+		let fpcDelegate: PanelDelegate = MeetingFloatingViewDelegate(owner: self)
+		
+		fpc.delegate = fpcDelegate
+		fpc.set(contentViewController: mainViewContainer.meetingViewController)
+		fpc.isRemovalInteractionEnabled = true
+
+		// MeetingView
+		mainViewContainer.meetingViewController.view.backgroundColor = .clear
+		mainViewContainer.meetingViewController.panelUp = {
+			fpc.addPanel(toParent: self, animated: true, completion: nil)
 		}
 	}
 }

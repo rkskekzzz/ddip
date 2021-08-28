@@ -13,8 +13,11 @@ struct MainViewContainer {
 	
     let mapViewController: MapViewController
 	
-	let searchFloatingViewController = FloatingPanelController()
   	let searchViewController: SearchViewController
+	let searchFloatingViewController = FloatingPanelController()
+	
+	let meetingViewController: MeetingViewController
+	let meetingFloatingViewController = FloatingPanelController()
     
     // guard 처리 하는게 맞는지?
     init(storyBoard: UIStoryboard?) {
@@ -22,6 +25,6 @@ struct MainViewContainer {
 		
 		mapViewController = storyboard.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
 		searchViewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-		
+		meetingViewController = storyboard.instantiateViewController(withIdentifier: "MeetingViewController") as! MeetingViewController
     }
 }
