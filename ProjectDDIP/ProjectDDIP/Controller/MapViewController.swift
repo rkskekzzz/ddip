@@ -18,7 +18,7 @@ class MapViewController: UIViewController {
     
 //    let viewContainer = MainViewContainer.share
     var delegate: MapViewControllerDelegate?
-
+    lazy var mainViewContainer = MainViewContainer(storyBoard: storyboard)
     @IBOutlet weak var mapView: MKMapView!
     private var annotations: [AnnotationObject] = []
     
@@ -26,7 +26,12 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         mapView.delegate = self
         
+        
         allTest()
+        mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo) in
+            let location = CLLocation(latitude: la, longitude: lo)
+            self.centerToLocation(location)
+        }
     }
     
     func centerToLocation(_ location: CLLocation) {
@@ -100,12 +105,29 @@ private extension MKMapView {
 
 extension MapViewController {
     
+    
     func allTest() {
         
         let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
         centerToLocation(initialLocation)
         
         let oahuCenter = convertToLocation(21.4765, -157.9647)
+        let region = convertToRegion(oahuCenter, latitudinalMeters: 50000, longitudinalMeters: 60000)
+        setCameraBoundary(region)
+        
+        let distance: Double = 600000
+        setCameraZoomMaxDistance(distance)
+        mapView.register(AnnotationMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        loadInitialData()
+        addAnnotations(annotations)
+    }
+    
+    func setLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        
+        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+        centerToLocation(initialLocation)
+        
+        let oahuCenter = convertToLocation(latitude, longitude)
         let region = convertToRegion(oahuCenter, latitudinalMeters: 50000, longitudinalMeters: 60000)
         setCameraBoundary(region)
         

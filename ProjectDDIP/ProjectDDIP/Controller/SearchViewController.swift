@@ -8,12 +8,16 @@
 import UIKit
 import MapKit
 
+
+
 class SearchViewController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var visualEffectView: UIVisualEffectView!
-
+    var panelUp: () -> Void = {}
+    var panelDown: () -> Void = {}
+    var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees) -> Void = {la, lo in }
     
     // 검색을 도와주는 변수
     private var searchCompleter: MKLocalSearchCompleter?
@@ -32,7 +36,6 @@ class SearchViewController: UIViewController {
             tableView.reloadData()
         }
     }
-
     // tableView에서 선택한 location 정보를 가져옴
     private var localSearch: MKLocalSearch? {
         willSet {
@@ -58,7 +61,7 @@ class SearchViewController: UIViewController {
 //        searchCompleter?.region = mapView.region
 //        searchRegion 변수가 가지고 있는 지역 기준으로 검색지역 설정
         searchCompleter?.region = searchRegion
-		
+    
 	}
     
     // Completer 참조 해제
@@ -67,7 +70,18 @@ class SearchViewController: UIViewController {
         searchCompleter = nil
     }
     
+    // SearchBar click event
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        print("search button clicked")
+//        panelshow()
+//    }
+//
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        print("here?")
+//    }
+    
 }
+
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -77,7 +91,6 @@ extension SearchViewController: UISearchBarDelegate {
         print("text: \(searchText)")
         searchCompleter?.queryFragment = searchText
     }
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         completerResults = nil
@@ -85,6 +98,7 @@ extension SearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        panelUp()
         searchBar.setShowsCancelButton(true, animated: true)
     }
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
@@ -139,6 +153,10 @@ extension SearchViewController: UITableViewDelegate{
 		
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
+            guard let place = places else {
+                return
+            }
+            centerToSearchLocation(place.placemark.coordinate.latitude, place.placemark.coordinate.longitude)
         }
     }
     
