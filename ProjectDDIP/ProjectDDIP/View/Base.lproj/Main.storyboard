@@ -70,14 +70,14 @@
                                             <rect key="frame" x="0.0" y="6" width="414" height="890"/>
                                             <subviews>
                                                 <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="xnx-mg-Ta4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="103"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="44e-AE-ReH" id="N3t-d3-Ozo"/>
                                                     </connections>
                                                 </searchBar>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DwD-8W-EiR">
-                                                    <rect key="frame" x="0.0" y="55" width="414" height="835"/>
+                                                    <rect key="frame" x="0.0" y="103" width="414" height="787"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <prototypes>
@@ -140,7 +140,7 @@
                             </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="14R-bB-pg9"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0LT-nc-ydc" firstAttribute="top" secondItem="ZT7-V8-FuV" secondAttribute="top" id="1eH-xc-Eqk"/>
                             <constraint firstItem="0LT-nc-ydc" firstAttribute="bottom" secondItem="ZT7-V8-FuV" secondAttribute="bottom" id="8WM-dw-tjz"/>
@@ -157,6 +157,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rzr-8P-kkZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1678" y="100"/>
+        </scene>
+        <!--Meeting View Controller-->
+        <scene sceneID="bEe-dG-QdR">
+            <objects>
+                <viewController storyboardIdentifier="MeetingViewController" id="ZJO-uS-GZP" customClass="MeetingViewController" customModule="ProjectDDIP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zmv-7e-Wee">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhL-Lz-8ss">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <view key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vLI-gc-7eu">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이게 보인다면 오류예요 ㅠ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1R-Lj-onv">
+                                            <rect key="frame" x="0.0" y="6" width="414" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="V1R-Lj-onv" firstAttribute="leading" secondItem="vLI-gc-7eu" secondAttribute="leading" id="oPa-cF-lMJ"/>
+                                        <constraint firstItem="V1R-Lj-onv" firstAttribute="trailing" secondItem="vLI-gc-7eu" secondAttribute="trailing" id="oQX-sc-Ue5"/>
+                                        <constraint firstItem="V1R-Lj-onv" firstAttribute="top" secondItem="vLI-gc-7eu" secondAttribute="top" constant="6" id="qhi-S5-sCD"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="systemUltraThinMaterial"/>
+                            </visualEffectView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Yk9-Cf-9J6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jhL-Lz-8ss" firstAttribute="bottom" secondItem="Zmv-7e-Wee" secondAttribute="bottom" id="5Qy-BB-wWb"/>
+                            <constraint firstItem="jhL-Lz-8ss" firstAttribute="trailing" secondItem="Yk9-Cf-9J6" secondAttribute="trailing" id="CtR-Bq-iyL"/>
+                            <constraint firstItem="jhL-Lz-8ss" firstAttribute="leading" secondItem="Yk9-Cf-9J6" secondAttribute="leading" id="rCR-Ep-Mmb"/>
+                            <constraint firstItem="jhL-Lz-8ss" firstAttribute="top" secondItem="Zmv-7e-Wee" secondAttribute="top" id="ztR-of-34G"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="V1R-Lj-onv" id="iQC-jH-1rY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tGE-GP-xof" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2523.0769230769229" y="99.526066350710892"/>
         </scene>
     </scenes>
     <resources>

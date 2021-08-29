@@ -10,78 +10,65 @@ import MapKit
 import FloatingPanel
 
 class MainViewController: UIViewController {
-	typealias PanelDelegate = FloatingPanelControllerDelegate & UIGestureRecognizerDelegate
-	
 	lazy var mainViewContainer = MainViewContainer(storyBoard: storyboard)
-	
-	lazy var fpc = FloatingPanelController()
-	lazy var fpcDelegate: PanelDelegate = SearchViewPanelDelegate(owner: self)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+    
+		initMainView()
+		initSearchView()
+		initMeetingView()
+	}
+}
+
+private extension MainViewController {
+	func initMainView() {
+		mainViewContainer.mapViewController.delegate = mainViewContainer.meetingViewController
+		addChild(mainViewContainer.mapViewController)
+		view.addSubview(mainViewContainer.mapViewController.view)
+	}
+	
+	func initSearchView() {
+		// SearchFloatingView
+		let fpc = mainViewContainer.searchFloatingViewController
+		let fpcDelegate = SearchFloatingViewDelegate(owner: self)
 		
-		mainViewContainer.mapViewController.delegate = self
-        mainViewContainer.searchViewController.panelUp = {
-            print("in closure")
-            self.fpc.move(to: .full, animated: true)
-        }
-        mainViewContainer.searchViewController.panelDown = {
-            print("in closure")
-            self.fpc.move(to: .tip, animated: true)
-        }
-		self.addChild(mainViewContainer.mapViewController)
-		self.view.addSubview(mainViewContainer.mapViewController.view)
-        mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo) in
-            let location = CLLocation(latitude: la, longitude: lo)
-            self.mainViewContainer.mapViewController.centerToLocation(location)
-        }
-        
+		mainViewContainer.searchFloatingViewDelegate = fpcDelegate
 		fpc.delegate = fpcDelegate
-		
+		fpc.contentMode = .fitToBounds
 		fpc.set(contentViewController: mainViewContainer.searchViewController)
 		fpc.track(scrollView: mainViewContainer.searchViewController.tableView)
-		fpc.layout = ychaPanelPhoneLayout()
-		fpc.setAppearanceForPhone()
-		
 		fpc.addPanel(toParent: self)
-	}
-}
-
-
-extension FloatingPanelController {
-	func setAppearanceForPhone() {
-		let appearance = SurfaceAppearance()
-		if #available(iOS 13.0, *) {
-			appearance.cornerCurve = .continuous
+		
+		// SearchView
+		mainViewContainer.searchViewController.view.backgroundColor = .clear
+		mainViewContainer.searchViewController.panelUp = {
+			fpc.move(to: .full, animated: true)
 		}
-		appearance.cornerRadius = 8.0
-		appearance.backgroundColor = .clear
-		surfaceView.appearance = appearance
+		mainViewContainer.searchViewController.panelDown = {
+			fpc.move(to: .tip, animated: true)
+		}
+    mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo) in
+      let location = CLLocation(latitude: la, longitude: lo)
+      self.mainViewContainer.mapViewController.centerToLocation(location)
+    }
 	}
-}
+	
+	func initMeetingView() {
+		// MeetingFloatingView
+		let fpc = mainViewContainer.meetingFloatingViewController
+		let fpcDelegate = MeetingFloatingViewDelegate(owner: self)
+		
+		mainViewContainer.meetingFloatingViewDelegate = fpcDelegate
+		fpc.delegate = fpcDelegate
+		fpc.contentMode = .fitToBounds
+		fpc.set(contentViewController: mainViewContainer.meetingViewController)
+		fpc.isRemovalInteractionEnabled = true
 
-class ychaPanelPhoneLayout: FloatingPanelLayout {
-	let position: FloatingPanelPosition  = .bottom
-	var anchors: [FloatingPanelState : FloatingPanelLayoutAnchoring] {
-		return [
-			.full: FloatingPanelLayoutAnchor(absoluteInset: 16.0, edge: .top, referenceGuide: .safeArea),
-			.half: FloatingPanelLayoutAnchor(fractionalInset: 0.7, edge: .bottom, referenceGuide: .safeArea),
-			.tip: FloatingPanelLayoutAnchor(absoluteInset: 44.0, edge: .bottom, referenceGuide: .safeArea),
-		]
-	}
-	let initialState: FloatingPanelState = .tip
-	func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
-		return 0.0
-	}
-}
-
-extension MainViewController: MapViewControllerDelegate {
-	func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
-		DispatchQueue.main.async {
-			print(annotationObject.locationName as Any)
-			print(annotationObject.coordinate.latitude)
-			print(annotationObject.coordinate.longitude)
-			print(annotationObject.discipline as Any)
+		// MeetingView
+		mainViewContainer.meetingViewController.view.backgroundColor = .clear
+		mainViewContainer.meetingViewController.panelUp = {
+			fpc.addPanel(toParent: self, animated: true, completion: nil)
 		}
 	}
 }
