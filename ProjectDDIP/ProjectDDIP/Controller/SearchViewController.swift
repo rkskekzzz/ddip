@@ -8,6 +8,9 @@
 import UIKit
 import MapKit
 
+protocol printDele {
+    func deleTest(str: String)
+}
 
 
 class SearchViewController: UIViewController {
@@ -18,6 +21,9 @@ class SearchViewController: UIViewController {
     var panelUp: () -> Void = {}
     var panelDown: () -> Void = {}
     var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees) -> Void = {la, lo in }
+    var closureTest: () -> Void = {}
+    var someValue: Int = 32
+    var dele: printDele?
     
     // 검색을 도와주는 변수
     private var searchCompleter: MKLocalSearchCompleter?
@@ -150,14 +156,12 @@ extension SearchViewController: UITableViewDataSource{
 extension SearchViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) // 선택 표시 해제
-		
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
-            guard let place = places else {
-                return
-            }
-            centerToSearchLocation(place.placemark.coordinate.latitude, place.placemark.coordinate.longitude)
         }
+        dele?.deleTest(str: "first")
+        
+        
     }
     
     private func search(for suggestedCompletion: MKLocalSearchCompletion) {
@@ -178,8 +182,15 @@ extension SearchViewController: UITableViewDelegate{
                 return
             }
             // 검색한 결과 : reponse의 mapItems 값을 가져온다.
+            let place = response?.mapItems[0]
             places = response?.mapItems[0]
-//          print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
+//            panelDown()
+            if let p = place {
+                print("p : \(p.placemark.coordinate.latitude)")
+                print("p : \(p.placemark.coordinate.longitude)")
+                centerToSearchLocation(p.placemark.coordinate.latitude, p.placemark.coordinate.longitude)
+            }
+//            print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
         }
     }
 }

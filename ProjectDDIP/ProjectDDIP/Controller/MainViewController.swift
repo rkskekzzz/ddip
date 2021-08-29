@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 import FloatingPanel
 
 class MainViewController: UIViewController {
@@ -30,7 +31,11 @@ class MainViewController: UIViewController {
         }
 		self.addChild(mainViewContainer.mapViewController)
 		self.view.addSubview(mainViewContainer.mapViewController.view)
-		
+        mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo) in
+            let location = CLLocation(latitude: la, longitude: lo)
+            self.mainViewContainer.mapViewController.centerToLocation(location)
+        }
+        
 		fpc.delegate = fpcDelegate
 		
 		fpc.set(contentViewController: mainViewContainer.searchViewController)
