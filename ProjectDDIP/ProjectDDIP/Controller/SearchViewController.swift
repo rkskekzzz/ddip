@@ -8,6 +8,11 @@
 import UIKit
 import MapKit
 
+protocol printDele {
+    func deleTest(str: String)
+}
+
+
 class SearchViewController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
@@ -15,6 +20,10 @@ class SearchViewController: UIViewController {
 	@IBOutlet weak var visualEffectView: UIVisualEffectView!
     var panelUp: () -> Void = {}
     var panelDown: () -> Void = {}
+    var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees) -> Void = {la, lo in }
+    var closureTest: () -> Void = {}
+    var someValue: Int = 32
+    var dele: printDele?
     
     // 검색을 도와주는 변수
     private var searchCompleter: MKLocalSearchCompleter?
@@ -33,7 +42,6 @@ class SearchViewController: UIViewController {
             tableView.reloadData()
         }
     }
-
     // tableView에서 선택한 location 정보를 가져옴
     private var localSearch: MKLocalSearch? {
         willSet {
@@ -90,9 +98,8 @@ extension SearchViewController: UISearchBarDelegate {
         searchCompleter?.queryFragment = searchText
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        panelDown()
-        completerResults = nil
         searchBar.text = nil
+        completerResults = nil
         searchCompleter?.queryFragment = ""
         searchBar.resignFirstResponder()
     }
@@ -149,10 +156,12 @@ extension SearchViewController: UITableViewDataSource{
 extension SearchViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) // 선택 표시 해제
-		
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
         }
+        dele?.deleTest(str: "first")
+        
+        
     }
     
     private func search(for suggestedCompletion: MKLocalSearchCompletion) {
@@ -173,8 +182,15 @@ extension SearchViewController: UITableViewDelegate{
                 return
             }
             // 검색한 결과 : reponse의 mapItems 값을 가져온다.
+            let place = response?.mapItems[0]
             places = response?.mapItems[0]
-//          print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
+//            panelDown()
+            if let p = place {
+                print("p : \(p.placemark.coordinate.latitude)")
+                print("p : \(p.placemark.coordinate.longitude)")
+                centerToSearchLocation(p.placemark.coordinate.latitude, p.placemark.coordinate.longitude)
+            }
+//            print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
         }
     }
 }

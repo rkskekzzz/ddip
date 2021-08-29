@@ -14,19 +14,26 @@ protocol MapViewControllerDelegate {
 //    func didUpdateMapVCAnnotationFail(error: Error)
 }
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, printDele {
+    func deleTest(str: String) {
+        print(str)
+        print(self.someString)
+    }
+    
     
 //    let viewContainer = MainViewContainer.share
     var delegate: MapViewControllerDelegate?
-
+    let someString: String = "hello"
+    
     @IBOutlet weak var mapView: MKMapView!
     private var annotations: [AnnotationObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        
+
         allTest()
+        
     }
     
     func centerToLocation(_ location: CLLocation) {
@@ -77,7 +84,6 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
         guard let annotationObject = view.annotation as? AnnotationObject else { return }
 
         let driving = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
@@ -85,7 +91,6 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
         guard let annotationObject = view.annotation as? AnnotationObject else { return }
         delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
     }
@@ -100,6 +105,7 @@ private extension MKMapView {
 
 extension MapViewController {
     
+    
     func allTest() {
         
         let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
@@ -107,7 +113,7 @@ extension MapViewController {
         
         let oahuCenter = convertToLocation(21.4765, -157.9647)
         let region = convertToRegion(oahuCenter, latitudinalMeters: 50000, longitudinalMeters: 60000)
-        setCameraBoundary(region)
+//        setCameraBoundary(region)
         
         let distance: Double = 600000
         setCameraZoomMaxDistance(distance)

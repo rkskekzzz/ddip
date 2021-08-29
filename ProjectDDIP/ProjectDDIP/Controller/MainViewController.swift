@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 import FloatingPanel
 
 class MainViewController: UIViewController {
@@ -13,7 +14,7 @@ class MainViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+    
 		initMainView()
 		initSearchView()
 		initMeetingView()
@@ -47,6 +48,10 @@ private extension MainViewController {
 		mainViewContainer.searchViewController.panelDown = {
 			fpc.move(to: .tip, animated: true)
 		}
+    mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo) in
+      let location = CLLocation(latitude: la, longitude: lo)
+      self.mainViewContainer.mapViewController.centerToLocation(location)
+    }
 	}
 	
 	func initMeetingView() {
