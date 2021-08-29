@@ -14,13 +14,7 @@ protocol MapViewControllerDelegate {
 //    func didUpdateMapVCAnnotationFail(error: Error)
 }
 
-class MapViewController: UIViewController, printDele {
-    func deleTest(str: String) {
-        print(str)
-        print(self.someString)
-    }
-    
-    
+class MapViewController: UIViewController {
 //    let viewContainer = MainViewContainer.share
     var delegate: MapViewControllerDelegate?
     let someString: String = "hello"
@@ -78,7 +72,7 @@ class MapViewController: UIViewController, printDele {
             let features = try MKGeoJSONDecoder().decode(artworkData).compactMap { $0 as? MKGeoJSONFeature }
             let validWorks = features.compactMap(AnnotationObject.init)
             annotations.append(contentsOf: validWorks)
-        } catch { print("Unexpected error: \(error).") }
+		} catch { } //print("Unexpected error: \(error).") }
     }
 }
 

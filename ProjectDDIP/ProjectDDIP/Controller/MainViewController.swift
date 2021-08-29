@@ -48,10 +48,10 @@ private extension MainViewController {
 		mainViewContainer.searchViewController.panelDown = {
 			fpc.move(to: .tip, animated: true)
 		}
-    mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo) in
-      let location = CLLocation(latitude: la, longitude: lo)
-      self.mainViewContainer.mapViewController.centerToLocation(location)
-    }
+		mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo) in
+//			let location = CLLocation(latitude: la, longitude: lo)
+			self.mainViewContainer.mapViewController.centerToLocation(self.mainViewContainer.mapViewController.convertToLocation(la, lo))
+		}
 	}
 	
 	func initMeetingView() {
