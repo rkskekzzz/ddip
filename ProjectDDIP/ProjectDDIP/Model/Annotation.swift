@@ -10,10 +10,10 @@ import Contacts
 
 class AnnotationObject: NSObject, MKAnnotation {
     
-    let title: String?
-    let locationName: String?
-    let discipline: String?
-    let coordinate: CLLocationCoordinate2D
+    var title: String?
+    var locationName: String?
+    var discipline: String?
+    var coordinate: CLLocationCoordinate2D
     
     init(title: String?, locationName: String?, discipline: String?, coordinate: CLLocationCoordinate2D) {
         self.title = title
@@ -62,6 +62,29 @@ class AnnotationObject: NSObject, MKAnnotation {
         )
     }
     
+    func resetAttributes(_ title: String?, _ locationName: String?, _ discipline: String?, _ coordinate: CLLocationCoordinate2D) {
+        self.title = title;
+        self.locationName = locationName
+        self.discipline = discipline
+        self.coordinate = coordinate
+    }
+    
+    func setTitle(_ title: String) {
+        self.title = title
+    }
+    
+    func setCoordinate(_ coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+    }
+    
+    func setLocationName(_ locationName: String) {
+        self.locationName = locationName
+    }
+    
+    func setDiscipline(_ discipline: String) {
+        self.discipline = discipline
+    }
+    
     var markerTintColor: UIColor  {
         
         switch discipline {
@@ -78,4 +101,5 @@ class AnnotationObject: NSObject, MKAnnotation {
         }
     }
 }
+
 

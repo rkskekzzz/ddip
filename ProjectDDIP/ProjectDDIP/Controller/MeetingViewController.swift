@@ -19,11 +19,11 @@ extension MeetingViewController: MapViewControllerDelegate {
 		DispatchQueue.main.async {
 			self.label.text = "\(annotationObject.title!)\n \(annotationObject.locationName!)"
 			self.panelUp()
-			
-			print(annotationObject.locationName as Any)
-			print(annotationObject.coordinate.latitude)
-			print(annotationObject.coordinate.longitude)
-			print(annotationObject.discipline as Any)
+
+//			print(annotationObject.locationName as Any)
+//			print(annotationObject.coordinate.latitude)
+//			print(annotationObject.coordinate.longitude)
+//			print(annotationObject.discipline as Any)
 		}
 	}
 }
