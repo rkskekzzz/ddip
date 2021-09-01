@@ -15,22 +15,25 @@ protocol MapViewControllerDelegate {
 }
 
 class MapViewController: UIViewController {
-//    let viewContainer = MainViewContainer.share
     var delegate: MapViewControllerDelegate?
-    let someString: String = "hello"
-    
+
     @IBOutlet weak var mapView: MKMapView!
+    private var gesturePin = AnnotationObject(title: nil, locationName: nil, discipline: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
     private var annotations: [AnnotationObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        UIGestureInit()
 
         allTest()
-        
     }
     
     func centerToLocation(_ location: CLLocation) {
+        mapView.centerToLocation(location)
+    }
+
+    func centerToLocation(_ location: CLLocationCoordinate2D) {
         mapView.centerToLocation(location)
     }
 
@@ -42,6 +45,10 @@ class MapViewController: UIViewController {
         mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true)
     }
 
+    func convertToLocation2D(_ latitude: Double, _ longitude: Double) -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
     func convertToLocation(_ latitude: Double, _ longitude: Double) -> CLLocation {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
@@ -54,12 +61,13 @@ class MapViewController: UIViewController {
         return MKCoordinateRegion(center: center, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters)
     }
 
-    func addAnnotation(_ object: AnnotationObject) {
-        mapView.addAnnotation(object)
-    }
-    
-    func addAnnotations(_ objects: [AnnotationObject]) {
-        mapView.addAnnotations(objects)
+    func removeAnnotation(_ object: AnnotationObject) { mapView.removeAnnotation(object) }
+    func addAnnotation(_ object: AnnotationObject) { mapView.addAnnotation(object) }
+    func removeAnnotations(_ objects: [AnnotationObject]) { mapView.removeAnnotations(objects) }
+    func addAnnotations(_ objects: [AnnotationObject]) { mapView.addAnnotations(objects) }
+    func replocateAnnotation(_ object: AnnotationObject) {
+        removeAnnotation(object)
+        addAnnotation(object)
     }
 
     private func loadInitialData() {
@@ -74,6 +82,51 @@ class MapViewController: UIViewController {
             annotations.append(contentsOf: validWorks)
 		} catch { } //print("Unexpected error: \(error).") }
     }
+}
+
+extension MapViewController: UIGestureRecognizerDelegate {
+    
+    func UIGestureInit() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.handleTapGesture(gestureRecognizer:)))
+        mapView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
+
+        if mapView.selectedAnnotations.count > 0 { return }
+        let p:CGPoint = gestureRecognizer.location(in: mapView)
+        let v:UIView = mapView.hitTest(p, with: nil)!
+        if !v.bounds.contains(p) { return }
+        
+        if  gestureRecognizer.state == UIGestureRecognizer.State.ended {
+            let touchLocation = gestureRecognizer.location(in: mapView)
+            let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+            
+            self.gesturePin.resetAttributes("title", "location name", "discipline", locationCoordinate)
+            replocateAnnotation(gesturePin)
+            print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude\(locationCoordinate.longitude)")
+        }
+    }
+
+//    func UIGestureInit() {
+//        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongtapGesture(gestureRecognizer:)))
+//        mapView.addGestureRecognizer(longTapGesture)
+//    }
+
+//    @objc func handleLongtapGesture(gestureRecognizer: UILongPressGestureRecognizer) {
+//
+//        if  gestureRecognizer.state != UIGestureRecognizer.State.ended {
+//            let touchLocation = gestureRecognizer.location(in: mapView)
+//            let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+//
+//            self.gesturePin.resetAttributes("title", "location name", "discipline", locationCoordinate)
+//            replocateAnnotation(gesturePin)
+//
+//            print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude\(locationCoordinate.longitude)")
+//        }
+//
+//        if gestureRecognizer.state != UIGestureRecognizer.State.began { return }
+//    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -95,6 +148,19 @@ private extension MKMapView {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         setRegion(coordinateRegion, animated: true)
     }
+
+    func centerToLocation(_ location: CLLocationCoordinate2D, regionRadius: CLLocationDistance = 1000) {
+        let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        setRegion(coordinateRegion, animated: true)
+    }
+
+    func visibleAnnotations() -> [MKAnnotation] {
+        return self.annotations(in: self.visibleMapRect).map { obj -> MKAnnotation in return obj as! MKAnnotation }
+    }
+
+    func visibleAnnotationRect() -> [MKMapRect] {
+        return self.annotations(in: self.visibleMapRect).map { obj -> MKMapRect in return obj as! MKMapRect }
+    }
 }
 
 extension MapViewController {
@@ -105,8 +171,8 @@ extension MapViewController {
         let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
         centerToLocation(initialLocation)
         
-        let oahuCenter = convertToLocation(21.4765, -157.9647)
-        let region = convertToRegion(oahuCenter, latitudinalMeters: 50000, longitudinalMeters: 60000)
+//        let oahuCenter = convertToLocation(21.4765, -157.9647)
+//        let region = convertToRegion(oahuCenter, latitudinalMeters: 50000, longitudinalMeters: 60000)
 //        setCameraBoundary(region)
         
         let distance: Double = 600000
