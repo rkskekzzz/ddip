@@ -95,8 +95,10 @@ extension MapViewController: UIGestureRecognizerDelegate {
 
         if mapView.selectedAnnotations.count > 0 { return }
         if mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements == nil { return }
+        // ...
         // If the UI policy has changed, more validators are needed.
         // This condition is created under the assumption that there is no button in the annotation.
+        // ...
         
         if  gestureRecognizer.state == UIGestureRecognizer.State.ended {
             let locationCoordinate = mapView.convert(gestureRecognizer.location(in: mapView), toCoordinateFrom: mapView)
