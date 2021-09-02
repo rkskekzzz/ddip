@@ -80,7 +80,7 @@ class MapViewController: UIViewController {
             let features = try MKGeoJSONDecoder().decode(artworkData).compactMap { $0 as? MKGeoJSONFeature }
             let validWorks = features.compactMap(AnnotationObject.init)
             annotations.append(contentsOf: validWorks)
-		} catch { } //print("Unexpected error: \(error).") }
+        } catch { print("Unexpected error: \(error)") }
     }
 }
 
@@ -94,39 +94,17 @@ extension MapViewController: UIGestureRecognizerDelegate {
     @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
 
         if mapView.selectedAnnotations.count > 0 { return }
-        let p:CGPoint = gestureRecognizer.location(in: mapView)
-        let v:UIView = mapView.hitTest(p, with: nil)!
-        if !v.bounds.contains(p) { return }
+        if mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements == nil { return }
+        // If the UI policy has changed, more validators are needed.
+        // This condition is created under the assumption that there is no button in the annotation.
         
         if  gestureRecognizer.state == UIGestureRecognizer.State.ended {
-            let touchLocation = gestureRecognizer.location(in: mapView)
-            let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
-            
+            let locationCoordinate = mapView.convert(gestureRecognizer.location(in: mapView), toCoordinateFrom: mapView)
             self.gesturePin.resetAttributes("title", "location name", "discipline", locationCoordinate)
             replocateAnnotation(gesturePin)
-            print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude\(locationCoordinate.longitude)")
+            print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude: \(locationCoordinate.longitude)")
         }
     }
-
-//    func UIGestureInit() {
-//        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongtapGesture(gestureRecognizer:)))
-//        mapView.addGestureRecognizer(longTapGesture)
-//    }
-
-//    @objc func handleLongtapGesture(gestureRecognizer: UILongPressGestureRecognizer) {
-//
-//        if  gestureRecognizer.state != UIGestureRecognizer.State.ended {
-//            let touchLocation = gestureRecognizer.location(in: mapView)
-//            let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
-//
-//            self.gesturePin.resetAttributes("title", "location name", "discipline", locationCoordinate)
-//            replocateAnnotation(gesturePin)
-//
-//            print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude\(locationCoordinate.longitude)")
-//        }
-//
-//        if gestureRecognizer.state != UIGestureRecognizer.State.began { return }
-//    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -153,13 +131,9 @@ private extension MKMapView {
         let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         setRegion(coordinateRegion, animated: true)
     }
-
+    
     func visibleAnnotations() -> [MKAnnotation] {
         return self.annotations(in: self.visibleMapRect).map { obj -> MKAnnotation in return obj as! MKAnnotation }
-    }
-
-    func visibleAnnotationRect() -> [MKMapRect] {
-        return self.annotations(in: self.visibleMapRect).map { obj -> MKMapRect in return obj as! MKMapRect }
     }
 }
 

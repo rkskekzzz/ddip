@@ -12,7 +12,8 @@ class AnnotationMarkerView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
             guard let annotationObject = newValue as? AnnotationObject else { return }
-
+                
+            accessibilityIdentifier = "annotationMarker"
             canShowCallout = true
             calloutOffset = CGPoint(x: -5, y: 5)
 
@@ -25,7 +26,6 @@ class AnnotationMarkerView: MKMarkerAnnotationView {
         }
     }
 }
-
 
 extension UIButton {
     
