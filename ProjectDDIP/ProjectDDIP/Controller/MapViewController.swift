@@ -5,6 +5,8 @@
 //  Created by su on 2021/08/23.
 //
 
+import AVFoundation
+import Foundation
 import UIKit
 import MapKit
 
@@ -24,51 +26,25 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        mapView.pointOfInterestFilter = .excludingAll
         UIGestureInit()
 
         allTest()
     }
     
-    func centerToLocation(_ location: CLLocation) {
-        mapView.centerToLocation(location)
-    }
-
-    func centerToLocation(_ location: CLLocationCoordinate2D) {
-        mapView.centerToLocation(location)
-    }
-
-    func setCameraZoomMaxDistance(_ maxDistance: Double) {
-        mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: maxDistance), animated: true)
-    }
-
-    func setCameraBoundary(_ region: MKCoordinateRegion) {
-        mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true)
-    }
-
-    func convertToLocation2D(_ latitude: Double, _ longitude: Double) -> CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-    
-    func convertToLocation(_ latitude: Double, _ longitude: Double) -> CLLocation {
-        return CLLocation(latitude: latitude, longitude: longitude)
-    }
-
-    func convertToRegion(_ center: CLLocation, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion {
-        return MKCoordinateRegion(center: center.coordinate, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters)
-    }
-
-    func convertToRegion(_ center: CLLocationCoordinate2D, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion {
-        return MKCoordinateRegion(center: center, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters)
-    }
-
+    func centerToLocation(_ location: CLLocation) { mapView.centerToLocation(location) }
+    func centerToLocation(_ location: CLLocationCoordinate2D) { mapView.centerToLocation(location) }
+    func setCameraZoomMaxDistance(_ maxDistance: Double) { mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: maxDistance), animated: true) }
+    func setCameraBoundary(_ region: MKCoordinateRegion) { mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true) }
+    func convertToLocation2D(_ latitude: Double, _ longitude: Double) -> CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: latitude, longitude: longitude) }
+    func convertToLocation(_ latitude: Double, _ longitude: Double) -> CLLocation { return CLLocation(latitude: latitude, longitude: longitude) }
+    func convertToRegion(_ center: CLLocation, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion { return MKCoordinateRegion(center: center.coordinate, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters) }
+    func convertToRegion(_ center: CLLocationCoordinate2D, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion { return MKCoordinateRegion(center: center, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters) }
     func removeAnnotation(_ object: AnnotationObject) { mapView.removeAnnotation(object) }
     func addAnnotation(_ object: AnnotationObject) { mapView.addAnnotation(object) }
     func removeAnnotations(_ objects: [AnnotationObject]) { mapView.removeAnnotations(objects) }
     func addAnnotations(_ objects: [AnnotationObject]) { mapView.addAnnotations(objects) }
-    func replocateAnnotation(_ object: AnnotationObject) {
-        removeAnnotation(object)
-        addAnnotation(object)
-    }
+    func replocateAnnotation(_ object: AnnotationObject) { removeAnnotation(object); addAnnotation(object) }
 
     private func loadInitialData() {
         guard
@@ -156,5 +132,23 @@ extension MapViewController {
         mapView.register(AnnotationMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         loadInitialData()
         addAnnotations(annotations)
+        
+//        print(mapView.overlays.count)
+//        for obj in mapView.overlays {
+//            print(obj.title)
+//            print(obj.description)
+//        }
+//        print("-------------")
+//        print(mapView.pointOfInterestFilter)
+//        print("-------------")
+//        print(mapView.interactions.count)
+//        for obj in mapView.interactions {
+//            print(obj.description)
+//        }
+//
+//        print("-------------")
+//        print(mapView.activityItemsConfiguration)
+//        print(mapView.constraints.count)
+//        mapView.removeConstraints(mapView.constraints)
     }
 }
