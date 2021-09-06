@@ -66,9 +66,18 @@ private extension MainViewController {
 		fpc.isRemovalInteractionEnabled = true
 
 		// MeetingView
-		mainViewContainer.meetingViewController.view.backgroundColor = .clear
-		mainViewContainer.meetingViewController.panelUp = {
-			fpc.addPanel(toParent: self, animated: true, completion: nil)
+		let vc = mainViewContainer.meetingViewController
+		let meetingViewFpc = mainViewContainer.meetingFloatingViewController
+		let searchViewFpc = mainViewContainer.searchFloatingViewController
+		
+		vc.view.backgroundColor = .clear
+		vc.changeViewToMeetingView = {
+			meetingViewFpc.addPanel(toParent: self, animated: true, completion: nil)
+			searchViewFpc.hide(animated: true, completion: nil)
+		}
+		vc.changeViewToMainView = {
+			meetingViewFpc.dismiss(animated: true, completion: nil)
+			searchViewFpc.show(animated: true, completion: nil)
 		}
 	}
 }

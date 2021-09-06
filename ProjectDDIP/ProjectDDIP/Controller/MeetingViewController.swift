@@ -13,8 +13,9 @@ class MeetingViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
     weak var button: UIButton!
-    var panelUp: () -> Void = {}
-    
+	
+    var changeViewToMeetingView: () -> Void = {}
+	var changeViewToMainView: () -> Void = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +43,7 @@ extension MeetingViewController: MapViewControllerDelegate {
     func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
         DispatchQueue.main.async {
             self.label.text = "\(annotationObject.title!)\n \(annotationObject.locationName!)"
-            self.panelUp()
-            
-            //			print(annotationObject.locationName as Any)
-            //			print(annotationObject.coordinate.latitude)
-            //			print(annotationObject.coordinate.longitude)
-            //			print(annotationObject.discipline as Any)
+            self.changeViewToMeetingView()
         }
     }
 }

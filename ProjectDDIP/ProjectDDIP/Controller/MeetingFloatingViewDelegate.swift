@@ -35,5 +35,9 @@ class MeetingFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UI
 		let minY = fpc.surfaceLocation(for: .half).y
 		fpc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
 	}
+	
+	func floatingPanelWillRemove(_ fpc: FloatingPanelController) {
+		owner.mainViewContainer.meetingViewController.changeViewToMainView()
+	}
 }
 
