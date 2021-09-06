@@ -37,7 +37,7 @@ class MeetingFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UI
 	}
 	
 	func floatingPanelWillRemove(_ fpc: FloatingPanelController) {
-		owner.mainViewContainer.meetingViewController.changeViewToMainView()
+		owner.mainViewContainer.searchFloatingViewController.addPanel(toParent: owner, animated: true, completion: nil)
 	}
 }
 

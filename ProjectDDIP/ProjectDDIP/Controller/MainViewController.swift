@@ -71,13 +71,12 @@ private extension MainViewController {
 		let searchViewFpc = mainViewContainer.searchFloatingViewController
 		
 		vc.view.backgroundColor = .clear
-		vc.changeViewToMeetingView = {
+		vc.createFloatingView = {
 			meetingViewFpc.addPanel(toParent: self, animated: true, completion: nil)
-			searchViewFpc.hide(animated: true, completion: nil)
+			searchViewFpc.dismiss(animated: true, completion: nil)
 		}
-		vc.changeViewToMainView = {
+		vc.removeFloatingView = {
 			meetingViewFpc.dismiss(animated: true, completion: nil)
-			searchViewFpc.show(animated: true, completion: nil)
 		}
 	}
 }
