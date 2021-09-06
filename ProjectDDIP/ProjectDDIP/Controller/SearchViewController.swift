@@ -91,6 +91,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBarSetDefault()
+        panelDown()
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         panelUp()
