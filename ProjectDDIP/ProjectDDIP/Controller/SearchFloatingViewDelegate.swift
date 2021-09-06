@@ -47,5 +47,11 @@ class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIG
 			owner.mainViewContainer.searchViewController.tableView.alpha = 1.0
 		}
 	}
+	
+	func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) {
+		if vc.state == .full {
+			owner.view.endEditing(true)
+		}
+	}
 }
 
