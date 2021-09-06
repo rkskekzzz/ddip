@@ -76,7 +76,10 @@ extension MapViewController: UIGestureRecognizerDelegate {
     @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
 
         if mapView.selectedAnnotations.count > 0 { return }
+        print(mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements as Any)
+        print(mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements?.count)
         if mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements == nil { return }
+        
         // ...
         // If the UI policy has changed, more validators are needed.
         // This condition is created under the assumption that there is no button in the annotation.
@@ -138,35 +141,5 @@ extension MapViewController {
         mapView.register(AnnotationMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         loadInitialData()
         addAnnotations(annotations)
-//        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-//        centerToLocation(initialLocation)
-//
-////        let oahuCenter = convertToLocation(21.4765, -157.9647)
-////        let region = convertToRegion(oahuCenter, latitudinalMeters: 50000, longitudinalMeters: 60000)
-////        setCameraBoundary(region)
-//
-//        let distance: Double = 600000
-//        setCameraZoomMaxDistance(distance)
-//        mapView.register(AnnotationMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-//        loadInitialData()
-//        addAnnotations(annotations)
-        
-//        print(mapView.overlays.count)
-//        for obj in mapView.overlays {
-//            print(obj.title)
-//            print(obj.description)
-//        }
-//        print("-------------")
-//        print(mapView.pointOfInterestFilter)
-//        print("-------------")
-//        print(mapView.interactions.count)
-//        for obj in mapView.interactions {
-//            print(obj.description)
-//        }
-//
-//        print("-------------")
-//        print(mapView.activityItemsConfiguration)
-//        print(mapView.constraints.count)
-//        mapView.removeConstraints(mapView.constraints)
     }
 }
