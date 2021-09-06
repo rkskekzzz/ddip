@@ -74,14 +74,7 @@ extension MapViewController: UIGestureRecognizerDelegate {
     @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
 
         if mapView.selectedAnnotations.count > 0 { return }
-//        let hitView: UIView? = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)
-//        print(String(describing: hitView!.classForCoder))
-//        if String(describing: hitView!.classForCoder) == "_MKBezierPathView" { return }
-         
-        // ...
-        // If the UI policy has changed, more validators are needed.
-        // This condition is created under the assumption that there is no button in the annotation.
-        // ...
+        if (mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil) as? AnnotationView) != nil { return }
         
         if  gestureRecognizer.state == UIGestureRecognizer.State.ended {
             let locationCoordinate = mapView.convert(gestureRecognizer.location(in: mapView), toCoordinateFrom: mapView)
@@ -136,7 +129,8 @@ extension MapViewController {
         mapView.setRegion(mapCoordinate, animated: true)
         setCameraZoomMaxDistance(distance)
 
-        mapView.register(AnnotationMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+//        mapView.register(AnnotationMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         loadInitialData()
         addAnnotations(annotations)
     }

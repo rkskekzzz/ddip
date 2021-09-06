@@ -8,28 +8,18 @@
 import UIKit
 import MapKit
 
-class AnnotationMarkerView: MKMarkerAnnotationView {
+class AnnotationView: MKAnnotationView {
 
     override var annotation: MKAnnotation? {
         willSet {
             guard let annotationObject = newValue as? AnnotationObject else { return }
-
-            self.isAccessibilityElement = true
-            self.accessibilityIdentifier = "annotationMarker"
             self.canShowCallout = true
             self.calloutOffset = CGPoint(x: -5, y: 5)
 
             let mapsButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 48, height: 48)))
             mapsButton.setBackgroundImage(#imageLiteral(resourceName: "Map"), for: .normal)
             self.rightCalloutAccessoryView = mapsButton
-
-            self.markerTintColor = annotationObject.markerTintColor
-
-            print("-------")
-            print(self)
-            print("-------")
-            
-            if let letter = annotationObject.discipline?.first { glyphText = String(letter) }
+            self.image = annotationObject.image
         }
     }
 }

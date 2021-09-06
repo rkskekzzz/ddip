@@ -21,7 +21,6 @@ class AnnotationObject: NSObject, MKAnnotation {
         self.locationName = locationName
         self.discipline = discipline
         self.coordinate = coordinate
-        
         super.init()
     }
 
@@ -70,21 +69,11 @@ class AnnotationObject: NSObject, MKAnnotation {
         self.coordinate = coordinate
     }
     
-    func setTitle(_ title: String) {
-        self.title = title
-    }
-    
-    func setCoordinate(_ coordinate: CLLocationCoordinate2D) {
-        self.coordinate = coordinate
-    }
-    
-    func setLocationName(_ locationName: String) {
-        self.locationName = locationName
-    }
-    
-    func setDiscipline(_ discipline: String) {
-        self.discipline = discipline
-    }
+    func setTitle(_ title: String) { self.title = title }
+    func setCoordinate(_ coordinate: CLLocationCoordinate2D) { self.coordinate = coordinate }
+    func setLocationName(_ locationName: String) { self.locationName = locationName }
+    func setDiscipline(_ discipline: String) { self.discipline = discipline }
+    var image: UIImage { return #imageLiteral(resourceName: "plus") }
     
     var markerTintColor: UIColor  {
         
