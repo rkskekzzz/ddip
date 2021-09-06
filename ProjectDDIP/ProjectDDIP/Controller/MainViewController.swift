@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
 		initMainView()
 		initSearchView()
 		initMeetingView()
+        initMapView()
 	}
 }
 
@@ -71,4 +72,16 @@ private extension MainViewController {
 			fpc.addPanel(toParent: self, animated: true, completion: nil)
 		}
 	}
+    
+    func initMapView() {
+        let mvc = mainViewContainer.mapViewController
+        let sfvc = mainViewContainer.searchFloatingViewController
+        let mfvc = mainViewContainer.meetingFloatingViewController
+        mvc.annotationDeselectBehaviourDefines = {
+            sfvc.removePanelFromParent(animated: true)
+            mfvc.removePanelFromParent(animated: true) // 이건 서치바를 날려버리니;; 다른 방식이 필요합니다.
+        }
+        
+        
+    }
 }

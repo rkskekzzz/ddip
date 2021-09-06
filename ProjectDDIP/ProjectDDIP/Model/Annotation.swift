@@ -74,6 +74,7 @@ class AnnotationObject: NSObject, MKAnnotation {
     func setLocationName(_ locationName: String) { self.locationName = locationName }
     func setDiscipline(_ discipline: String) { self.discipline = discipline }
     var image: UIImage { return #imageLiteral(resourceName: "plus") }
+    var focusImage: UIImage { return #imageLiteral(resourceName: "Map") }
     
     var markerTintColor: UIColor  {
         
