@@ -183,7 +183,7 @@ extension SearchViewController: UITableViewDelegate{
                 let a:CLCircularRegion = p.placemark.region as! CLCircularRegion
                 print("p : \(p.placemark.coordinate.latitude)")
                 print("p : \(p.placemark.coordinate.longitude)")
-                print(a.radius)
+                print("p : \(a.radius)")
                 centerToSearchLocation(p.placemark.coordinate.latitude, p.placemark.coordinate.longitude, a.radius)
                 
 			}
