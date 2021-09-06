@@ -1,5 +1,5 @@
 //
-//  MeetingFloatingViewDelegate.swift
+//  MeetingPanelDelegate.swift
 //  ProjectDDIP
 //
 //  Created by 차영훈 on 2021/08/29.
@@ -8,7 +8,7 @@
 import UIKit
 import FloatingPanel
 
-class MeetingFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIGestureRecognizerDelegate {
+class MeetingPanelDelegate: NSObject, FloatingPanelControllerDelegate, UIGestureRecognizerDelegate {
 	unowned let owner: MainViewController
 
 	init(owner: MainViewController) {
@@ -27,7 +27,7 @@ class MeetingFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UI
 		appearance.backgroundColor = .clear
 		fpc.surfaceView.appearance = appearance
 		
-		return MeetingFloatingViewLayout()
+		return MeetingPanelLayout()
 	}
 
 	func floatingPanelDidMove(_ fpc: FloatingPanelController) {
@@ -37,7 +37,7 @@ class MeetingFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UI
 	}
 	
 	func floatingPanelWillRemove(_ fpc: FloatingPanelController) {
-		owner.mainViewContainer.searchFloatingViewController.addPanel(toParent: owner, animated: true, completion: nil)
+		owner.mainViewContainer.searchPanelController.addPanel(toParent: owner, animated: true, completion: nil)
 	}
 }
 

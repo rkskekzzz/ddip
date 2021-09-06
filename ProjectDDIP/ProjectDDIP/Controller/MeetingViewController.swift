@@ -14,8 +14,8 @@ class MeetingViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     weak var button: UIButton!
 	
-    var createFloatingView: () -> Void = {}
-	var removeFloatingView: () -> Void = {}
+    var createPanel: () -> Void = {}
+	var removePanel: () -> Void = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class MeetingViewController: UIViewController {
     
     @objc func buttonAction(sender: UIButton!) {
         print("Button tapped")
-		removeFloatingView()
+		removePanel()
     }
     
 }
@@ -44,7 +44,7 @@ extension MeetingViewController: MapViewControllerDelegate {
     func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
         DispatchQueue.main.async {
             self.label.text = "\(annotationObject.title!)\n \(annotationObject.locationName!)"
-            self.createFloatingView()
+            self.createPanel()
         }
     }
 }

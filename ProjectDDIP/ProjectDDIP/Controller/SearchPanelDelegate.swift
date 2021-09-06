@@ -1,5 +1,5 @@
 //
-//  SearchViewPanelDelegate.swift
+//  SearchPanelDelegate.swift
 //  ProjectDDIP
 //
 //  Created by 차영훈 on 2021/08/24.
@@ -8,7 +8,7 @@
 import UIKit
 import FloatingPanel
 
-class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIGestureRecognizerDelegate {
+class SearchPanelDelegate: NSObject, FloatingPanelControllerDelegate, UIGestureRecognizerDelegate {
 	unowned let owner: MainViewController
 
 	init(owner: MainViewController) {
@@ -27,7 +27,7 @@ class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIG
 		appearance.backgroundColor = .clear
 		fpc.surfaceView.appearance = appearance
 		
-		return SearchFloatingViewLayout()
+		return SearchPanelLayout()
 	}
 
 	func floatingPanelDidMove(_ fpc: FloatingPanelController) {
