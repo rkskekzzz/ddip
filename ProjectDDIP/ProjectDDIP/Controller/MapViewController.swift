@@ -54,7 +54,7 @@ class MapViewController: UIViewController {
 
     private func loadInitialData() {
         guard
-            let fileName = Bundle.main.url(forResource: "PublicArt", withExtension: "geojson"),
+            let fileName = Bundle.main.url(forResource: "Directions", withExtension: "geojson"),
             let artworkData = try? Data(contentsOf: fileName)
         else { return }
 

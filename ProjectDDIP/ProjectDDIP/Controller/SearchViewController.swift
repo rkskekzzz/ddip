@@ -15,7 +15,7 @@ class SearchViewController: UIViewController {
 	@IBOutlet weak var visualEffectView: UIVisualEffectView!
     var panelUp: () -> Void = {}
     var panelDown: () -> Void = {}
-    var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees) -> Void = {la, lo in }
+    var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees, CLLocationDistance) -> Void = {la, lo, dis in }
     
     // 검색을 도와주는 변수
     private var searchCompleter: MKLocalSearchCompleter?
@@ -90,10 +90,7 @@ extension SearchViewController: UISearchBarDelegate {
         searchCompleter?.queryFragment = searchText
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = nil
-        completerResults = nil
-        searchCompleter?.queryFragment = ""
-        searchBar.resignFirstResponder()
+        searchBarSetDefault()
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         panelUp()
@@ -102,6 +99,12 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(false, animated: true)
         return true
+    }
+    func searchBarSetDefault() {
+        searchBar.text = nil
+        completerResults = nil
+        searchCompleter?.queryFragment = ""
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -151,6 +154,7 @@ extension SearchViewController: UITableViewDelegate{
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
 			panelDown()
+            searchBarSetDefault()
 			self.searchBar.resignFirstResponder()
 			//deactivate
         }
@@ -176,9 +180,12 @@ extension SearchViewController: UITableViewDelegate{
             // 검색한 결과 : reponse의 mapItems 값을 가져온다.
             places = response?.mapItems[0]
 			if let p = places {
-				print("p : \(p.placemark.coordinate.latitude)")
-				print("p : \(p.placemark.coordinate.longitude)")
-				centerToSearchLocation(p.placemark.coordinate.latitude, p.placemark.coordinate.longitude)
+                let a:CLCircularRegion = p.placemark.region as! CLCircularRegion
+                print("p : \(p.placemark.coordinate.latitude)")
+                print("p : \(p.placemark.coordinate.longitude)")
+                print(a.radius)
+                centerToSearchLocation(p.placemark.coordinate.latitude, p.placemark.coordinate.longitude, a.radius)
+                
 			}
             
 //            print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
