@@ -48,9 +48,10 @@ class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIG
 		}
 	}
 	
-	func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) {
-		if vc.state == .full {
+	func floatingPanelDidChangeState(_ vc: FloatingPanelController) {
+		if vc.state == .tip {
 			owner.view.endEditing(true)
+			owner.mainViewContainer.searchViewController.searchBarSetDefault()
 		}
 	}
 }
