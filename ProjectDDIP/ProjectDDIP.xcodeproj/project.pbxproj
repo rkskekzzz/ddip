@@ -29,6 +29,7 @@
 		904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */; };
 		904C4B8326D64B7900FDC55D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B8226D64B7900FDC55D /* Cell.swift */; };
 		904C4B8526D790D900FDC55D /* MapItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B8426D790D900FDC55D /* MapItemData.swift */; };
+		908A01AD26E5EA4100B9B41B /* Directions.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 908A01AC26E5E24C00B9B41B /* Directions.geojson */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContainer.swift; sourceTree = "<group>"; };
 		904C4B8226D64B7900FDC55D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		904C4B8426D790D900FDC55D /* MapItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItemData.swift; sourceTree = "<group>"; };
+		908A01AC26E5E24C00B9B41B /* Directions.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Directions.geojson; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */,
+				908A01AC26E5E24C00B9B41B /* Directions.geojson */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				908A01AD26E5EA4100B9B41B /* Directions.geojson in Resources */,
 				904C4B7326D3CDF000FDC55D /* LaunchScreen.storyboard in Resources */,
 				904C4B7026D3CDF000FDC55D /* Assets.xcassets in Resources */,
 				904C4B6E26D3CDEE00FDC55D /* Main.storyboard in Resources */,
@@ -395,12 +399,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 54PCB24H6S;
 				INFOPLIST_FILE = ProjectDDIP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.angelayu.ProjectDDIP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.suhshin.ProjectDDIP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -413,12 +418,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 54PCB24H6S;
 				INFOPLIST_FILE = ProjectDDIP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.angelayu.ProjectDDIP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.suhshin.ProjectDDIP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
