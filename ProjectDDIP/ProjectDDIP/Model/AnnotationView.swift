@@ -14,8 +14,8 @@ class AnnotationMarkerView: MKMarkerAnnotationView {
         willSet {
             guard let annotationObject = newValue as? AnnotationObject else { return }
                 
-            self.accessibilityIdentifier = "annotationMarker"
             self.isAccessibilityElement = true
+            self.accessibilityIdentifier = "annotationMarker"
             self.canShowCallout = true
             self.calloutOffset = CGPoint(x: -5, y: 5)
 

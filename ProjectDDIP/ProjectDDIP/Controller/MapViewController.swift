@@ -5,8 +5,6 @@
 //  Created by su on 2021/08/23.
 //
 
-import AVFoundation
-import Foundation
 import UIKit
 import MapKit
 
@@ -76,10 +74,9 @@ extension MapViewController: UIGestureRecognizerDelegate {
     @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
 
         if mapView.selectedAnnotations.count > 0 { return }
-        print(mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements as Any)
-        print(mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements?.count)
-        if mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements == nil { return }
-        
+        let hitView: UIView? = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)
+        print(String(describing: hitView!.classForCoder))
+        if String(describing: hitView!.classForCoder) == "_MKBezierPathView" { return }
         // ...
         // If the UI policy has changed, more validators are needed.
         // This condition is created under the assumption that there is no button in the annotation.
