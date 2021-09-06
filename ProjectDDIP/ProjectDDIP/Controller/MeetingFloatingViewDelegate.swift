@@ -15,8 +15,8 @@ class MeetingFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UI
 		self.owner = owner
 	}
 
-	func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
-		let appearance = vc.surfaceView.appearance
+	func floatingPanel(_ fpc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
+		let appearance = fpc.surfaceView.appearance
 
 		if #available(iOS 13.0, *) {
 			appearance.cornerCurve = .continuous
@@ -25,15 +25,15 @@ class MeetingFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UI
 		appearance.borderColor = nil
 		appearance.cornerRadius = 8.0
 		appearance.backgroundColor = .clear
-		vc.surfaceView.appearance = appearance
+		fpc.surfaceView.appearance = appearance
 		
 		return MeetingFloatingViewLayout()
 	}
 
-	func floatingPanelDidMove(_ vc: FloatingPanelController) {
-		let loc = vc.surfaceLocation
-		let minY = vc.surfaceLocation(for: .half).y
-		vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
+	func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+		let loc = fpc.surfaceLocation
+		let minY = fpc.surfaceLocation(for: .half).y
+		fpc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
 	}
 }
 

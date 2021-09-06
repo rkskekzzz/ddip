@@ -15,8 +15,8 @@ class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIG
 		self.owner = owner
 	}
 
-	func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
-		let appearance = vc.surfaceView.appearance
+	func floatingPanel(_ fpc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
+		let appearance = fpc.surfaceView.appearance
 
 		if #available(iOS 13.0, *) {
 			appearance.cornerCurve = .continuous
@@ -25,21 +25,21 @@ class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIG
 		appearance.borderColor = nil
 		appearance.cornerRadius = 8.0
 		appearance.backgroundColor = .clear
-		vc.surfaceView.appearance = appearance
+		fpc.surfaceView.appearance = appearance
 		
 		return SearchFloatingViewLayout()
 	}
 
-	func floatingPanelDidMove(_ vc: FloatingPanelController) {
-		let loc = vc.surfaceLocation
+	func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+		let loc = fpc.surfaceLocation
 
-		if vc.isAttracting == false {
-			let minY = vc.surfaceLocation(for: .full).y - 6.0
-			let maxY = vc.surfaceLocation(for: .tip).y + 6.0
-			vc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
+		if fpc.isAttracting == false {
+			let minY = fpc.surfaceLocation(for: .full).y - 6.0
+			let maxY = fpc.surfaceLocation(for: .tip).y + 6.0
+			fpc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
 		}
 
-		let tipY = vc.surfaceLocation(for: .tip).y
+		let tipY = fpc.surfaceLocation(for: .tip).y
 		if loc.y > tipY - 44.0 {
 			let progress = max(0.0, min((tipY  - loc.y) / 44.0, 1.0))
 			owner.mainViewContainer.searchViewController.tableView.alpha = progress
@@ -48,8 +48,8 @@ class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIG
 		}
 	}
 	
-	func floatingPanelDidChangeState(_ vc: FloatingPanelController) {
-		if vc.state == .tip {
+	func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {
+		if fpc.state == .tip {
 			owner.view.endEditing(true)
 			owner.mainViewContainer.searchViewController.searchBarSetDefault()
 		}
