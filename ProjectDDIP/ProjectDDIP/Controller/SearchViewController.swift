@@ -90,10 +90,7 @@ extension SearchViewController: UISearchBarDelegate {
         searchCompleter?.queryFragment = searchText
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = nil
-        completerResults = nil
-        searchCompleter?.queryFragment = ""
-        searchBar.resignFirstResponder()
+        searchBarSetDefault()
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         panelUp()
@@ -102,6 +99,12 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(false, animated: true)
         return true
+    }
+    func searchBarSetDefault() {
+        searchBar.text = nil
+        completerResults = nil
+        searchCompleter?.queryFragment = ""
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -151,6 +154,7 @@ extension SearchViewController: UITableViewDelegate{
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
 			panelDown()
+            searchBarSetDefault()
 			self.searchBar.resignFirstResponder()
 			//deactivate
         }
