@@ -32,6 +32,12 @@ class MapViewController: UIViewController {
         allTest()
     }
     
+    func centerToLocation(_ location: CLLocation, _ radius: Double) {
+        centerToLocation(location)
+        let span = MKCoordinateSpan(latitudeDelta: radius / 111320, longitudeDelta: radius / 111320)
+        let mapCoordinate = MKCoordinateRegion(center: location.coordinate, span: span)
+        mapView.setRegion(mapCoordinate, animated: true)
+    }
     func centerToLocation(_ location: CLLocation) { mapView.centerToLocation(location) }
     func centerToLocation(_ location: CLLocationCoordinate2D) { mapView.centerToLocation(location) }
     func setCameraZoomMaxDistance(_ maxDistance: Double) { mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: maxDistance), animated: true) }
@@ -70,7 +76,10 @@ extension MapViewController: UIGestureRecognizerDelegate {
     @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
 
         if mapView.selectedAnnotations.count > 0 { return }
+        print(mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements as Any)
+        print(mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements?.count)
         if mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)!.accessibilityElements == nil { return }
+        
         // ...
         // If the UI policy has changed, more validators are needed.
         // This condition is created under the assumption that there is no button in the annotation.
@@ -120,35 +129,17 @@ extension MapViewController {
     
     func allTest() {
         
-        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-        centerToLocation(initialLocation)
+        let startLocation = convertToLocation(37.529510664039876, 127.02840863820876)
+        let distance: Double = 60000
+        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
+        let mapCoordinate = MKCoordinateRegion(center: startLocation.coordinate, span: span)
         
-//        let oahuCenter = convertToLocation(21.4765, -157.9647)
-//        let region = convertToRegion(oahuCenter, latitudinalMeters: 50000, longitudinalMeters: 60000)
-//        setCameraBoundary(region)
-        
-        let distance: Double = 600000
+        centerToLocation(startLocation)
+        mapView.setRegion(mapCoordinate, animated: true)
         setCameraZoomMaxDistance(distance)
+
         mapView.register(AnnotationMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         loadInitialData()
         addAnnotations(annotations)
-        
-//        print(mapView.overlays.count)
-//        for obj in mapView.overlays {
-//            print(obj.title)
-//            print(obj.description)
-//        }
-//        print("-------------")
-//        print(mapView.pointOfInterestFilter)
-//        print("-------------")
-//        print(mapView.interactions.count)
-//        for obj in mapView.interactions {
-//            print(obj.description)
-//        }
-//
-//        print("-------------")
-//        print(mapView.activityItemsConfiguration)
-//        print(mapView.constraints.count)
-//        mapView.removeConstraints(mapView.constraints)
     }
 }

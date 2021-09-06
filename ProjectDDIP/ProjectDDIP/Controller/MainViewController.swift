@@ -50,7 +50,7 @@ private extension MainViewController {
 		}
 		mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo, dis) in
 //			let location = CLLocation(latitude: la, longitude: lo)
-			self.mainViewContainer.mapViewController.centerToLocation(self.mainViewContainer.mapViewController.convertToLocation(la, lo))
+			self.mainViewContainer.mapViewController.centerToLocation(self.mainViewContainer.mapViewController.convertToLocation(la, lo), dis)
 		}
 	}
 	
