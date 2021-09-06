@@ -47,5 +47,12 @@ class SearchFloatingViewDelegate: NSObject, FloatingPanelControllerDelegate, UIG
 			owner.mainViewContainer.searchViewController.tableView.alpha = 1.0
 		}
 	}
+	
+	func floatingPanelDidChangeState(_ vc: FloatingPanelController) {
+		if vc.state == .tip {
+			owner.view.endEditing(true)
+			owner.mainViewContainer.searchViewController.searchBarSetDefault()
+		}
+	}
 }
 
