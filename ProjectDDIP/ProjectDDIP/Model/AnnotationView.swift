@@ -13,7 +13,7 @@ class AnnotationMarkerView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
             guard let annotationObject = newValue as? AnnotationObject else { return }
-                
+
             self.isAccessibilityElement = true
             self.accessibilityIdentifier = "annotationMarker"
             self.canShowCallout = true
@@ -21,9 +21,14 @@ class AnnotationMarkerView: MKMarkerAnnotationView {
 
             let mapsButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 48, height: 48)))
             mapsButton.setBackgroundImage(#imageLiteral(resourceName: "Map"), for: .normal)
-            rightCalloutAccessoryView = mapsButton
+            self.rightCalloutAccessoryView = mapsButton
+
+            self.markerTintColor = annotationObject.markerTintColor
+
+            print("-------")
+            print(self)
+            print("-------")
             
-            markerTintColor = annotationObject.markerTintColor
             if let letter = annotationObject.discipline?.first { glyphText = String(letter) }
         }
     }

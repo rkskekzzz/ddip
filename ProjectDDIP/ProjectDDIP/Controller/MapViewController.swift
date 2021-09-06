@@ -74,9 +74,10 @@ extension MapViewController: UIGestureRecognizerDelegate {
     @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
 
         if mapView.selectedAnnotations.count > 0 { return }
-        let hitView: UIView? = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)
-        print(String(describing: hitView!.classForCoder))
-        if String(describing: hitView!.classForCoder) == "_MKBezierPathView" { return }
+//        let hitView: UIView? = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil)
+//        print(String(describing: hitView!.classForCoder))
+//        if String(describing: hitView!.classForCoder) == "_MKBezierPathView" { return }
+         
         // ...
         // If the UI policy has changed, more validators are needed.
         // This condition is created under the assumption that there is no button in the annotation.
