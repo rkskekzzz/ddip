@@ -16,70 +16,91 @@ class MainViewController: UIViewController {
 		super.viewDidLoad()
     
 		initMainView()
+		
+		// Search
+		initSearchPanel()
 		initSearchView()
+		
+		// Meeting
+		initMeetingPanel()
 		initMeetingView()
         initMapView()
 	}
 }
 
 private extension MainViewController {
-	func initMainView() {
+	private func initMainView() {
 		mainViewContainer.mapViewController.delegate = mainViewContainer.meetingViewController
 		addChild(mainViewContainer.mapViewController)
 		view.addSubview(mainViewContainer.mapViewController.view)
 	}
-	
-	func initSearchView() {
-		// SearchFloatingView
-		let fpc = mainViewContainer.searchFloatingViewController
-		let fpcDelegate = SearchFloatingViewDelegate(owner: self)
+}
+
+private extension MainViewController {
+	private func initSearchPanel() {
+		let fpc = mainViewContainer.searchPanelController
+		let fpcDelegate = SearchPanelDelegate(owner: self)
 		
-		mainViewContainer.searchFloatingViewDelegate = fpcDelegate
+		mainViewContainer.searchPanelDelegate = fpcDelegate
 		fpc.delegate = fpcDelegate
 		fpc.contentMode = .fitToBounds
 		fpc.set(contentViewController: mainViewContainer.searchViewController)
 		fpc.track(scrollView: mainViewContainer.searchViewController.tableView)
 		fpc.addPanel(toParent: self)
+	}
+	
+	private func initSearchView() {
+		let vc = mainViewContainer.searchViewController
+		let searchFpc = mainViewContainer.searchPanelController
 		
-		// SearchView
-		mainViewContainer.searchViewController.view.backgroundColor = .clear
-		mainViewContainer.searchViewController.panelUp = {
-			fpc.move(to: .full, animated: true)
+		vc.view.backgroundColor = .clear
+		vc.movePanelToFull = {
+			searchFpc.move(to: .full, animated: true)
 		}
-		mainViewContainer.searchViewController.panelDown = {
-			fpc.move(to: .tip, animated: true)
+		vc.movePanelToTip = {
+			searchFpc.move(to: .tip, animated: true)
 		}
-		mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo, dis) in
+		vc.centerToSearchLocation = { (la, lo, dis) in
 //			let location = CLLocation(latitude: la, longitude: lo)
 			self.mainViewContainer.mapViewController.centerToLocation(self.mainViewContainer.mapViewController.convertToLocation(la, lo), dis)
 		}
 	}
-	
-	func initMeetingView() {
-		// MeetingFloatingView
-		let fpc = mainViewContainer.meetingFloatingViewController
-		let fpcDelegate = MeetingFloatingViewDelegate(owner: self)
+}
+
+private extension MainViewController {
+	private func initMeetingPanel() {
+		let fpc = mainViewContainer.meetingPanelController
+		let fpcDelegate = MeetingPanelDelegate(owner: self)
 		
-		mainViewContainer.meetingFloatingViewDelegate = fpcDelegate
+		mainViewContainer.meetingPanelDelegate = fpcDelegate
 		fpc.delegate = fpcDelegate
 		fpc.contentMode = .fitToBounds
 		fpc.set(contentViewController: mainViewContainer.meetingViewController)
 		fpc.isRemovalInteractionEnabled = true
-
-		// MeetingView
-		mainViewContainer.meetingViewController.view.backgroundColor = .clear
-		mainViewContainer.meetingViewController.panelUp = {
-			fpc.addPanel(toParent: self, animated: true, completion: nil)
+	}
+	
+	private func initMeetingView() {
+		let vc = mainViewContainer.meetingViewController
+		let meetingFpc = mainViewContainer.meetingPanelController
+		let searchFpc = mainViewContainer.searchPanelController
+		
+		vc.view.backgroundColor = .clear
+		vc.createPanel = {
+			meetingFpc.addPanel(toParent: self, animated: true, completion: nil)
+			searchFpc.dismiss(animated: true, completion: nil)
+		}
+		vc.removePanel = {
+			meetingFpc.dismiss(animated: true, completion: nil)
 		}
 	}
     
     func initMapView() {
-        let mvc = mainViewContainer.mapViewController
-        let sfvc = mainViewContainer.searchFloatingViewController
-        let mfvc = mainViewContainer.meetingFloatingViewController
-        mvc.annotationDeselectBehaviourDefines = {
-            sfvc.removePanelFromParent(animated: true)
-            mfvc.removePanelFromParent(animated: true) // 이건 서치바를 날려버리니;; 다른 방식이 필요합니다.
+        let vc = mainViewContainer.mapViewController
+        let searchFpc = mainViewContainer.searchPanelController
+        let meetingFpc = mainViewContainer.meetingPanelController
+        vc.annotationDeselectBehaviourDefines = {
+            searchFpc.removePanelFromParent(animated: true)
+            meetingFpc.removePanelFromParent(animated: true) // 이건 서치바를 날려버리니;; 다른 방식이 필요합니다.
         }
         
         

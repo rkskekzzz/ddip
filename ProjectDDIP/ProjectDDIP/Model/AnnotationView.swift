@@ -13,6 +13,7 @@ class AnnotationView: MKAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
             guard let annotationObject = newValue as? AnnotationObject else { return }
+          
             self.canShowCallout = false
             self.image = annotationObject.image
         }

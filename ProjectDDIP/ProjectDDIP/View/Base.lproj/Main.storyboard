@@ -171,20 +171,7 @@
                                 <view key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vLI-gc-7eu">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이게 보인다면 오류예요 ㅠ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1R-Lj-onv">
-                                            <rect key="frame" x="0.0" y="6" width="414" height="24"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="V1R-Lj-onv" firstAttribute="leading" secondItem="vLI-gc-7eu" secondAttribute="leading" id="oPa-cF-lMJ"/>
-                                        <constraint firstItem="V1R-Lj-onv" firstAttribute="trailing" secondItem="vLI-gc-7eu" secondAttribute="trailing" id="oQX-sc-Ue5"/>
-                                        <constraint firstItem="V1R-Lj-onv" firstAttribute="top" secondItem="vLI-gc-7eu" secondAttribute="top" constant="6" id="qhi-S5-sCD"/>
-                                    </constraints>
                                 </view>
                                 <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
@@ -198,9 +185,6 @@
                             <constraint firstItem="jhL-Lz-8ss" firstAttribute="top" secondItem="Zmv-7e-Wee" secondAttribute="top" id="ztR-of-34G"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="label" destination="V1R-Lj-onv" id="iQC-jH-1rY"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGE-GP-xof" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

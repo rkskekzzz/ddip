@@ -14,12 +14,12 @@ struct MainViewContainer {
     let mapViewController: MapViewController
 	
   	let searchViewController: SearchViewController
-	let searchFloatingViewController = FloatingPanelController()
-	var searchFloatingViewDelegate: PanelDelegate?
+	let searchPanelController = FloatingPanelController()
+	var searchPanelDelegate: PanelDelegate?
 	
 	let meetingViewController: MeetingViewController
-	let meetingFloatingViewController = FloatingPanelController()
-	var meetingFloatingViewDelegate: PanelDelegate?
+	let meetingPanelController = FloatingPanelController()
+	var meetingPanelDelegate: PanelDelegate?
     
     // guard 처리 하는게 맞는지?
     init(storyBoard: UIStoryboard?) {
@@ -27,10 +27,10 @@ struct MainViewContainer {
 		
 		mapViewController = storyboard.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
 		
-		searchFloatingViewDelegate = nil
+		searchPanelDelegate = nil
 		searchViewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
 		
-		meetingFloatingViewDelegate = nil
+		meetingPanelDelegate = nil
 		meetingViewController = storyboard.instantiateViewController(withIdentifier: "MeetingViewController") as! MeetingViewController
     }
 }

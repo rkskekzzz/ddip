@@ -13,8 +13,8 @@ class SearchViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var visualEffectView: UIVisualEffectView!
-    var panelUp: () -> Void = {}
-    var panelDown: () -> Void = {}
+    var movePanelToTip: () -> Void = {}
+    var movePanelToFull: () -> Void = {}
     var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees, CLLocationDistance) -> Void = {la, lo, dis in }
     
     // 검색을 도와주는 변수
@@ -91,10 +91,10 @@ extension SearchViewController: UISearchBarDelegate {
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBarSetDefault()
-        panelDown()
+		movePanelToTip()
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        panelUp()
+		movePanelToFull()
         searchBar.setShowsCancelButton(true, animated: true)
     }
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
@@ -154,7 +154,7 @@ extension SearchViewController: UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true) // 선택 표시 해제
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
-			panelDown()
+			movePanelToTip()
             searchBarSetDefault()
 			self.searchBar.resignFirstResponder()
 			//deactivate
