@@ -11,7 +11,6 @@ import MapKit
 
 class MeetingViewController: UIViewController {
     
-    @IBOutlet weak var label: UILabel!
     var panelUp: () -> Void = {}
     
     lazy var stackView: UIStackView = {
@@ -20,7 +19,11 @@ class MeetingViewController: UIViewController {
         stackV.translatesAutoresizingMaskIntoConstraints = false
         stackV.axis = .vertical
         stackV.spacing = 10
-        stackV.distribution = .fillEqually
+        stackV.distribution = .equalCentering
+        
+        // debug
+        stackV.layer.borderColor = UIColor.red.cgColor
+        stackV.layer.borderWidth = 1
         
         return stackV
     }()
@@ -28,41 +31,78 @@ class MeetingViewController: UIViewController {
     lazy var titleAndPeopleStackView: UIStackView = {
         let stackV = UIStackView(arrangedSubviews: [titleLabel, numberOfPeopleLabel])
         
+        stackV.translatesAutoresizingMaskIntoConstraints = false
+        stackV.axis = .horizontal
+//        stackV.alignment = .bottom
+        stackV.spacing = 10
+        stackV.distribution = .equalSpacing
+        
+        // debug
+        stackV.layer.borderColor = UIColor.green.cgColor
+        stackV.layer.borderWidth = 1
+        
         return stackV
     }()
     
     lazy var dateAndMoneyStackView: UIStackView = {
         let stackV = UIStackView(arrangedSubviews: [dateAndTimeStackView, moneyLabel])
         
+        stackV.translatesAutoresizingMaskIntoConstraints = false
+        stackV.axis = .horizontal
+        stackV.spacing = 10
+        stackV.distribution = .fillEqually
+        
         return stackV
     }()
     
     lazy var dateAndTimeStackView: UIStackView = {
+        
         let stackV = UIStackView(arrangedSubviews: [dateLabel, timeLabel])
+        stackV.translatesAutoresizingMaskIntoConstraints = false
+        stackV.axis = .vertical
+        stackV.spacing = 2
+        stackV.distribution = .fillEqually
         
         return stackV
     }()
     
-    lazy var joinButton: UIButton = {
-        let height: CGFloat = 50
-        let weight: CGFloat = self.view.frame.width - 70
-        let button = UIButton(frame: CGRect.init(x: (self.view.frame.size.width - weight) / 2,
-                                                 y: (self.view.frame.size.height - height) / 4,
-                                                 width: weight,
-                                                 height: height))
-        button.backgroundColor = .green
-        button.layer.cornerRadius = 25
-        button.layer.shadowColor = UIColor.gray.cgColor
-        button.layer.shadowOpacity = 1.0
-        button.layer.shadowOffset = CGSize.zero
-        button.layer.shadowRadius = 6
-        button.backgroundColor = UIColor.black
-        button.setTitle("Join Event", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
-        return button
-    }()
+//    lazy var ddayLabelFrame: UIView = {
+//        let ddayLabelF = UIView()
+//        // debug
+//        ddayLabelF.layer.borderColor = UIColor.green.cgColor
+//        ddayLabelF.layer.borderWidth = 1
+//
+//        ddayLabelF.addSubview(ddayLabel)
+//        print(ddayLabel.text)
+//        return ddayLabelF
+//    }()
+//
+//    lazy var titleAndPeopleStackViewFrame: UIView = {
+//        let titleAndPeopleStackViewF = UIView(frame: CGRect.init(x: 0,
+//                                                                y: 0,
+//                                                                width: self.stackView.frame.size.width,
+//                                                                height: (self.stackView.frame.size.height / 4) - 10))
+//        titleAndPeopleStackViewF.addSubview(titleAndPeopleStackView)
+//        return titleAndPeopleStackViewF
+//    }()
+    
+//    lazy var dateAndMoneyStackViewFrame: UIView = {
+//        let dateAndMoneyStackViewF = UIView(frame: CGRect.init(x: 0,
+//                                                                y: 0,
+//                                                                width: self.stackView.frame.size.width,
+//                                                                height: (self.stackView.frame.size.height / 4) - 10))
+//        dateAndMoneyStackViewF.addSubview(dateAndMoneyStackView)
+//        return dateAndMoneyStackViewF
+//    }()
+//
+//    lazy var joinButtonFrame: UIView = {
+//        let joinButtonFrameF = UIView(frame: CGRect.init(x: 0,
+//                                                                y: 0,
+//                                                                width: self.stackView.frame.size.width,
+//                                                                height: (self.stackView.frame.size.height / 4) - 10))
+//        joinButtonFrameF.addSubview(joinButton)
+//        return joinButtonFrameF
+//    }()
     
     lazy var ddayLabel: UILabel = {
         let dday = UILabel()
@@ -70,6 +110,11 @@ class MeetingViewController: UIViewController {
         
         dday.text = "6시간 후 시작"
         dday.textColor = UIColor(rgb: 0x87b8b7)
+        
+        // debug
+        dday.layer.borderColor = UIColor.blue.cgColor
+        dday.layer.borderWidth = 1
+        
         return dday
     }()
     
@@ -79,6 +124,11 @@ class MeetingViewController: UIViewController {
         
         title.text = "면접 스터디 모임"
         title.font = UIFont.boldSystemFont(ofSize: 30)
+        
+        // debug
+        title.layer.borderColor = UIColor.black.cgColor
+        title.layer.borderWidth = 1
+        
         return title
     }()
     
@@ -87,6 +137,11 @@ class MeetingViewController: UIViewController {
         
         numberOfPeople.text = "9 / 10"
         numberOfPeople.textColor = .gray
+        
+        // debug
+        numberOfPeople.layer.borderColor = UIColor.black.cgColor
+        numberOfPeople.layer.borderWidth = 1
+        
         return numberOfPeople
     
     }()
@@ -112,6 +167,27 @@ class MeetingViewController: UIViewController {
         return money
     }()
     
+    lazy var joinButton: UIButton = {
+        let height: CGFloat = 50
+        let weight: CGFloat = self.view.frame.width - 70
+        let button = UIButton(frame: CGRect.init(x: (self.view.frame.size.width - weight) / 2,
+                                                 y: (self.view.frame.size.height - height) / 4,
+                                                 width: weight,
+                                                 height: height))
+        button.backgroundColor = .green
+        button.layer.cornerRadius = 25
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowOffset = CGSize.zero
+        button.layer.shadowRadius = 6
+        button.backgroundColor = UIColor.black
+        button.setTitle("Join Event", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -134,7 +210,7 @@ class MeetingViewController: UIViewController {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        stackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        stackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20)
             .isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
             .isActive = true
