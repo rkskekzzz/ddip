@@ -29,14 +29,16 @@ class SearchPanelDelegate: NSObject, FloatingPanelControllerDelegate, UIGestureR
 		
 		return SearchPanelLayout()
 	}
-
+	
 	func floatingPanelDidMove(_ fpc: FloatingPanelController) {
 		let loc = fpc.surfaceLocation
-
+		
 		if fpc.isAttracting == false {
 			let minY = fpc.surfaceLocation(for: .full).y - 6.0
 			let maxY = fpc.surfaceLocation(for: .tip).y + 6.0
-			fpc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
+			if loc.y < maxY + 100 {
+				fpc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
+			}
 		}
 
 		let tipY = fpc.surfaceLocation(for: .tip).y

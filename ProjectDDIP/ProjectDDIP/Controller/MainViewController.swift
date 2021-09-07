@@ -86,11 +86,11 @@ private extension MainViewController {
 		
 		vc.view.backgroundColor = .clear
 		vc.createPanel = {
-			meetingFpc.addPanel(toParent: self, animated: true, completion: nil)
-			searchFpc.dismiss(animated: true, completion: nil)
+			meetingFpc.addPanel(toParent: self, animated: true)
+			searchFpc.hide(animated: true, completion: nil)
 		}
 		vc.removePanel = {
-			meetingFpc.dismiss(animated: true, completion: nil)
+			meetingFpc.removePanelFromParent(animated: true)
 		}
 	}
     
@@ -99,8 +99,7 @@ private extension MainViewController {
         let searchFpc = mainViewContainer.searchPanelController
         let meetingFpc = mainViewContainer.meetingPanelController
         vc.annotationDeselectBehaviourDefines = {
-            searchFpc.removePanelFromParent(animated: true)
-            meetingFpc.removePanelFromParent(animated: true) // 이건 서치바를 날려버리니;; 다른 방식이 필요합니다.
+            meetingFpc.removePanelFromParent(animated: true)
         }
         
         
