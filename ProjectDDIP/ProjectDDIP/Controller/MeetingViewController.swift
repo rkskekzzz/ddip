@@ -11,7 +11,8 @@ import MapKit
 
 class MeetingViewController: UIViewController {
     
-    var panelUp: () -> Void = {}
+    var createPanel: () -> Void = {}
+	var removePanel: () -> Void = {}
     
     lazy var stackView: UIStackView = {
         let stackV = UIStackView(arrangedSubviews: [ddayLabel, titleAndPeopleStackView, dateAndMoneyStackView ,joinButton])
@@ -231,6 +232,7 @@ class MeetingViewController: UIViewController {
     
     @objc func buttonAction(sender: UIButton!) {
         print("Button tapped")
+		removePanel()
     }
     
 }
@@ -238,12 +240,7 @@ class MeetingViewController: UIViewController {
 extension MeetingViewController: MapViewControllerDelegate {
     func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
         DispatchQueue.main.async {
-            self.panelUp()
-            
-            //			print(annotationObject.locationName as Any)
-            //			print(annotationObject.coordinate.latitude)
-            //			print(annotationObject.coordinate.longitude)
-            //			print(annotationObject.discipline as Any)
+            self.createPanel()
         }
     }
 }

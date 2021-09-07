@@ -19,7 +19,10 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     private var gesturePin = AnnotationObject(title: nil, locationName: nil, discipline: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+    private var selectedView: MKAnnotationView? = nil
+    private var selectedPin: AnnotationObject? = nil
     private var annotations: [AnnotationObject] = []
+    var annotationDeselectBehaviourDefines: () -> Void = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,8 @@ class MapViewController: UIViewController {
     }
     func centerToLocation(_ location: CLLocation) { mapView.centerToLocation(location) }
     func centerToLocation(_ location: CLLocationCoordinate2D) { mapView.centerToLocation(location) }
+    func moveToLocation(_ location: CLLocation) { mapView.moveToLocation(location.coordinate) }
+    func moveToLocation(_ location: CLLocationCoordinate2D) { mapView.moveToLocation(location) }
     func setCameraZoomMaxDistance(_ maxDistance: Double) { mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: maxDistance), animated: true) }
     func setCameraBoundary(_ region: MKCoordinateRegion) { mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true) }
     func convertToLocation2D(_ latitude: Double, _ longitude: Double) -> CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: latitude, longitude: longitude) }
@@ -72,9 +77,19 @@ extension MapViewController: UIGestureRecognizerDelegate {
     }
 
     @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
-
-        if mapView.selectedAnnotations.count > 0 { return }
-        if (mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil) as? AnnotationView) != nil { return }
+        
+        let hitObject = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil) as? AnnotationView
+        
+        if mapView.selectedAnnotations.count > 0 {
+            if hitObject == nil {
+                selectedView?.image = selectedPin?.image
+                selectedView = nil
+                selectedPin = nil
+                self.annotationDeselectBehaviourDefines()
+            }
+            return
+        }
+        if hitObject != nil { return }
         
         if  gestureRecognizer.state == UIGestureRecognizer.State.ended {
             let locationCoordinate = mapView.convert(gestureRecognizer.location(in: mapView), toCoordinateFrom: mapView)
@@ -95,28 +110,33 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotationObject = view.annotation as? AnnotationObject else { return }
+        if selectedView != nil || selectedPin != nil { selectedView?.image = selectedPin?.image }
+        selectedView = view
+        selectedPin = annotationObject
+        view.image = annotationObject.focusImage
+        moveToLocation(annotationObject.coordinate)
         delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
     }
 }
 
 private extension MKMapView {
     func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 1000) {
-        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: self.camera.centerCoordinateDistance, longitudinalMeters: self.camera.centerCoordinateDistance)
         setRegion(coordinateRegion, animated: true)
     }
 
     func centerToLocation(_ location: CLLocationCoordinate2D, regionRadius: CLLocationDistance = 1000) {
-        let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: self.camera.centerCoordinateDistance, longitudinalMeters: self.camera.centerCoordinateDistance)
         setRegion(coordinateRegion, animated: true)
     }
     
-    func visibleAnnotations() -> [MKAnnotation] {
-        return self.annotations(in: self.visibleMapRect).map { obj -> MKAnnotation in return obj as! MKAnnotation }
-    }
+    func moveToLocation(_ location: CLLocation) { self.setCenter(location.coordinate, animated: true) }
+    func moveToLocation(_ location: CLLocationCoordinate2D) { self.setCenter(location, animated: true) }
+    
+    func visibleAnnotations() -> [MKAnnotation] { return self.annotations(in: self.visibleMapRect).map { obj -> MKAnnotation in return obj as! MKAnnotation } }
 }
 
 extension MapViewController {
-    
     
     func allTest() {
         
@@ -129,7 +149,6 @@ extension MapViewController {
         mapView.setRegion(mapCoordinate, animated: true)
         setCameraZoomMaxDistance(distance)
 
-//        mapView.register(AnnotationMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         loadInitialData()
         addAnnotations(annotations)
