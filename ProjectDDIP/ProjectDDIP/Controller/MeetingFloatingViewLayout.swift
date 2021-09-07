@@ -14,7 +14,7 @@ class MeetingFloatingViewLayout: FloatingPanelLayout {
 	
 	var anchors: [FloatingPanelState : FloatingPanelLayoutAnchoring] {
 		return [
-			.half: FloatingPanelLayoutAnchor(fractionalInset: 0.4, edge: .bottom, referenceGuide: .safeArea),
+			.half: FloatingPanelLayoutAnchor(fractionalInset: 0.31, edge: .bottom, referenceGuide: .safeArea),
 		]
 	}
 	

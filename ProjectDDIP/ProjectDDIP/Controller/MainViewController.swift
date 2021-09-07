@@ -49,13 +49,14 @@ private extension MainViewController {
 			fpc.move(to: .tip, animated: true)
 		}
 		mainViewContainer.searchViewController.centerToSearchLocation = { (la, lo, dis) in
-//			let location = CLLocation(latitude: la, longitude: lo)
+            _ = CLLocation(latitude: la, longitude: lo)
+            
 			self.mainViewContainer.mapViewController.centerToLocation(self.mainViewContainer.mapViewController.convertToLocation(la, lo), dis)
 		}
 	}
 	
 	func initMeetingView() {
-		// MeetingFloatingView
+//		 MeetingFloatingView
 		let fpc = mainViewContainer.meetingFloatingViewController
 		let fpcDelegate = MeetingFloatingViewDelegate(owner: self)
 		
