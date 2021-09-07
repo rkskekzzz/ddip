@@ -74,12 +74,12 @@ private extension MainViewController {
 	}
     
     func initMapView() {
-        let mvc = mainViewContainer.mapViewController
-        let sfvc = mainViewContainer.searchFloatingViewController
-        let mfvc = mainViewContainer.meetingFloatingViewController
-        mvc.annotationDeselectBehaviourDefines = {
-            sfvc.removePanelFromParent(animated: true)
-            mfvc.removePanelFromParent(animated: true) // 이건 서치바를 날려버리니;; 다른 방식이 필요합니다.
+        let vc = mainViewContainer.mapViewController
+        let searchFpc = mainViewContainer.searchPanelController
+        let meetingFpc = mainViewContainer.meetingPanelController
+        vc.annotationDeselectBehaviourDefines = {
+            searchFpc.removePanelFromParent(animated: true)
+            meetingFpc.removePanelFromParent(animated: true) // 이건 서치바를 날려버리니;; 다른 방식이 필요합니다.
         }
         
         
