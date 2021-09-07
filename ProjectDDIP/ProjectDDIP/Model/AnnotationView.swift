@@ -13,13 +13,15 @@ class AnnotationView: MKAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
             guard let annotationObject = newValue as? AnnotationObject else { return }
-            self.canShowCallout = true
+//            self.canShowCallout = true
+            self.canShowCallout = false
             self.calloutOffset = CGPoint(x: -5, y: 5)
 
             let mapsButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 48, height: 48)))
             mapsButton.setBackgroundImage(#imageLiteral(resourceName: "Map"), for: .normal)
             self.rightCalloutAccessoryView = mapsButton
             self.image = annotationObject.image
+            self.shouldGroupAccessibilityChildren = true
         }
     }
 }
