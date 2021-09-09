@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 protocol MapViewControllerDelegate {
 //    func didUpdateMapVCAnnotation(_ mapViewController: MapViewController, annotationObject: AnnotationObject)
@@ -16,13 +17,16 @@ protocol MapViewControllerDelegate {
 
 class MapViewController: UIViewController {
     var delegate: MapViewControllerDelegate?
-
+    
     @IBOutlet weak var mapView: MKMapView!
     private var gesturePin = AnnotationObject(title: nil, locationName: nil, discipline: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
     private var selectedView: MKAnnotationView? = nil
     private var selectedPin: AnnotationObject? = nil
     private var annotations: [AnnotationObject] = []
+    
     var annotationDeselectBehaviourDefines: () -> Void = {}
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +45,8 @@ class MapViewController: UIViewController {
     }
     func centerToLocation(_ location: CLLocation) { mapView.centerToLocation(location) }
     func centerToLocation(_ location: CLLocationCoordinate2D) { mapView.centerToLocation(location) }
-    func moveToLocation(_ location: CLLocation) { mapView.moveToLocation(location.coordinate) }
-    func moveToLocation(_ location: CLLocationCoordinate2D) { mapView.moveToLocation(location) }
+    func centerToLocation(_ location: CLLocation, _ zoomLevel: String) { mapView.centerToLocation(location.coordinate, zoomLevel) }
+    func centerToLocation(_ location: CLLocationCoordinate2D, _ zoomLevel: String) { mapView.centerToLocation(location, zoomLevel) }
     func setCameraZoomMaxDistance(_ maxDistance: Double) { mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: maxDistance), animated: true) }
     func setCameraBoundary(_ region: MKCoordinateRegion) { mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true) }
     func convertToLocation2D(_ latitude: Double, _ longitude: Double) -> CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: latitude, longitude: longitude) }
@@ -54,19 +58,7 @@ class MapViewController: UIViewController {
     func removeAnnotations(_ objects: [AnnotationObject]) { mapView.removeAnnotations(objects) }
     func addAnnotations(_ objects: [AnnotationObject]) { mapView.addAnnotations(objects) }
     func replocateAnnotation(_ object: AnnotationObject) { removeAnnotation(object); addAnnotation(object) }
-
-    private func loadInitialData() {
-        guard
-            let fileName = Bundle.main.url(forResource: "Directions", withExtension: "geojson"),
-            let artworkData = try? Data(contentsOf: fileName)
-        else { return }
-
-        do {
-            let features = try MKGeoJSONDecoder().decode(artworkData).compactMap { $0 as? MKGeoJSONFeature }
-            let validWorks = features.compactMap(AnnotationObject.init)
-            annotations.append(contentsOf: validWorks)
-        } catch { print("Unexpected error: \(error)") }
-    }
+    func getSelectedAnnotationObject() -> AnnotationObject? { return self.selectedPin }
 }
 
 extension MapViewController: UIGestureRecognizerDelegate {
@@ -114,7 +106,7 @@ extension MapViewController: MKMapViewDelegate {
         selectedView = view
         selectedPin = annotationObject
         view.image = annotationObject.focusImage
-        moveToLocation(annotationObject.coordinate)
+        centerToLocation(annotationObject.coordinate, "current")
         delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
     }
 }
@@ -130,8 +122,25 @@ private extension MKMapView {
         setRegion(coordinateRegion, animated: true)
     }
     
-    func moveToLocation(_ location: CLLocation) { self.setCenter(location.coordinate, animated: true) }
-    func moveToLocation(_ location: CLLocationCoordinate2D) { self.setCenter(location, animated: true) }
+    func centerToLocation(_ location: CLLocation, _ zoomLevel: String) {
+        switch zoomLevel {
+            case "current":
+                self.setCenter(location.coordinate, animated: true)
+                return
+            default:
+                centerToLocation(location)
+        }
+    }
+    
+    func centerToLocation(_ location: CLLocationCoordinate2D, _ zoomLevel: String) {
+        switch zoomLevel {
+            case "current":
+                self.setCenter(location, animated: true)
+                return
+            default:
+                centerToLocation(location)
+        }
+    }
     
     func visibleAnnotations() -> [MKAnnotation] { return self.annotations(in: self.visibleMapRect).map { obj -> MKAnnotation in return obj as! MKAnnotation } }
 }
@@ -150,7 +159,62 @@ extension MapViewController {
         setCameraZoomMaxDistance(distance)
 
         mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        loadInitialData()
+        
+        getAllDdips()
+        getAllContracts()
         addAnnotations(annotations)
+    }
+    
+    private func displayDdipData(ddips:[Ddip]) {
+        
+        if ddips.count == 0 { return }
+        
+        for ddip in ddips {
+            let annotation:AnnotationObject = AnnotationObject(title: ddip.title, locationName: ddip.placeName, discipline: "discipline", coordinate: CLLocationCoordinate2D(latitude: ddip.latitude, longitude: ddip.longitude))
+            annotations.append(annotation)
+        }
+    }
+    
+    fileprivate func getAllDdips() {
+        let ddips: [Ddip] = CoreDataManager.shared.getDatas("Ddip")
+        displayDdipData(ddips: ddips)
+
+        //test start
+        let titles: [String] = ddips.map({$0.title})
+        let ids: [Int64] = ddips.map({$0.id})
+        print("ids   = \(ids)")
+        print("title = \(titles)")
+        //test end
+    }
+
+    fileprivate func getAllContracts() {
+        let contracts: [Contract] = CoreDataManager.shared.getDatas("Contract")
+        
+        //test start
+        let ids: [Int64] = contracts.map({$0.id})
+        let ddipTokens: [String] = contracts.map({$0.ddipToken!})
+        let userTokens: [String] = contracts.map({$0.userToken!})
+        print("ids   = \(ids)")
+        print("ddip = \(ddipTokens)")
+        print("user = \(userTokens)")
+        //test end
+    }
+    
+    fileprivate func saveNewDdip(_ id: Int64, title: String, ddipToken:String, latitude: Double, longitude: Double, placeName:String, reaminSlot: Int16) {
+        CoreDataManager.shared.saveDdip(id: 0, title: title, createTime: Date.init(timeIntervalSinceNow: 0), startTime: Date.init(timeIntervalSinceNow: 100), ddipToken: ddipToken, latitude: latitude, longitude: longitude, placeName: placeName, remainSlot: 3) {
+            onSuccess in print("saved = \(onSuccess)") }
+        getAllDdips()
+    }
+    
+    fileprivate func saveNewContract(_ id: Int64, ddipToken:String, userToken:String) {
+        CoreDataManager.shared.saveContract(id: id, ddipToken:ddipToken, userToken: userToken) { onSuccess in print("saved = \(onSuccess)") }
+    }
+
+    fileprivate func deleteDdip(_ id: Int64) {
+        CoreDataManager.shared.deleteDdip(id: id) { onSuccess in print("deleted = \(onSuccess)") }
+    }
+
+    fileprivate func deleteContract(_ id: Int64) {
+        CoreDataManager.shared.deleteContract(id: id) { onSuccess in print("deleted = \(onSuccess)") }
     }
 }
