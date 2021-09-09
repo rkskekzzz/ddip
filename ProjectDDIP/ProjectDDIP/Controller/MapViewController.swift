@@ -33,8 +33,7 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         mapView.pointOfInterestFilter = .excludingAll
         UIGestureInit()
-
-        allTest()
+        displayAnnotations()
     }
     
     func centerToLocation(_ location: CLLocation, _ radius: Double) {
@@ -74,7 +73,7 @@ extension MapViewController: UIGestureRecognizerDelegate {
         
         if mapView.selectedAnnotations.count > 0 {
             if hitObject == nil {
-                selectedView?.image = selectedPin?.image
+                deSelectAnnotation()
                 selectedView = nil
                 selectedPin = nil
                 self.annotationDeselectBehaviourDefines()
@@ -90,6 +89,8 @@ extension MapViewController: UIGestureRecognizerDelegate {
             print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude: \(locationCoordinate.longitude)")
         }
     }
+    
+    func deSelectAnnotation() { selectedView?.image = selectedPin?.image }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -102,7 +103,7 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotationObject = view.annotation as? AnnotationObject else { return }
-        if selectedView != nil || selectedPin != nil { selectedView?.image = selectedPin?.image }
+        deSelectAnnotation()
         selectedView = view
         selectedPin = annotationObject
         view.image = annotationObject.focusImage
@@ -147,13 +148,12 @@ private extension MKMapView {
 
 extension MapViewController {
     
-    func allTest() {
-        
+    func displayAnnotations() {
         let startLocation = convertToLocation(37.529510664039876, 127.02840863820876)
         let distance: Double = 60000
         let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
         let mapCoordinate = MKCoordinateRegion(center: startLocation.coordinate, span: span)
-        
+
         centerToLocation(startLocation)
         mapView.setRegion(mapCoordinate, animated: true)
         setCameraZoomMaxDistance(distance)
@@ -163,6 +163,24 @@ extension MapViewController {
         getAllDdips()
         getAllContracts()
         addAnnotations(annotations)
+    }
+    
+    func allTest() {
+        
+//        let startLocation = convertToLocation(37.529510664039876, 127.02840863820876)
+//        let distance: Double = 60000
+//        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
+//        let mapCoordinate = MKCoordinateRegion(center: startLocation.coordinate, span: span)
+//
+//        centerToLocation(startLocation)
+//        mapView.setRegion(mapCoordinate, animated: true)
+//        setCameraZoomMaxDistance(distance)
+//
+//        mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+//
+//        getAllDdips()
+//        getAllContracts()
+//        addAnnotations(annotations)
     }
     
     private func displayDdipData(ddips:[Ddip]) {
