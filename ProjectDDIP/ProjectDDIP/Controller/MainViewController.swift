@@ -101,7 +101,5 @@ private extension MainViewController {
         vc.annotationDeselectBehaviourDefines = {
             meetingFpc.removePanelFromParent(animated: true)
         }
-        
-        
     }
 }
