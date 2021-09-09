@@ -146,9 +146,13 @@ private extension MKMapView {
     func visibleAnnotations() -> [MKAnnotation] { return self.annotations(in: self.visibleMapRect).map { obj -> MKAnnotation in return obj as! MKAnnotation } }
 }
 
+
+
+// MARK: - CoreData
+
 extension MapViewController {
     
-    func displayAnnotations() {
+    private func displayAnnotations() {
         let startLocation = convertToLocation(37.529510664039876, 127.02840863820876)
         let distance: Double = 60000
         let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
@@ -167,20 +171,6 @@ extension MapViewController {
     
     func allTest() {
         
-//        let startLocation = convertToLocation(37.529510664039876, 127.02840863820876)
-//        let distance: Double = 60000
-//        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
-//        let mapCoordinate = MKCoordinateRegion(center: startLocation.coordinate, span: span)
-//
-//        centerToLocation(startLocation)
-//        mapView.setRegion(mapCoordinate, animated: true)
-//        setCameraZoomMaxDistance(distance)
-//
-//        mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-//
-//        getAllDdips()
-//        getAllContracts()
-//        addAnnotations(annotations)
     }
     
     private func displayDdipData(ddips:[Ddip]) {
@@ -193,7 +183,7 @@ extension MapViewController {
         }
     }
     
-    fileprivate func getAllDdips() {
+    private func getAllDdips() {
         let ddips: [Ddip] = CoreDataManager.shared.getDatas("Ddip")
         displayDdipData(ddips: ddips)
 
@@ -205,7 +195,7 @@ extension MapViewController {
         //test end
     }
 
-    fileprivate func getAllContracts() {
+    func getAllContracts() {
         let contracts: [Contract] = CoreDataManager.shared.getDatas("Contract")
         
         //test start
@@ -218,21 +208,13 @@ extension MapViewController {
         //test end
     }
     
-    fileprivate func saveNewDdip(_ id: Int64, title: String, ddipToken:String, latitude: Double, longitude: Double, placeName:String, reaminSlot: Int16) {
+    func saveNewDdip(_ id: Int64, title: String, ddipToken:String, latitude: Double, longitude: Double, placeName:String, reaminSlot: Int16) {
         CoreDataManager.shared.saveDdip(id: 0, title: title, createTime: Date.init(timeIntervalSinceNow: 0), startTime: Date.init(timeIntervalSinceNow: 100), ddipToken: ddipToken, latitude: latitude, longitude: longitude, placeName: placeName, remainSlot: 3) {
             onSuccess in print("saved = \(onSuccess)") }
         getAllDdips()
     }
     
-    fileprivate func saveNewContract(_ id: Int64, ddipToken:String, userToken:String) {
-        CoreDataManager.shared.saveContract(id: id, ddipToken:ddipToken, userToken: userToken) { onSuccess in print("saved = \(onSuccess)") }
-    }
-
-    fileprivate func deleteDdip(_ id: Int64) {
-        CoreDataManager.shared.deleteDdip(id: id) { onSuccess in print("deleted = \(onSuccess)") }
-    }
-
-    fileprivate func deleteContract(_ id: Int64) {
-        CoreDataManager.shared.deleteContract(id: id) { onSuccess in print("deleted = \(onSuccess)") }
-    }
+    func saveNewContract(_ id: Int64, ddipToken:String, userToken:String) { CoreDataManager.shared.saveContract(id: id, ddipToken:ddipToken, userToken: userToken) { onSuccess in print("saved = \(onSuccess)") } }
+    func deleteDdip(_ id: Int64) { CoreDataManager.shared.deleteDdip(id: id) { onSuccess in print("deleted = \(onSuccess)") } }
+    func deleteContract(_ id: Int64) { CoreDataManager.shared.deleteContract(id: id) { onSuccess in print("deleted = \(onSuccess)") } }
 }
