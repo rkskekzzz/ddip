@@ -52,7 +52,6 @@ class SearchPanelDelegate: NSObject, FloatingPanelControllerDelegate, UIGestureR
 	
 	func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {
 		if fpc.state == .tip {
-			owner.view.endEditing(true)
 			owner.mainViewContainer.searchViewController.searchBarSetDefault()
 		}
 	}

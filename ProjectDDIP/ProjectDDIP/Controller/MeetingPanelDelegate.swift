@@ -38,6 +38,7 @@ class MeetingPanelDelegate: NSObject, FloatingPanelControllerDelegate, UIGesture
 	
 	func floatingPanelWillRemove(_ fpc: FloatingPanelController) {
 		owner.mainViewContainer.searchPanelController.show(animated: true)
+		owner.mainViewContainer.mapViewController.deSelectAnnotation()
 	}
 }
 
