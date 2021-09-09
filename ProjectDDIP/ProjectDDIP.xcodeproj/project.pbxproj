@@ -44,7 +44,6 @@
 		697A39DF26EA6F4F0049E8D0 /* Ddip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ddip+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		69A6ED6426D407B300C1A4D5 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Annotation.swift; path = ProjectDDIP/Model/Annotation.swift; sourceTree = SOURCE_ROOT; };
 		69A6ED6626D407EA00C1A4D5 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnnotationView.swift; path = ProjectDDIP/Model/AnnotationView.swift; sourceTree = SOURCE_ROOT; };
-		69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PublicArt.geojson; sourceTree = "<group>"; };
 		7097C6C926DAAECF0049F953 /* SearchPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPanelLayout.swift; sourceTree = "<group>"; };
 		7097C6CB26DAC6C70049F953 /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		7097C6CD26DAD2370049F953 /* MeetingPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingPanelDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +61,6 @@
 		904C4B7C26D3CF4A00FDC55D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContainer.swift; sourceTree = "<group>"; };
 		904C4B8226D64B7900FDC55D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
-		908A01AC26E5E24C00B9B41B /* Directions.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Directions.geojson; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +98,6 @@
 		69A6ED6926D4098200C1A4D5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				69A6ED6C26D409C000C1A4D5 /* PublicArt.geojson */,
-				908A01AC26E5E24C00B9B41B /* Directions.geojson */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
