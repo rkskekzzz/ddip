@@ -69,9 +69,9 @@
                                         <stackView contentMode="bottom" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QQ8-bb-dFF">
                                             <rect key="frame" x="0.0" y="6" width="414" height="890"/>
                                             <subviews>
-                                                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="xnx-mg-Ta4">
+                                                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="장소 또는 주소 검색" translatesAutoresizingMaskIntoConstraints="NO" id="xnx-mg-Ta4">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="103"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="44e-AE-ReH" id="N3t-d3-Ozo"/>
                                                     </connections>
