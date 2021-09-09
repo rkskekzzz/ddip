@@ -68,13 +68,20 @@ class MeetingViewController: UIViewController {
     }()
     
 //    lazy var ddayLabelFrame: UIView = {
-//        let ddayLabelF = UIView()
+//        let ddayLabelF = UIView(frame: CGRect(x: 0,
+//                                              y: 0,
+//                                              width: 100,
+//                                              height: 40))
+//
 //        // debug
 //        ddayLabelF.layer.borderColor = UIColor.green.cgColor
 //        ddayLabelF.layer.borderWidth = 1
 //
-//        ddayLabelF.addSubview(ddayLabel)
+//
+//        // debug
 //        print(ddayLabel.text)
+////        ddayLabelF.addSubview(ddayLabel)
+//
 //        return ddayLabelF
 //    }()
 //
@@ -109,6 +116,7 @@ class MeetingViewController: UIViewController {
         let dday = UILabel()
         
         
+        
         dday.text = "6시간 후 시작"
         dday.textColor = UIColor(rgb: 0x87b8b7)
         
@@ -121,6 +129,7 @@ class MeetingViewController: UIViewController {
     
     lazy var titleLabel: UILabel = {
         let title = UILabel()
+        
         
         
         title.text = "면접 스터디 모임"
