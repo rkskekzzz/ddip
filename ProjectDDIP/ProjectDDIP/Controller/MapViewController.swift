@@ -58,6 +58,7 @@ class MapViewController: UIViewController {
     func addAnnotations(_ objects: [AnnotationObject]) { mapView.addAnnotations(objects) }
     func replocateAnnotation(_ object: AnnotationObject) { removeAnnotation(object); addAnnotation(object) }
     func getSelectedAnnotationObject() -> AnnotationObject? { return self.selectedPin }
+	func deSelectAnnotation() { selectedView?.image = selectedPin?.image }
 }
 
 extension MapViewController: UIGestureRecognizerDelegate {
@@ -89,8 +90,6 @@ extension MapViewController: UIGestureRecognizerDelegate {
             print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude: \(locationCoordinate.longitude)")
         }
     }
-    
-    func deSelectAnnotation() { selectedView?.image = selectedPin?.image }
 }
 
 extension MapViewController: MKMapViewDelegate {
