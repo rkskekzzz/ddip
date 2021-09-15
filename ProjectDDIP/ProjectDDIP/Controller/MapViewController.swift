@@ -211,4 +211,5 @@ extension MapViewController {
     
     
     func addTestCode() { print("add test code") }
+    func addTestCode2() { print("add test code") }
 }
