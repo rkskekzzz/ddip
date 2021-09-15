@@ -208,4 +208,7 @@ extension MapViewController {
     func saveNewContract(_ id: Int64, ddipToken: String, userToken: String) { CoreDataManager.shared.saveContract(id: id, ddipToken: ddipToken, userToken: userToken) { onSuccess in print("saved = \(onSuccess)") } }
     func deleteDdip(_ id: Int64) { CoreDataManager.shared.deleteDdip(id: id) { onSuccess in print("deleted = \(onSuccess)") } }
     func deleteContract(_ id: Int64) { CoreDataManager.shared.deleteContract(id: id) { onSuccess in print("deleted = \(onSuccess)") } }
+    
+    
+    func addTestCode() { print("add test code") }
 }
