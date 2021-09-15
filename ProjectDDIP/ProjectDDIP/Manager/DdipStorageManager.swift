@@ -14,7 +14,7 @@ class CoreDataManager {
     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
     
-    func getDatas<T>(_ entityName: String, ascending: Bool = false) -> [T] {
+    func getDataArray<T>(_ entityName: String, ascending: Bool = false) -> [T] {
         var models: [T] = [T]()
         
         if let context = context {
