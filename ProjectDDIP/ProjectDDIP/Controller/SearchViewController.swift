@@ -5,26 +5,25 @@
 //  Created by 차영훈 on 2021/08/24.
 //
 
-import UIKit
 import MapKit
+import UIKit
 
 class SearchViewController: UIViewController {
-	
-	@IBOutlet weak var tableView: UITableView!
-	@IBOutlet weak var searchBar: UISearchBar!
-	@IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var visualEffectView: UIVisualEffectView!
     var movePanelToTip: () -> Void = {}
     var movePanelToFull: () -> Void = {}
-    var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees, CLLocationDistance) -> Void = {la, lo, dis in }
-    
+    var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees, CLLocationDistance) -> Void = { _, _, _ in }
+
     // 검색을 도와주는 변수
     private var searchCompleter: MKLocalSearchCompleter?
-    
+
     // 검색 지역 범위 설정 변수
     // .world : 전세계
-    private var searchRegion: MKCoordinateRegion = MKCoordinateRegion(MKMapRect.world)
+    private var searchRegion = MKCoordinateRegion(MKMapRect.world)
 //    private var searchRegion: MKCoordinateRegion = mapView.region
-    
+
     // 검색 결과를 배열로 담는다
     var completerResults: [MKLocalSearchCompletion]?
 
@@ -34,6 +33,7 @@ class SearchViewController: UIViewController {
             tableView.reloadData()
         }
     }
+
     // tableView에서 선택한 location 정보를 가져옴
     private var localSearch: MKLocalSearch? {
         willSet {
@@ -41,9 +41,9 @@ class SearchViewController: UIViewController {
             localSearch?.cancel()
         }
     }
-    
+
     override func viewDidLoad() {
-		super.viewDidLoad()
+        super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         searchCompleter = MKLocalSearchCompleter()
@@ -59,15 +59,14 @@ class SearchViewController: UIViewController {
 //        searchCompleter?.region = mapView.region
 //        searchRegion 변수가 가지고 있는 지역 기준으로 검색지역 설정
         searchCompleter?.region = searchRegion
-    
-	}
-    
+    }
+
     // Completer 참조 해제
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         searchCompleter = nil
     }
-    
+
     // SearchBar click event
 //    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        print("search button clicked")
@@ -77,30 +76,32 @@ class SearchViewController: UIViewController {
 //    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 //        print("here?")
 //    }
-    
 }
 
-
 extension SearchViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
             completerResults = nil
         }
         print("text: \(searchText)")
         searchCompleter?.queryFragment = searchText
     }
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+
+    func searchBarCancelButtonClicked(_: UISearchBar) {
         searchBarSetDefault()
-		movePanelToTip()
+        movePanelToTip()
     }
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-		movePanelToFull()
+        movePanelToFull()
         searchBar.setShowsCancelButton(true, animated: true)
     }
+
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(false, animated: true)
         return true
     }
+
     func searchBarSetDefault() {
         searchBar.text = nil
         completerResults = nil
@@ -117,7 +118,7 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
         // tableView reload
         tableView.reloadData()
     }
-    
+
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         if let error = error as NSError? {
             print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription). The query fragment is: \"\(completer.queryFragment)\"")
@@ -126,41 +127,39 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
     }
 }
 
-extension SearchViewController: UITableViewDataSource{
+extension SearchViewController: UITableViewDataSource {
     // 결과 count 값 리턴, 없으면 default 0
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
 //        print("\(completerResults?.count ?? 0)")
         return completerResults?.count ?? 0
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? Cell else { return UITableViewCell() }
-		
-		if let suggestion = completerResults?[indexPath.row] {
-//			print(suggestion.title)
-//			print(suggestion.subtitle)
-//			print("------------------")
-			cell.titleLabel.text = suggestion.title
-			cell.subtitleLabel.text = suggestion.subtitle
-            
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? Cell else { return UITableViewCell() }
+
+        if let suggestion = completerResults?[indexPath.row] {
+            //			print(suggestion.title)
+            //			print(suggestion.subtitle)
+            //			print("------------------")
+            cell.titleLabel.text = suggestion.title
+            cell.subtitleLabel.text = suggestion.subtitle
         }
         return cell
     }
 }
 
-extension SearchViewController: UITableViewDelegate{
+extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) // 선택 표시 해제
         if let suggestion = completerResults?[indexPath.row] {
             search(for: suggestion)
-			movePanelToTip()
+            movePanelToTip()
             searchBarSetDefault()
-			self.searchBar.resignFirstResponder()
-			//deactivate
+            searchBar.resignFirstResponder()
+            // deactivate
         }
     }
-    
+
     private func search(for suggestedCompletion: MKLocalSearchCompletion) {
         let searchRequest = MKLocalSearch.Request(completion: suggestedCompletion)
         search(using: searchRequest)
@@ -174,21 +173,20 @@ extension SearchViewController: UITableViewDelegate{
         // MKLocalSearch 생성
         localSearch = MKLocalSearch(request: searchRequest)
         // 비동기로 검색 실행
-        localSearch?.start { [unowned self] (response, error) in
+        localSearch?.start { [unowned self] response, error in
             guard error == nil else {
                 return
             }
             // 검색한 결과 : reponse의 mapItems 값을 가져온다.
             places = response?.mapItems[0]
-			if let p = places {
-                let a:CLCircularRegion = p.placemark.region as! CLCircularRegion
+            if let p = places {
+                let a: CLCircularRegion = p.placemark.region as! CLCircularRegion
                 print("p : \(p.placemark.coordinate.latitude)")
                 print("p : \(p.placemark.coordinate.longitude)")
                 print("p : \(a.radius)")
                 centerToSearchLocation(p.placemark.coordinate.latitude, p.placemark.coordinate.longitude, a.radius)
-                
-			}
-            
+            }
+
 //            print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
         }
     }

@@ -6,10 +6,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(Contract)
-public class Contract: NSManagedObject {
-
-}
+public class Contract: NSManagedObject {}

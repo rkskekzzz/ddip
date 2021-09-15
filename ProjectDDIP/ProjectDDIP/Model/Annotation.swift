@@ -5,17 +5,16 @@
 //  Created by kyuhkim on 2021/08/24.
 //
 
-import UIKit
-import MapKit
 import Contacts
+import MapKit
+import UIKit
 
 class AnnotationObject: NSObject, MKAnnotation {
-    
     var title: String?
     var locationName: String?
     var discipline: String?
     var coordinate: CLLocationCoordinate2D
-    
+
     init(title: String?, locationName: String?, discipline: String?, coordinate: CLLocationCoordinate2D) {
         self.title = title
         self.locationName = locationName
@@ -32,36 +31,35 @@ class AnnotationObject: NSObject, MKAnnotation {
         let addressDict = [CNPostalAddressStreetKey: location]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
         let mapItem = MKMapItem(placemark: placemark)
-    
+
         mapItem.name = title
         return mapItem
     }
 
     func exchangeColor(_ hex: Int) -> UIColor {
         return UIColor(
-            red: CGFloat((hex & 0xff0000) >> 16) / 255.0,
-            green: CGFloat((hex & 0x00ff00) >> 8) / 255.0,
-            blue: CGFloat(hex & 0x0000ff) / 255.0,
+            red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(hex & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
     }
-    
+
     func resetAttributes(_ title: String?, _ locationName: String?, _ discipline: String?, _ coordinate: CLLocationCoordinate2D) {
-        self.title = title;
+        self.title = title
         self.locationName = locationName
         self.discipline = discipline
         self.coordinate = coordinate
     }
-    
+
     func setTitle(_ title: String) { self.title = title }
     func setCoordinate(_ coordinate: CLLocationCoordinate2D) { self.coordinate = coordinate }
     func setLocationName(_ locationName: String) { self.locationName = locationName }
     func setDiscipline(_ discipline: String) { self.discipline = discipline }
     var image: UIImage { return #imageLiteral(resourceName: "plus") }
     var focusImage: UIImage { return #imageLiteral(resourceName: "Map") }
-    
-    var markerTintColor: UIColor  {
-        
+
+    var markerTintColor: UIColor {
         switch discipline {
         case "Monument":
             return exchangeColor(0xFFB900)
@@ -76,5 +74,3 @@ class AnnotationObject: NSObject, MKAnnotation {
         }
     }
 }
-
-
