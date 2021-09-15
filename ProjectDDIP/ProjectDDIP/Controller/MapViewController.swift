@@ -9,6 +9,12 @@ import UIKit
 import MapKit
 import CoreData
 
+extension CLLocation {
+    convenience init(latitude: Double, longtigude: Double) {
+        assert(false)
+    }
+}
+
 protocol MapViewControllerDelegate {
 //    func didUpdateMapVCAnnotation(_ mapViewController: MapViewController, annotationObject: AnnotationObject)
     func didUpdateMapVCAnnotation(annotationObject: AnnotationObject)
@@ -24,7 +30,9 @@ class MapViewController: UIViewController {
     private var selectedPin: AnnotationObject? = nil
     private var annotations: [AnnotationObject] = []
     
-    var annotationDeselectBehaviourDefines: () -> Void = {}
+    var annotationDeselectBehaviourDefines: () -> Void = {
+        assert(false)
+    }
     
     
     
@@ -49,7 +57,9 @@ class MapViewController: UIViewController {
     func setCameraZoomMaxDistance(_ maxDistance: Double) { mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: maxDistance), animated: true) }
     func setCameraBoundary(_ region: MKCoordinateRegion) { mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true) }
     func convertToLocation2D(_ latitude: Double, _ longitude: Double) -> CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: latitude, longitude: longitude) }
-    func convertToLocation(_ latitude: Double, _ longitude: Double) -> CLLocation { return CLLocation(latitude: latitude, longitude: longitude) }
+    
+    func convertToLocation(_ latitude: Double, _ longitude: Double) -> CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude) }
     func convertToRegion(_ center: CLLocation, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion { return MKCoordinateRegion(center: center.coordinate, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters) }
     func convertToRegion(_ center: CLLocationCoordinate2D, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion { return MKCoordinateRegion(center: center, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters) }
     func removeAnnotation(_ object: AnnotationObject) { mapView.removeAnnotation(object) }
@@ -58,7 +68,7 @@ class MapViewController: UIViewController {
     func addAnnotations(_ objects: [AnnotationObject]) { mapView.addAnnotations(objects) }
     func replocateAnnotation(_ object: AnnotationObject) { removeAnnotation(object); addAnnotation(object) }
     func getSelectedAnnotationObject() -> AnnotationObject? { return self.selectedPin }
-	func deSelectAnnotation() { selectedView?.image = selectedPin?.image }
+	func deselectAnnotation() { selectedView?.image = selectedPin?.image }
 }
 
 extension MapViewController: UIGestureRecognizerDelegate {
@@ -72,9 +82,9 @@ extension MapViewController: UIGestureRecognizerDelegate {
         
         let hitObject = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil) as? AnnotationView
         
-        if mapView.selectedAnnotations.count > 0 {
+        if !mapView.selectedAnnotations.isEmpty {
             if hitObject == nil {
-                deSelectAnnotation()
+                deselectAnnotation()
                 selectedView = nil
                 selectedPin = nil
                 self.annotationDeselectBehaviourDefines()
@@ -82,8 +92,8 @@ extension MapViewController: UIGestureRecognizerDelegate {
             return
         }
         if hitObject != nil { return }
-        
-        if  gestureRecognizer.state == UIGestureRecognizer.State.ended {
+
+        if  gestureRecognizer.state == .ended {
             let locationCoordinate = mapView.convert(gestureRecognizer.location(in: mapView), toCoordinateFrom: mapView)
             self.gesturePin.resetAttributes("title", "location name", "discipline", locationCoordinate)
             replocateAnnotation(gesturePin)
@@ -106,13 +116,13 @@ extension MapViewController: MKMapViewDelegate {
         selectedView = view
         selectedPin = annotationObject
         view.image = annotationObject.focusImage
-        centerToLocation(annotationObject.coordinate, "current")
+        center(toLocation: annotationObject.coordinate, zoomLevel: "current")
         delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
     }
 }
 
 private extension MKMapView {
-    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 1000) {
+    func center(toLocation location: CLLocation, regionRadius: CLLocationDistance = 1000) {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: self.camera.centerCoordinateDistance, longitudinalMeters: self.camera.centerCoordinateDistance)
         setRegion(coordinateRegion, animated: true)
     }
@@ -122,7 +132,7 @@ private extension MKMapView {
         setRegion(coordinateRegion, animated: true)
     }
     
-    func centerToLocation(_ location: CLLocation, _ zoomLevel: String) {
+    func center(toLocation location: CLLocation, zoomLevel: String) {
         switch zoomLevel {
             case "current":
                 self.setCenter(location.coordinate, animated: true)
@@ -152,12 +162,15 @@ private extension MKMapView {
 extension MapViewController {
     
     private func displayAnnotations() {
-        let startLocation = convertToLocation(37.529510664039876, 127.02840863820876)
+        let startLocation = CLLocation(latitude: 37.529510664039876, longitude: 127.02840863820876)
         let distance: Double = 60000
         let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
         let mapCoordinate = MKCoordinateRegion(center: startLocation.coordinate, span: span)
 
-        centerToLocation(startLocation)
+        center(toLocation: startLocation)
+        center(toLocation: annotationObject.coordinate, zoomLevel: "current")
+        
+        
         mapView.setRegion(mapCoordinate, animated: true)
         setCameraZoomMaxDistance(distance)
 
@@ -168,23 +181,19 @@ extension MapViewController {
         addAnnotations(annotations)
     }
     
-    func allTest() {
+    private func displayDdipData(ddips:[Ddip]) -> [AnnotationObject] {
         
-    }
-    
-    private func displayDdipData(ddips:[Ddip]) {
+        guard !ddips.isEmpty else { return }
         
-        if ddips.count == 0 { return }
-        
-        for ddip in ddips {
-            let annotation:AnnotationObject = AnnotationObject(title: ddip.title, locationName: ddip.placeName, discipline: "discipline", coordinate: CLLocationCoordinate2D(latitude: ddip.latitude, longitude: ddip.longitude))
-            annotations.append(annotation)
-        }
+        return ddips.map({
+                  AnnotationObject(title: ddip.title, locationName: ddip.placeName, discipline: "discipline", coordinate: CLLocationCoordinate2D(latitude: ddip.latitude, longitude: ddip.longitude))
+                  } )
     }
     
     private func getAllDdips() {
         let ddips: [Ddip] = CoreDataManager.shared.getDatas("Ddip")
-        displayDdipData(ddips: ddips)
+        annotations.append(
+            displayDdipData(ddips: ddips))
 
         //test start
         let titles: [String] = ddips.map({$0.title})
@@ -208,7 +217,7 @@ extension MapViewController {
     }
     
     func saveNewDdip(_ id: Int64, title: String, ddipToken:String, latitude: Double, longitude: Double, placeName:String, reaminSlot: Int16) {
-        CoreDataManager.shared.saveDdip(id: 0, title: title, createTime: Date.init(timeIntervalSinceNow: 0), startTime: Date.init(timeIntervalSinceNow: 100), ddipToken: ddipToken, latitude: latitude, longitude: longitude, placeName: placeName, remainSlot: 3) {
+        CoreDataManager.shared.saveDdip(id: 0, title: title, createTime: Date(timeIntervalSinceNow: 0), startTime: Date(timeIntervalSinceNow: 100), ddipToken: ddipToken, latitude: latitude, longitude: longitude, placeName: placeName, remainSlot: 3) {
             onSuccess in print("saved = \(onSuccess)") }
         getAllDdips()
     }
@@ -217,3 +226,13 @@ extension MapViewController {
     func deleteDdip(_ id: Int64) { CoreDataManager.shared.deleteDdip(id: id) { onSuccess in print("deleted = \(onSuccess)") } }
     func deleteContract(_ id: Int64) { CoreDataManager.shared.deleteContract(id: id) { onSuccess in print("deleted = \(onSuccess)") } }
 }
+
+
+#if DEBUG
+extension ... {
+    
+    func allTest() {
+        
+    }
+}
+#endif
