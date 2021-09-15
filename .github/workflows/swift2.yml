@@ -5,12 +5,12 @@ on:
     branches:
       - feature
     paths:
-      - ".github/workflows/swift.yaml"
+      - ".github/workflows/swift2.yaml"
       - "**.swift"
       - "**/Package.resolved"
   pull_request:
     paths:
-      - ".github/workflows/swift.yaml"
+      - ".github/workflows/swift2.yaml"
       - "**.swift"
       - "**/Package.resolved"
 
