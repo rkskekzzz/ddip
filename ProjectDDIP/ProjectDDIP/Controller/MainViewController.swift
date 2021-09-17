@@ -96,7 +96,7 @@ private extension MainViewController {
 
     func initMapView() {
         let vc = mainViewContainer.mapViewController
-        let searchFpc = mainViewContainer.searchPanelController
+//        let searchFpc = mainViewContainer.searchPanelController
         let meetingFpc = mainViewContainer.meetingPanelController
         vc.annotationDeselectBehaviourDefines = {
             meetingFpc.removePanelFromParent(animated: true)
