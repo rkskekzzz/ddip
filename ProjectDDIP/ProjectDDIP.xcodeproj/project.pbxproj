@@ -32,6 +32,7 @@
 		904C4B7D26D3CF4A00FDC55D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7C26D3CF4A00FDC55D /* MapViewController.swift */; };
 		904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */; };
 		904C4B8326D64B7900FDC55D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B8226D64B7900FDC55D /* Cell.swift */; };
+		906F4AE526F6334D00EF0638 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F4AE426F6334D00EF0638 /* MapView.swift */; };
 		90728F0126F5051300657FE5 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0026F5051300657FE5 /* TableView.swift */; };
 		90728F0526F52EEF00657FE5 /* UIMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0426F52EEF00657FE5 /* UIMapView.swift */; };
 		90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0626F5D1B900657FE5 /* ScheduleCard.swift */; };
@@ -68,6 +69,7 @@
 		904C4B7C26D3CF4A00FDC55D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContainer.swift; sourceTree = "<group>"; };
 		904C4B8226D64B7900FDC55D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		906F4AE426F6334D00EF0638 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		90728F0026F5051300657FE5 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		90728F0426F52EEF00657FE5 /* UIMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMapView.swift; sourceTree = "<group>"; };
 		90728F0626F5D1B900657FE5 /* ScheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCard.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				90728F0426F52EEF00657FE5 /* UIMapView.swift */,
+				906F4AE426F6334D00EF0638 /* MapView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */,
 				90728F0526F52EEF00657FE5 /* UIMapView.swift in Sources */,
 				70F4760A26D423DB00905070 /* SearchViewController.swift in Sources */,
+				906F4AE526F6334D00EF0638 /* MapView.swift in Sources */,
 				90728F0926F5D96700657FE5 /* ScheduleView.swift in Sources */,
 				904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */,
 				90728F0126F5051300657FE5 /* TableView.swift in Sources */,

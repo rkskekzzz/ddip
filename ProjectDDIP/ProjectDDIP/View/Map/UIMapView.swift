@@ -10,18 +10,6 @@ import MapKit
 import SlideOverCard
 
 struct UIMapView: View {
-    @State private var userTrackingMode: MapUserTrackingMode = .follow
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(
-            latitude: 25.7617,
-            longitude: 80.1918
-        ),
-        span: MKCoordinateSpan(
-            latitudeDelta: 10,
-            longitudeDelta: 10
-        )
-    )
-    
     @State private var position = CardPosition.top
     @State private var background = BackgroundStyle.solid
     
@@ -31,13 +19,7 @@ struct UIMapView: View {
     
     var body: some View {
         ZStack {
-            Map(
-                coordinateRegion: $region,
-                interactionModes: MapInteractionModes.all,
-                showsUserLocation: true,
-                userTrackingMode: $userTrackingMode
-            )
-            
+            MapView()
             SlideOverCard($position, backgroundStyle: $background) {
                 VStack {
                     SearchView(searchText: searchText, searchResult: searchResult, test: test)

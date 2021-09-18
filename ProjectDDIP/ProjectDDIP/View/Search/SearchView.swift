@@ -37,6 +37,7 @@ struct SearchView: View {
                     }
                 }
             }
+            .animation(nil)
         }
     }
 }
