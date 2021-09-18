@@ -12,16 +12,14 @@ struct ScheduleView: View {
     
     var body: some View {
         NavigationView {
-            List {
+            LazyVStack {
                 ForEach(schedules, id: \.id) { schedule in
                     ScheduleCard(schedule: schedule)
-                        .border(Color.blue, width: 2)
-                        .cornerRadius(10)
-                        .background(Color.white)
-                        // shadow 어떻게 씀? to 의민
-                }
+                }.background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(radius: 4))
+                .padding(.vertical, 5)
             }
             .navigationTitle("Schedule")
+            .padding(.horizontal, 20)
         }
     }
 }
