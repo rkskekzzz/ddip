@@ -23,7 +23,7 @@ struct UIMapView: View {
     )
     
     @State private var position = CardPosition.top
-    @State private var background = BackgroundStyle.blur
+    @State private var background = BackgroundStyle.solid
     
     @State var searchText: String
     @State var searchResult: [SearchLocation]
@@ -40,8 +40,9 @@ struct UIMapView: View {
             
             SlideOverCard($position, backgroundStyle: $background) {
                 VStack {
-                    SearchBar(searchText: $searchText, searchResult: $searchResult, test: $test)
+                    SearchView(searchText: searchText, searchResult: searchResult, test: test)
                         .padding(.horizontal, 10)
+                        .animation(.default)
                 }
             }
             
