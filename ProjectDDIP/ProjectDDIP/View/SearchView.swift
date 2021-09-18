@@ -34,10 +34,6 @@ struct SearchView: View {
                             Text("\(result.subtitle)")
                                 .font(.caption)
                         }
-                        
-                        //                ListItem2(
-                        //                    title: result.title,
-                        //                    subtitle: result.subtitle)
                     }
                 }
             }

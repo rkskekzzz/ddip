@@ -33,8 +33,9 @@
 		904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */; };
 		904C4B8326D64B7900FDC55D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B8226D64B7900FDC55D /* Cell.swift */; };
 		90728F0126F5051300657FE5 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0026F5051300657FE5 /* TableView.swift */; };
-		90728F0326F5167500657FE5 /* ListItem2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0226F5167500657FE5 /* ListItem2.swift */; };
 		90728F0526F52EEF00657FE5 /* UIMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0426F52EEF00657FE5 /* UIMapView.swift */; };
+		90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0626F5D1B900657FE5 /* ScheduleCard.swift */; };
+		90728F0926F5D96700657FE5 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0826F5D96700657FE5 /* ScheduleView.swift */; };
 		90BF216726F4F47200E00B73 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216626F4F47200E00B73 /* SearchView.swift */; };
 		90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216826F4F5AA00E00B73 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
@@ -67,8 +68,9 @@
 		904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContainer.swift; sourceTree = "<group>"; };
 		904C4B8226D64B7900FDC55D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		90728F0026F5051300657FE5 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
-		90728F0226F5167500657FE5 /* ListItem2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem2.swift; sourceTree = "<group>"; };
 		90728F0426F52EEF00657FE5 /* UIMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMapView.swift; sourceTree = "<group>"; };
+		90728F0626F5D1B900657FE5 /* ScheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCard.swift; sourceTree = "<group>"; };
+		90728F0826F5D96700657FE5 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		90BF216626F4F47200E00B73 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		90BF216826F4F5AA00E00B73 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,8 +166,10 @@
 				90BF216626F4F47200E00B73 /* SearchView.swift */,
 				90BF216826F4F5AA00E00B73 /* SearchBar.swift */,
 				90728F0026F5051300657FE5 /* TableView.swift */,
+				90728F0626F5D1B900657FE5 /* ScheduleCard.swift */,
+				904C4B8226D64B7900FDC55D /* Cell.swift */,
+				90728F0826F5D96700657FE5 /* ScheduleView.swift */,
 				90728F0426F52EEF00657FE5 /* UIMapView.swift */,
-				90728F0226F5167500657FE5 /* ListItem2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */,
-				904C4B8226D64B7900FDC55D /* Cell.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -281,8 +284,10 @@
 				7097C6CC26DAC6C70049F953 /* MeetingViewController.swift in Sources */,
 				90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */,
 				70F4760F26D433E300905070 /* SearchPanelDelegate.swift in Sources */,
+				90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */,
 				90728F0526F52EEF00657FE5 /* UIMapView.swift in Sources */,
 				70F4760A26D423DB00905070 /* SearchViewController.swift in Sources */,
+				90728F0926F5D96700657FE5 /* ScheduleView.swift in Sources */,
 				904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */,
 				90728F0126F5051300657FE5 /* TableView.swift in Sources */,
 				694EF47426E92B1E00025C7B /* Ddip.xcdatamodeld in Sources */,
@@ -291,7 +296,6 @@
 				904C4B8326D64B7900FDC55D /* Cell.swift in Sources */,
 				904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */,
 				69A6ED6526D407B300C1A4D5 /* Annotation.swift in Sources */,
-				90728F0326F5167500657FE5 /* ListItem2.swift in Sources */,
 				7097C6CE26DAD2370049F953 /* MeetingPanelDelegate.swift in Sources */,
 				7097C6CA26DAAECF0049F953 /* SearchPanelLayout.swift in Sources */,
 				7097C6D026DAD2D50049F953 /* MeetingPanelLayout.swift in Sources */,
