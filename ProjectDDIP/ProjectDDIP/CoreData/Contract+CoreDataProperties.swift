@@ -6,22 +6,17 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-extension Contract {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Contract> {
+public extension Contract {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Contract> {
         return NSFetchRequest<Contract>(entityName: "Contract")
     }
 
-    @NSManaged public var ddipToken: String?
-    @NSManaged public var id: Int64
-    @NSManaged public var userToken: String?
-
+    @NSManaged var ddipToken: String?
+    @NSManaged var id: Int64
+    @NSManaged var userToken: String?
 }
 
-extension Contract : Identifiable {
-
-}
+extension Contract: Identifiable {}

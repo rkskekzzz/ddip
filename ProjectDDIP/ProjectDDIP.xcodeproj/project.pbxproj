@@ -32,6 +32,14 @@
 		904C4B7D26D3CF4A00FDC55D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7C26D3CF4A00FDC55D /* MapViewController.swift */; };
 		904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */; };
 		904C4B8326D64B7900FDC55D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B8226D64B7900FDC55D /* Cell.swift */; };
+		906F4AE526F6334D00EF0638 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F4AE426F6334D00EF0638 /* MapView.swift */; };
+		90728F0126F5051300657FE5 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0026F5051300657FE5 /* TableView.swift */; };
+		90728F0526F52EEF00657FE5 /* UIMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0426F52EEF00657FE5 /* UIMapView.swift */; };
+		90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0626F5D1B900657FE5 /* ScheduleCard.swift */; };
+		90728F0926F5D96700657FE5 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0826F5D96700657FE5 /* ScheduleView.swift */; };
+		90728F0F26F61E4500657FE5 /* SlideOverCard in Frameworks */ = {isa = PBXBuildFile; productRef = 90728F0E26F61E4500657FE5 /* SlideOverCard */; };
+		90BF216726F4F47200E00B73 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216626F4F47200E00B73 /* SearchView.swift */; };
+		90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216826F4F5AA00E00B73 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +69,13 @@
 		904C4B7C26D3CF4A00FDC55D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContainer.swift; sourceTree = "<group>"; };
 		904C4B8226D64B7900FDC55D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		906F4AE426F6334D00EF0638 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		90728F0026F5051300657FE5 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		90728F0426F52EEF00657FE5 /* UIMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMapView.swift; sourceTree = "<group>"; };
+		90728F0626F5D1B900657FE5 /* ScheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCard.swift; sourceTree = "<group>"; };
+		90728F0826F5D96700657FE5 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		90BF216626F4F47200E00B73 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		90BF216826F4F5AA00E00B73 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90728F0F26F61E4500657FE5 /* SlideOverCard in Frameworks */,
 				70F4760D26D42DEA00905070 /* FloatingPanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +167,9 @@
 			isa = PBXGroup;
 			children = (
 				904C4B6C26D3CDEE00FDC55D /* Main.storyboard */,
+				90728F0A26F60C8D00657FE5 /* Search */,
+				90728F0B26F60CA700657FE5 /* Schedule */,
+				90728F0C26F610ED00657FE5 /* Map */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,9 +193,37 @@
 			isa = PBXGroup;
 			children = (
 				904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */,
-				904C4B8226D64B7900FDC55D /* Cell.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		90728F0A26F60C8D00657FE5 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				90BF216626F4F47200E00B73 /* SearchView.swift */,
+				90BF216826F4F5AA00E00B73 /* SearchBar.swift */,
+				90728F0026F5051300657FE5 /* TableView.swift */,
+				904C4B8226D64B7900FDC55D /* Cell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		90728F0B26F60CA700657FE5 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				90728F0626F5D1B900657FE5 /* ScheduleCard.swift */,
+				90728F0826F5D96700657FE5 /* ScheduleView.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		90728F0C26F610ED00657FE5 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				90728F0426F52EEF00657FE5 /* UIMapView.swift */,
+				906F4AE426F6334D00EF0638 /* MapView.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +244,7 @@
 			name = ProjectDDIP;
 			packageProductDependencies = (
 				70F4760C26D42DEA00905070 /* FloatingPanel */,
+				90728F0E26F61E4500657FE5 /* SlideOverCard */,
 			);
 			productName = ProjectDDIP;
 			productReference = 904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */;
@@ -227,6 +275,7 @@
 			mainGroup = 904C4B5A26D3CDED00FDC55D;
 			packageReferences = (
 				70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */,
 			);
 			productRefGroup = 904C4B6426D3CDEE00FDC55D /* Products */;
 			projectDirPath = "";
@@ -262,10 +311,17 @@
 				6924CFE126D788DC004828AB /* DdipNotification.swift in Sources */,
 				694EF45E26E87FF600025C7B /* DdipStorageManager.swift in Sources */,
 				904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */,
+				90BF216726F4F47200E00B73 /* SearchView.swift in Sources */,
 				7097C6CC26DAC6C70049F953 /* MeetingViewController.swift in Sources */,
+				90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */,
 				70F4760F26D433E300905070 /* SearchPanelDelegate.swift in Sources */,
+				90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */,
+				90728F0526F52EEF00657FE5 /* UIMapView.swift in Sources */,
 				70F4760A26D423DB00905070 /* SearchViewController.swift in Sources */,
+				906F4AE526F6334D00EF0638 /* MapView.swift in Sources */,
+				90728F0926F5D96700657FE5 /* ScheduleView.swift in Sources */,
 				904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */,
+				90728F0126F5051300657FE5 /* TableView.swift in Sources */,
 				694EF47426E92B1E00025C7B /* Ddip.xcdatamodeld in Sources */,
 				697A39E026EA6F4F0049E8D0 /* Ddip+CoreDataClass.swift in Sources */,
 				69A6ED6726D407EA00C1A4D5 /* AnnotationView.swift in Sources */,
@@ -487,6 +543,14 @@
 				minimumVersion = 2.4.0;
 			};
 		};
+		90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/moifort/swiftUI-slide-over-card";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -494,6 +558,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
 			productName = FloatingPanel;
+		};
+		90728F0E26F61E4500657FE5 /* SlideOverCard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */;
+			productName = SlideOverCard;
 		};
 /* End XCSwiftPackageProductDependency section */
 

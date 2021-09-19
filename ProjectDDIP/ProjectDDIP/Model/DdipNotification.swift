@@ -7,17 +7,16 @@
 
 import UIKit
 
-
 public extension NSNotification.Name {
     static let ddip = Notification.Name("ddip")
     static let annotationData = Notification.Name("annotationData")
 }
 
 //
-//@objc extension NSNotification {
+// @objc extension NSNotification {
 //    public static let ddip = Notification.Name.ddip
-//}
+// }
 
-//class var `ddip`: NotificationCenter { get }
+// class var `ddip`: NotificationCenter { get }
 
 //

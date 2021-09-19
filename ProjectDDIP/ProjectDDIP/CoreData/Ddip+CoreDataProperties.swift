@@ -6,27 +6,23 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-extension Ddip {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Ddip> {
+public extension Ddip {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Ddip> {
         return NSFetchRequest<Ddip>(entityName: "Ddip")
     }
 
-    @NSManaged public var createTime: Date
-    @NSManaged public var ddipToken: String
-    @NSManaged public var id: Int64
-    @NSManaged public var latitude: Double
-    @NSManaged public var longitude: Double
-    @NSManaged public var placeName: String
-    @NSManaged public var remainSlot: Int16
-    @NSManaged public var startTime: Date
-    @NSManaged public var title: String
+    @NSManaged var createTime: Date
+    @NSManaged var ddipToken: String
+    @NSManaged var id: Int64
+    @NSManaged var latitude: Double
+    @NSManaged var longitude: Double
+    @NSManaged var placeName: String
+    @NSManaged var remainSlot: Int16
+    @NSManaged var startTime: Date
+    @NSManaged var title: String
 }
 
-extension Ddip : Identifiable {
-
-}
+extension Ddip: Identifiable {}
