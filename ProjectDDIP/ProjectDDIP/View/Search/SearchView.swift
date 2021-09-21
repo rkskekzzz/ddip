@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import SlideOverCard
 
 struct SearchLocation: Identifiable, Hashable {
     var id: Int
@@ -20,9 +21,11 @@ struct SearchView: View {
     @State var searchResult: [SearchLocation]
     @State var test: Int
     
+    @Binding var searchBarPosition: CardPosition
+    
     var body: some View {
         VStack {
-            SearchBar(searchText: $searchText, searchResult: $searchResult, test: $test)
+            SearchBar(searchText: $searchText, searchResult: $searchResult, searchBarPosition: $searchBarPosition, test: $test)
             //            Text("count : \(searchResult.count)")
             //            Text("test : \(test)")
             List(searchResult) { result in
@@ -44,6 +47,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(searchText: "", searchResult: [], test: 0)
+        SearchView(searchText: "", searchResult: [], test: 0, searchBarPosition: .constant(.bottom))
     }
 }
