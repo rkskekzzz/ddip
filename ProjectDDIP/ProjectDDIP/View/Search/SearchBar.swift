@@ -56,6 +56,20 @@ struct SearchBar: UIViewRepresentable {
         
         func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
             searchbar.searchBarPosition = .top
+            searchBar.setShowsCancelButton(true, animated: true)
+        }
+        
+        func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+            searchbar.searchBarPosition = .bottom
+            searchBar.setShowsCancelButton(false, animated: true)
+        }
+        
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchbar.searchBarPosition = .bottom
+            searchBar.text = nil
+            
+            self.searchCompleter.queryFragment = ""
+            searchBar.resignFirstResponder()
         }
         
         class SearchCompleterDelegate: NSObject, MKLocalSearchCompleterDelegate {
