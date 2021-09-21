@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ScheduleView: View {
+    @Binding var showingScheduleView: Bool
     let schedules: [Schedule]
     
     var body: some View {
@@ -20,12 +21,17 @@ struct ScheduleView: View {
             }
             .navigationTitle("Schedule")
             .padding(.horizontal, 20)
+            .navigationBarItems(leading: Button(action: { showingScheduleView = false }, label: {
+                Text("back")
+            }), trailing: Button(action: { }, label: {
+                Text("edit")
+            }))
         }
     }
 }
 
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleView(schedules: Schedule.data)
+        ScheduleView(showingScheduleView: .constant(true), schedules: Schedule.data)
     }
 }

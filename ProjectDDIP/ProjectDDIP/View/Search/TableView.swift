@@ -45,7 +45,7 @@ struct TableView: UIViewRepresentable {
 
             cell.textLabel?.text = "asdf"
             cell.titleLabel.text = "\(type(of:cell))"
-            cell.subtitleLabel.text = "hell;o"
+            cell.subtitleLabel.text = "hello"
             return cell
         }
     }
