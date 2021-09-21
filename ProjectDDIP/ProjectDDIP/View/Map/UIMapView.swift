@@ -11,8 +11,8 @@ import SlideOverCard
 
 struct UIMapView: View {
     @State private var showingScheduleView:Bool = false
-    @State private var position = CardPosition.top
-    @State private var background = BackgroundStyle.solid
+    @State private var searchBarPosition = CardPosition.bottom
+    @State private var searchBarBackground = BackgroundStyle.solid
 //    @State private var region
     
     @State var searchText: String
@@ -34,9 +34,9 @@ struct UIMapView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .padding(.vertical, 100)
                 .padding(.horizontal, 40)
-                SlideOverCard($position, backgroundStyle: $background) {
+                SlideOverCard($searchBarPosition, backgroundStyle: $searchBarBackground) {
                     VStack {
-                        SearchView(searchText: searchText, searchResult: searchResult, test: test)
+                        SearchView(searchText: searchText, searchResult: searchResult, test: test, searchBarPosition: $searchBarPosition)
                             .padding(.horizontal, 10)
                             .animation(.default)
                     }
