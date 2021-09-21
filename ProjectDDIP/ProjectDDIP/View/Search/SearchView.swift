@@ -26,21 +26,27 @@ struct SearchView: View {
     var body: some View {
         VStack {
             SearchBar(searchText: $searchText, searchResult: $searchResult, searchBarPosition: $searchBarPosition, test: $test)
-            //            Text("count : \(searchResult.count)")
-            //            Text("test : \(test)")
-            List(searchResult) { result in
-                Button(action: {}) {
-                    VStack(alignment: .leading) {
-                        Text("\(result.title)")
-                            .font(.headline)
-                        if !result.subtitle.isEmpty {
-                            Text("\(result.subtitle)")
-                                .font(.caption)
+            ScrollView {
+                LazyVStack(alignment: .leading) {
+                    ForEach(searchResult) { result in
+                        Button(action: { }) {
+                            VStack(alignment: .leading) {
+                                Text("\(result.title)")
+                                    .font(.headline)
+                                if !result.subtitle.isEmpty {
+                                    Text("\(result.subtitle)")
+                                        .font(.caption)
+                                }
+                            }
                         }
+                        .foregroundColor(Color.black)
+                        Spacer()
                     }
                 }
-            }
+                .padding(.horizontal, 20)
+                .background(Color.white)
             .animation(nil)
+            }
         }
     }
 }

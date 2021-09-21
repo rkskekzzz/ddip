@@ -18,8 +18,6 @@ struct SearchBar: UIViewRepresentable {
     
     @Binding var test: Int
     
-    
-    
     func makeUIView(context: Context) -> UIViewType {
         let view = UISearchBar()
         view.searchBarStyle = .minimal
