@@ -37,17 +37,19 @@ struct Schedule: Identifiable {
 extension Schedule {
     static var data: [Schedule] {
         [
-            Schedule(title: "면접 스터디 모임", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
-            Schedule(title: "면접 스터디 모임", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
-            Schedule(title: "면접 스터디 모임", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
-            Schedule(title: "면접 스터디 모임", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24)
+            Schedule(title: "면접 스터디", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
+            Schedule(title: "모여서 각자 코딩", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
+            Schedule(title: "커피마시기 모임", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
+            Schedule(title: "책읽고 독후감쓰기", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24)
         ]
     }
 }
 
 struct ScheduleCard: View {
+    @Binding var activateDeleteButton: Bool
+
     let schedule: Schedule
-    
+    var deleteScheldule : (UUID) -> ()
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(schedule.remainTime) 시간 후 시작")
@@ -58,6 +60,12 @@ struct ScheduleCard: View {
                 Text("\(schedule.currentAttendees)/\(schedule.totalAttendees)")
                     .font(.caption2)
                     .foregroundColor(.primary)
+                Spacer()
+                if activateDeleteButton {
+                    Button(action: { deleteScheldule(schedule.id) }, label: { Image(systemName: "minus.circle") })
+                        .font(.title2)  //size of minus.circle button
+                        .foregroundColor(.red)
+                }
                 
             }
             Spacer()
@@ -78,10 +86,12 @@ struct ScheduleCard: View {
     }
 }
 
-struct ScheduleCard_Previews: PreviewProvider {
-    static var schedule = Schedule.data[0]
-    
-    static var previews: some View {
-        ScheduleCard(schedule: schedule)
-    }
-}
+
+
+//struct ScheduleCard_Previews: PreviewProvider {
+//    static var schedule = Schedule.data[0]
+//
+//    static var previews: some View {
+//        ScheduleCard(activateDeleteButton: <#T##Binding<Bool>#>, schedule: <#T##Schedule#>, deleteScheldule: <#T##(UUID) -> ()#>)
+//    }
+//}
