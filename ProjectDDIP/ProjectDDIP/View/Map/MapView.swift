@@ -52,16 +52,16 @@ struct MapView: UIViewRepresentable {
             annotationObject.mapItem?.openInMaps(launchOptions: driving)
         }
 
-//        func mapView(_: MKMapView, didSelect view: MKAnnotationView) {
-//            guard let annotationObject = view.annotation as? AnnotationObject else { return }
-//            deSelectAnnotation()
-//            selectedView = view
-//            selectedPin = annotationObject
-//            view.image = annotationObject.focusImage
-//            centerToLocation(annotationObject.coordinate, "current")
-//            delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
-//        }
-//
+        func mapView(_ map: MKMapView, didSelect view: MKAnnotationView) {
+            guard let annotationObject = view.annotation as? AnnotationObject else { return }
+            deSelectAnnotation()
+            selectedView = view
+            selectedPin = annotationObject
+            view.image = annotationObject.focusImage
+            map.centerToLocation(annotationObject.coordinate, "current")
+            delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
+        }
+
 //        func UIGestureInit() {
 //            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.handleTapGesture(gestureRecognizer:)))
 //            mapView.addGestureRecognizer(tapGesture)
@@ -91,7 +91,7 @@ struct MapView: UIViewRepresentable {
     }
 }
 
-private extension MKMapView {
+extension MKMapView {
     func centerToLocation(_ location: CLLocation, regionRadius _: CLLocationDistance = 1000) {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: camera.centerCoordinateDistance, longitudinalMeters: camera.centerCoordinateDistance)
         setRegion(coordinateRegion, animated: true)
