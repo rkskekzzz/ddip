@@ -33,6 +33,8 @@
 		904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */; };
 		904C4B8326D64B7900FDC55D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B8226D64B7900FDC55D /* Cell.swift */; };
 		906F4AE526F6334D00EF0638 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F4AE426F6334D00EF0638 /* MapView.swift */; };
+		906F4AE926F90E2200EF0638 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F4AE826F90E2200EF0638 /* Test.swift */; };
+		906F4AEC26F9187E00EF0638 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 906F4AEB26F9187E00EF0638 /* FloatingButton */; };
 		90728F0126F5051300657FE5 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0026F5051300657FE5 /* TableView.swift */; };
 		90728F0526F52EEF00657FE5 /* UIMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0426F52EEF00657FE5 /* UIMapView.swift */; };
 		90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0626F5D1B900657FE5 /* ScheduleCard.swift */; };
@@ -70,6 +72,7 @@
 		904C4B7E26D3D63F00FDC55D /* MainViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContainer.swift; sourceTree = "<group>"; };
 		904C4B8226D64B7900FDC55D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		906F4AE426F6334D00EF0638 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		906F4AE826F90E2200EF0638 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		90728F0026F5051300657FE5 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		90728F0426F52EEF00657FE5 /* UIMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMapView.swift; sourceTree = "<group>"; };
 		90728F0626F5D1B900657FE5 /* ScheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCard.swift; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				906F4AEC26F9187E00EF0638 /* FloatingButton in Frameworks */,
 				90728F0F26F61E4500657FE5 /* SlideOverCard in Frameworks */,
 				70F4760D26D42DEA00905070 /* FloatingPanel in Frameworks */,
 			);
@@ -221,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				90728F0426F52EEF00657FE5 /* UIMapView.swift */,
+				906F4AE826F90E2200EF0638 /* Test.swift */,
 				906F4AE426F6334D00EF0638 /* MapView.swift */,
 			);
 			path = Map;
@@ -245,6 +250,7 @@
 			packageProductDependencies = (
 				70F4760C26D42DEA00905070 /* FloatingPanel */,
 				90728F0E26F61E4500657FE5 /* SlideOverCard */,
+				906F4AEB26F9187E00EF0638 /* FloatingButton */,
 			);
 			productName = ProjectDDIP;
 			productReference = 904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */;
@@ -276,6 +282,7 @@
 			packageReferences = (
 				70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 				90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */,
+				906F4AEA26F9187E00EF0638 /* XCRemoteSwiftPackageReference "FloatingButton" */,
 			);
 			productRefGroup = 904C4B6426D3CDEE00FDC55D /* Products */;
 			projectDirPath = "";
@@ -312,6 +319,7 @@
 				694EF45E26E87FF600025C7B /* DdipStorageManager.swift in Sources */,
 				904C4B7F26D3D63F00FDC55D /* MainViewContainer.swift in Sources */,
 				90BF216726F4F47200E00B73 /* SearchView.swift in Sources */,
+				906F4AE926F90E2200EF0638 /* Test.swift in Sources */,
 				7097C6CC26DAC6C70049F953 /* MeetingViewController.swift in Sources */,
 				90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */,
 				70F4760F26D433E300905070 /* SearchPanelDelegate.swift in Sources */,
@@ -543,6 +551,14 @@
 				minimumVersion = 2.4.0;
 			};
 		};
+		906F4AEA26F9187E00EF0638 /* XCRemoteSwiftPackageReference "FloatingButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/FloatingButton";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 		90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/moifort/swiftUI-slide-over-card";
@@ -558,6 +574,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
 			productName = FloatingPanel;
+		};
+		906F4AEB26F9187E00EF0638 /* FloatingButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 906F4AEA26F9187E00EF0638 /* XCRemoteSwiftPackageReference "FloatingButton" */;
+			productName = FloatingButton;
 		};
 		90728F0E26F61E4500657FE5 /* SlideOverCard */ = {
 			isa = XCSwiftPackageProductDependency;

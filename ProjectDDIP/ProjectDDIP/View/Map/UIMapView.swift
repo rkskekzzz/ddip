@@ -10,6 +10,7 @@ import MapKit
 import SlideOverCard
 
 struct UIMapView: View {
+    @State private var state = false
     @State private var position = CardPosition.top
     @State private var background = BackgroundStyle.solid
     
@@ -18,18 +19,28 @@ struct UIMapView: View {
     @State var test: Int
     
     var body: some View {
-        ZStack {
-            MapView()
-            SlideOverCard($position, backgroundStyle: $background) {
-                VStack {
-                    SearchView(searchText: searchText, searchResult: searchResult, test: test)
-                        .padding(.horizontal, 10)
-                        .animation(.default)
+//        NavigationView {
+            ZStack {
+                MapView()
+                SlideOverCard($position, backgroundStyle: $background) {
+                    VStack {
+                        SearchView(searchText: searchText, searchResult: searchResult, test: test)
+                            .padding(.horizontal, 10)
+                            .animation(.default)
+                    }
                 }
-            }
-            
+//                Button(action: {
+//                    self.state.toggle()
+//                }) {
+//                    ScheduleView(schedules: Schedule.data)
+////                    self.state = false
+//                }
+                
+                
+//            }
+            .edgesIgnoringSafeArea(.all)
         }
-        .edgesIgnoringSafeArea(.all)
+        
     }
 }
 
