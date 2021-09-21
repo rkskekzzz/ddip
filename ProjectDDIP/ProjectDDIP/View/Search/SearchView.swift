@@ -26,20 +26,26 @@ struct SearchView: View {
     var body: some View {
         VStack {
             SearchBar(searchText: $searchText, searchResult: $searchResult, searchBarPosition: $searchBarPosition, test: $test)
-            //            Text("count : \(searchResult.count)")
-            //            Text("test : \(test)")
-            List(searchResult) { result in
-                Button(action: {}) {
-                    VStack(alignment: .leading) {
-                        Text("\(result.title)")
-                            .font(.headline)
-                        if !result.subtitle.isEmpty {
-                            Text("\(result.subtitle)")
-                                .font(.caption)
+            //            LazyVStack {
+            //                ForEach(mySchedule.score, id: \.id) { schedule in
+            //                    ScheduleCard(activateDeleteButton: $activateDeleteButton, schedule: schedule, deleteScheldule: deleteSchedule)
+            //                }
+            LazyVStack {
+                ForEach(searchResult) { result in
+                    Button(action: { }) {
+                        VStack(alignment: .leading) {
+                            Text("\(result.title)")
+                                .font(.headline)
+                            if !result.subtitle.isEmpty {
+                                Text("\(result.subtitle)")
+                                    .font(.caption)
+                            }
                         }
                     }
+                    Spacer()
                 }
             }
+            .background(Color.white)
             .animation(nil)
         }
     }

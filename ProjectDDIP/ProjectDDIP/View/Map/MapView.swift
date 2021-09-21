@@ -40,7 +40,7 @@ struct MapView: UIViewRepresentable {
         init(_ mapView: MapView) {
             self.mapView = mapView
         }
-        
+
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
             print(mapView.centerCoordinate)
         }
@@ -52,42 +52,42 @@ struct MapView: UIViewRepresentable {
             annotationObject.mapItem?.openInMaps(launchOptions: driving)
         }
 
-        func mapView(_: MKMapView, didSelect view: MKAnnotationView) {
-            guard let annotationObject = view.annotation as? AnnotationObject else { return }
-            deSelectAnnotation()
-            selectedView = view
-            selectedPin = annotationObject
-            view.image = annotationObject.focusImage
-            centerToLocation(annotationObject.coordinate, "current")
-            delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
-        }
-        
-        func UIGestureInit() {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.handleTapGesture(gestureRecognizer:)))
-            mapView.addGestureRecognizer(tapGesture)
-        }
-
-        @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
-            let hitObject = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil) as? AnnotationView
-
-            if mapView.selectedAnnotations.count > 0 {
-                if hitObject == nil {
-                    deSelectAnnotation()
-                    selectedView = nil
-                    selectedPin = nil
-                    annotationDeselectBehaviourDefines()
-                }
-                return
-            }
-            if hitObject != nil { return }
-
-            if gestureRecognizer.state == UIGestureRecognizer.State.ended {
-                let locationCoordinate = mapView.convert(gestureRecognizer.location(in: mapView), toCoordinateFrom: mapView)
-                gesturePin.resetAttributes("title", "location name", "discipline", locationCoordinate)
-                replocateAnnotation(gesturePin)
-                print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude: \(locationCoordinate.longitude)")
-            }
-        }
+//        func mapView(_: MKMapView, didSelect view: MKAnnotationView) {
+//            guard let annotationObject = view.annotation as? AnnotationObject else { return }
+//            deSelectAnnotation()
+//            selectedView = view
+//            selectedPin = annotationObject
+//            view.image = annotationObject.focusImage
+//            centerToLocation(annotationObject.coordinate, "current")
+//            delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
+//        }
+//
+//        func UIGestureInit() {
+//            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.handleTapGesture(gestureRecognizer:)))
+//            mapView.addGestureRecognizer(tapGesture)
+//        }
+//
+//        @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
+//            let hitObject = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil) as? AnnotationView
+//
+//            if mapView.selectedAnnotations.count > 0 {
+//                if hitObject == nil {
+//                    deSelectAnnotation()
+//                    selectedView = nil
+//                    selectedPin = nil
+//                    annotationDeselectBehaviourDefines()
+//                }
+//                return
+//            }
+//            if hitObject != nil { return }
+//
+//            if gestureRecognizer.state == UIGestureRecognizer.State.ended {
+//                let locationCoordinate = mapView.convert(gestureRecognizer.location(in: mapView), toCoordinateFrom: mapView)
+//                gesturePin.resetAttributes("title", "location name", "discipline", locationCoordinate)
+//                replocateAnnotation(gesturePin)
+//                print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude: \(locationCoordinate.longitude)")
+//            }
+//        }
     }
 }
 
