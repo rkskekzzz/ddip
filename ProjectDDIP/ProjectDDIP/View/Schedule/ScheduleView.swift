@@ -7,23 +7,37 @@
 
 import SwiftUI
 
+class EnData: ObservableObject {
+    @Published var score = Schedule.data
+    
+}
+
 struct ScheduleView: View {
     @Binding var showingScheduleView: Bool
-    let schedules: [Schedule]
+    @State private var activateDeleteButton:Bool = false
+
+    @EnvironmentObject var mySchedule: EnData
+
+    func deleteSchedule(id: UUID) {
+        mySchedule.score = mySchedule.score.filter { $0.id != id }
+    }
     
     var body: some View {
         NavigationView {
-            LazyVStack {
-                ForEach(schedules, id: \.id) { schedule in
-                    ScheduleCard(schedule: schedule)
-                }.background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(radius: 4))
-                .padding(.vertical, 5)
+            ScrollView {
+                LazyVStack {
+                    ForEach(mySchedule.score, id: \.id) { schedule in
+                        ScheduleCard(activateDeleteButton: $activateDeleteButton, schedule: schedule, deleteScheldule: deleteSchedule)
+                    }.background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(radius: 4))
+                    .padding(.vertical, 5)
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
             }
             .navigationTitle("Schedule")
-            .padding(.horizontal, 20)
             .navigationBarItems(leading: Button(action: { showingScheduleView = false }, label: {
                 Text("back")
-            }), trailing: Button(action: { }, label: {
+            }), trailing: Button(action: { activateDeleteButton.toggle() }, label: {
                 Text("edit")
             }))
         }
@@ -32,6 +46,6 @@ struct ScheduleView: View {
 
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleView(showingScheduleView: .constant(true), schedules: Schedule.data)
+        ScheduleView(showingScheduleView: .constant(true)).environmentObject(EnData())
     }
 }
