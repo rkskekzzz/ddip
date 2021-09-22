@@ -32,10 +32,10 @@ struct MapView: UIViewRepresentable {
     class Coordinator: NSObject, MKMapViewDelegate, UIGestureRecognizerDelegate {
         var mapView: MapView
         
-        private var gesturePin = AnnotationObject(title: nil, locationName: nil, discipline: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+        private var gesturePin = AnnotationPin(title: nil, locationName: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
         private var selectedView: MKAnnotationView?
-        private var selectedPin: AnnotationObject?
-        private var annotations: [AnnotationObject] = []
+        private var selectedPin: AnnotationPin?
+        private var annotations: [AnnotationPin] = []
         
         init(_ mapView: MapView) {
             self.mapView = mapView
@@ -46,20 +46,20 @@ struct MapView: UIViewRepresentable {
         }
         
         func mapView(_: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped _: UIControl) {
-            guard let annotationObject = view.annotation as? AnnotationObject else { return }
+            guard let annotationPin = view.annotation as? AnnotationPin else { return }
 
             let driving = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-            annotationObject.mapItem?.openInMaps(launchOptions: driving)
+            annotationPin.mapItem?.openInMaps(launchOptions: driving)
         }
 
         func mapView(_ map: MKMapView, didSelect view: MKAnnotationView) {
-            guard let annotationObject = view.annotation as? AnnotationObject else { return }
-            deSelectAnnotation()
+            guard let annotationPin = view.annotation as? AnnotationPin else { return }
+            deselectAnnotation()
             selectedView = view
-            selectedPin = annotationObject
-            view.image = annotationObject.focusImage
-            map.centerToLocation(annotationObject.coordinate, "current")
-            delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
+            selectedPin = annotationPin
+            view.image = annotationPin.selectImage
+            map.centerToLocation(annotationPin.coordinate, "current")
+            delegate?.didUpdateMapVCAnnotation(annotationPin: annotationPin)
         }
 
 //        func UIGestureInit() {
@@ -126,10 +126,10 @@ extension MKMapView {
 }
 
 
-
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView()
-    }
-}
-
+//
+//struct MapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapView()
+//    }
+//}
+//
