@@ -44,7 +44,7 @@ extension MapView {
         var parent: MapView
         
         private var gesturePin = AnnotationPin(title: nil, locationName: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
-        private var selectedView: MKAnnotationView?
+        private var focusedView: MKAnnotationView?
         private var selectedPin: AnnotationPin?
         private var annotations: [AnnotationPin] = []
         
@@ -52,7 +52,6 @@ extension MapView {
         init(_ parent: MapView) {
             self.parent = parent
         }
-        
 
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
             print(mapView.centerCoordinate)
@@ -69,42 +68,70 @@ extension MapView {
             let driving = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
             annotationPin.mapItem?.openInMaps(launchOptions: driving)
         }
+        func mapView(_ : MKMapView, didSelect view: MKAnnotationView) {
+            guard let annotationPin = view.annotation as? AnnotationPin else { return }
+            releaseFocusedView()
+            focusedView = view
+            selectedPin = annotationPin
+            view.image = annotationPin.selectImage
+            parent.mapView.center(to: annotationPin.coordinate, zoomLevel: "current")
+//            parent.mapView.delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
+        }
         
-        func centerToLocation(_ location: CLLocation, _ radius: Double) {
-            centerToLocation(location)
+//        func getSelectedAnnotationPin() -> AnnotationPin? {
+//            return self.selectedPin
+//        }
+        func releaseFocusedView() {
+            focusedView?.image = selectedPin?.deselectImage
+        }
+        
+        func center(to location: CLLocation, radius: Double) {
+            center(to: location)
             let span = MKCoordinateSpan(latitudeDelta: radius / 111320, longitudeDelta: radius / 111320)
             let mapCoordinate = MKCoordinateRegion(center: location.coordinate, span: span)
             parent.mapView.setRegion(mapCoordinate, animated: true)
         }
-        func centerToLocation(_ location: CLLocation) { parent.mapView.centerToLocation(location) }
-        func centerToLocation(_ location: CLLocationCoordinate2D) { parent.mapView.centerToLocation(location) }
-        func centerToLocation(_ location: CLLocation, _ zoomLevel: String) { parent.mapView.centerToLocation(location.coordinate, zoomLevel) }
-        func centerToLocation(_ location: CLLocationCoordinate2D, _ zoomLevel: String) { parent.mapView.centerToLocation(location, zoomLevel) }
-        func setCameraZoomMaxDistance(_ maxDistance: Double) { parent.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: maxDistance), animated: true) }
-        func setCameraBoundary(_ region: MKCoordinateRegion) { parent.mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true) }
-        func convertToLocation2D(_ latitude: Double, _ longitude: Double) -> CLLocationCoordinate2D { return CLLocationCoordinate2D(latitude: latitude, longitude: longitude) }
-        func convertToLocation(_ latitude: Double, _ longitude: Double) -> CLLocation { return CLLocation(latitude: latitude, longitude: longitude) }
-        func convertToRegion(_ center: CLLocation, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion { return MKCoordinateRegion(center: center.coordinate, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters) }
-        func convertToRegion(_ center: CLLocationCoordinate2D, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion { return MKCoordinateRegion(center: center, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters) }
-        func removeAnnotation(_ object: AnnotationPin) { parent.mapView.removeAnnotation(object) }
-        func addAnnotation(_ object: AnnotationPin) { parent.mapView.addAnnotation(object) }
-        func removeAnnotations(_ objects: [AnnotationPin]) { parent.mapView.removeAnnotations(objects) }
-        func addAnnotations(_ objects: [AnnotationPin]) { parent.mapView.addAnnotations(objects) }
-        func replocateAnnotation(_ object: AnnotationPin) { removeAnnotation(object); addAnnotation(object) }
-        func getSelectedAnnotationObject() -> AnnotationPin? { return self.selectedPin }
-        func deselectAnnotation() { selectedView?.image = selectedPin?.deselectImage }
-
-        func mapView(_ : MKMapView, didSelect view: MKAnnotationView) {
-            guard let annotationObject = view.annotation as? AnnotationPin else { return }
-            deselectAnnotation()
-            selectedView = view
-            selectedPin = annotationObject
-            view.image = annotationObject.selectImage
-            parent.mapView.centerToLocation(annotationObject.coordinate, "current")
-//            parent.mapView.delegate?.didUpdateMapVCAnnotation(annotationObject: annotationObject)
-            
+        func center(to location: CLLocation) {
+            parent.mapView.center(to: location)
+        }
+        func center(to location: CLLocationCoordinate2D) {
+            parent.mapView.center(to: location)
+        }
+        func center(to location: CLLocation, zoomLevel: String) {
+            parent.mapView.center(to: location, zoomLevel: zoomLevel)
+        }
+        func center(to location: CLLocationCoordinate2D, zoomLevel: String) {
+            parent.mapView.center(to: location, zoomLevel: zoomLevel)
         }
         
+        func removeAnnotation(pin: AnnotationPin) {
+            parent.mapView.removeAnnotation(pin)
+        }
+        func addAnnotation(pin: AnnotationPin) {
+            parent.mapView.addAnnotation(pin)
+        }
+        func removeAnnotations(pinArray: [AnnotationPin]) {
+            parent.mapView.removeAnnotations(pinArray)
+        }
+        func addAnnotations(pinArray: [AnnotationPin]) {
+            parent.mapView.addAnnotations(pinArray)
+        }
+        func resetAnnotation(pin: AnnotationPin) {
+            removeAnnotation(pin: pin)
+            addAnnotation(pin: pin)
+        }
+        
+        func setCamera(zoom maxDistance: Double) { parent.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: maxDistance), animated: true)
+        }
+        func setCamera(boundary region: MKCoordinateRegion) { parent.mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true)
+        }
+
+        func convert(toRegion center: CLLocation, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion {
+            return MKCoordinateRegion(center: center.coordinate, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters)
+        }
+        func convert(toRegion center: CLLocationCoordinate2D, latitudinalMeters: Double, longitudinalMeters: Double) -> MKCoordinateRegion {
+            return MKCoordinateRegion(center: center, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters)
+        }
 
 //        func UIGestureInit() {
 //            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.handleTapGesture(gestureRecognizer:)))
@@ -135,44 +162,43 @@ extension MapView {
     }
 }
 
-
+// MARK: - MKMapView
 
 extension MKMapView {
-    func centerToLocation(_ location: CLLocation, regionRadius _: CLLocationDistance = 1000) {
+    func center(to location: CLLocation, regionRadius: CLLocationDistance = 1000) {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: camera.centerCoordinateDistance, longitudinalMeters: camera.centerCoordinateDistance)
         setRegion(coordinateRegion, animated: true)
     }
-
-    func centerToLocation(_ location: CLLocationCoordinate2D, regionRadius _: CLLocationDistance = 1000) {
+    
+    func center(to location: CLLocationCoordinate2D, regionRadius: CLLocationDistance = 1000) {
         let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: camera.centerCoordinateDistance, longitudinalMeters: camera.centerCoordinateDistance)
         setRegion(coordinateRegion, animated: true)
     }
 
-    func centerToLocation(_ location: CLLocation, _ zoomLevel: String) {
+    func center(to location: CLLocation, zoomLevel: String) {
         switch zoomLevel {
         case "current":
             setCenter(location.coordinate, animated: true)
             return
         default:
-            centerToLocation(location)
+            center(to: location)
         }
     }
 
-    func centerToLocation(_ location: CLLocationCoordinate2D, _ zoomLevel: String) {
+    func center(to location: CLLocationCoordinate2D, zoomLevel: String) {
         switch zoomLevel {
         case "current":
             setCenter(location, animated: true)
             return
         default:
-            centerToLocation(location)
+            center(to: location)
         }
     }
 
-//    func visibleAnnotations() -> [MKAnnotation] { return annotations(in: visibleMapRect).map { obj -> MKAnnotation in obj as! MKAnnotation } }
+    func visibleAnnotations() -> [MKAnnotation] { return annotations(in: visibleMapRect).map { obj -> MKAnnotation in obj as! MKAnnotation } }
 }
 
-
-
+//
 //struct MapView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        MapView()
