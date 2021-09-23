@@ -19,4 +19,6 @@ extension CodingUserInfoKey {
 protocol CopyDelegate {
     func copy<T>(with: T)
     func getId() -> Int64
+    func getDdipForm() -> DdipForm
+    func getContractForm() -> ContractForm
 }

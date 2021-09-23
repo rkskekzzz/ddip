@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - CoreData
 
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Ddip")
+        let container = NSPersistentContainer(name: ENTITY().DDIP)
         container.loadPersistentStores(completionHandler: { _, error in
             if let error = error { fatalError("Unresolved error, \((error as NSError).userInfo)") }
         })

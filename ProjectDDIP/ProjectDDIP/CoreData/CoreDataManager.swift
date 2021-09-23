@@ -14,73 +14,35 @@ class CoreDataManager {
 
     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
-
-    func removeDuplicate(entityName: String) {
-        let array:[NSManagedObject] = fromCoreData(entityName: entityName)
-        guard !array.isEmpty else { return }
-        var indexOut = 0
-        var indexIn = 0
-        
-        for source in array {
-            guard let convertedSource = source as? CopyDelegate else { assert(false) }
-            
-            for target in array {
-                guard let convertedTarget = target as? CopyDelegate else { assert(false) }
-                
-                if indexOut < indexIn {
-                    if convertedSource.getId() == convertedTarget.getId() {
-                        deleteCoreData(entityName: entityName, object: target)
-                        print("--> duplicate find! <--")
-                    }
-                }
-                indexIn += 1
-            }
-            indexIn = 0
-            indexOut += 1
-        }
-    }
-
+    
     func deleteCoreData(entityName: String, id: Int64) {
         
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = filteredRequest(id: id, entityName: entityName)
-        do {
-            if let results: [NSManagedObject] = try context?.fetch(fetchRequest) as? [NSManagedObject] {
-                for item in results {
-                    guard let convert = item as? CopyDelegate else { assert(false) }
-                    
-                    if convert.getId() == id {
-                        context?.delete(item)
-                        contextSave()
-                        return
-                    }
-                }
-            }
-        } catch let error as NSError {
-            print("Could not fatch: \(error), \(error.userInfo)")
+        let result = fetchResult(id: id, entityName: entityName)
+        if !result.isEmpty {
+            for item in result { context?.delete(item) }
+            contextSave()
         }
     }
     
-    func deleteCoreData<T: NSManagedObject>(entityName: String, object: T) {
+    func deleteCoreData<T>(object: T) {
         guard let convert = object as? CopyDelegate else { assert(false) }
-        
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = filteredRequest(id: convert.getId(), entityName: entityName)
-        do {
-            if let results: [T] = try context?.fetch(fetchRequest) as? [T] {
-                if !results.isEmpty {
-                    context?.delete(object)
-                    print(results.count)
-                    contextSave()
-                }
-            }
-        } catch let error as NSError {
-            print("Could not fatch: \(error), \(error.userInfo)")
-        }
+        deleteCoreData(entityName: getEntityName(typeArg: T.self), id: convert.getId())
     }
 
-    func fromCoreData<T> (entityName: String, ascendingKey: String = SYMBOL().EMPTY ) -> [T] {
+    func toCoreData<T> (jsonString: String) -> [T] {
+        if T.self == Ddip.self {
+            return toDdipCoreData(jsonString: jsonString)
+        }
+        if T.self == Contract.self {
+            return toContractCoreData(jsonString: jsonString)
+        }
+        assert(false)
+    }
+
+    func fromCoreData<T> (ascendingKey: String = SYMBOL().EMPTY ) -> [T] {
         var array: [T] = []
         if let context = context {
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: getEntityName(typeArg: T.self))
             if !ascendingKey.isEmpty {
                 let sortByKey = NSSortDescriptor(key: ascendingKey, ascending: true)
                 fetchRequest.sortDescriptors = [sortByKey]
@@ -94,37 +56,47 @@ class CoreDataManager {
         }
         return array
     }
-    
-    func fromCoreData<T> (entityName: String, id: Int64) -> T? {
-        let array:[T] = fromCoreData(entityName: entityName)
-        guard !array.isEmpty else { return nil }
+
+    func fromCoreData<T> (id: Int64) -> [T] {
+        var array:[T] = []
+        let fromCoreData:[T] = fromCoreData()
         
-        for item in array {
+        for item in fromCoreData {
             guard let convert = item as? CopyDelegate else { assert(false) }
-            if convert.getId() == id { return item }
+            if convert.getId() == id { array.append(item) }
         }
-        print("can not find id:[\(id)]")
-        return nil
+        return array
+    }
+
+    func toJson<T>(code: [T]) -> String {
+        guard let convert = code as? [CopyDelegate] else { assert(false) }
+        if T.self == Ddip.self {
+            var array:[DdipForm] = []
+            for item in convert {
+                array.append(item.getDdipForm())
+            }
+            return toEncode(code: array)
+        }
+        if T.self == Contract.self {
+            var array:[ContractForm] = []
+            for item in convert {
+                array.append(item.getContractForm())
+            }
+            return toEncode(code: array)
+        }
+        assert(false)
     }
     
-    func toCoreData<T: Decodable> (entityName: String, jsonString: String) -> T {
-        let decoder = JSONDecoder()
-        decoder.userInfo[.managedObjectContext] = context
+    func fromJson<T: Decodable>(json: String) -> [T] {
+        var array:[T] = []
         do {
-            let object = try decoder.decode(T.self, from: jsonString.data(using: .utf8)!)
-            contextSave()
-            removeDuplicate(entityName: entityName)
-            return object
+            let result = try JSONDecoder().decode([T].self, from: json.data(using: .utf8)!)
+            for item in result { array.append(item) }
+            return array
         } catch let error as NSError {
             print(error)
             assert(false)
         }
-    }
-
-    func toJson<T: Codable>(code: T) -> String {
-        guard let data = try? JSONEncoder().encode(code) else { assert(false) }
-        let json = String(data: data, encoding: String.Encoding.utf8)!
-        return json
     }
 }
 
@@ -134,9 +106,79 @@ private extension CoreDataManager {
         fetchRequest.predicate = NSPredicate(format: "id = %@", NSNumber(value: id))
         return fetchRequest
     }
+    
+    func fetchResult(id: Int64, entityName: String) -> [NSManagedObject] {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = filteredRequest(id: id, entityName: entityName)
+        do {
+            if let results: [NSManagedObject] = try context?.fetch(fetchRequest) as? [NSManagedObject] { return results }
+            assert(false)
+        } catch let error as NSError {
+            print("Could not fatch: \(error), \(error.userInfo)")
+            assert (false)
+        }
+    }
 
     func contextSave() {
         do { try context?.save() }
         catch let error as NSError { print("Could not save: \(error), \(error.userInfo)") }
+    }
+
+    func toEncode<T: Encodable>(code: [T]) -> String {
+        guard let data = try? JSONEncoder().encode(code) else { assert(false) }
+        let json = String(data: data, encoding: String.Encoding.utf8)!
+        return json
+    }
+
+    func toDdipCoreData<T> (jsonString: String) -> [T] {
+        var result:[T] = []
+        let array:[DdipForm] = fromJson(json: jsonString)
+        for item in array {
+            let fetchResult = fetchResult(id: item.id, entityName: getEntityName(typeArg: T.self))
+            if fetchResult.isEmpty {
+                let append:[T] = appendCoreData(source: item)
+                for obj in append {
+                    result.append(obj)
+                }
+            }
+        }
+        if !result.isEmpty { contextSave() }
+        else { print("nothing added") }
+        return result
+    }
+
+    func toContractCoreData<T> (jsonString: String) -> [T] {
+        var result:[T] = []
+        let array:[ContractForm] = fromJson(json: jsonString)
+        for item in array {
+            let fetchResult = fetchResult(id: item.id, entityName: getEntityName(typeArg: T.self))
+            if fetchResult.isEmpty {
+                let append:[T] = appendCoreData(source: item)
+                for obj in append {
+                    result.append(obj)
+                }
+            }
+        }
+        if !result.isEmpty { contextSave() }
+        else { print("nothing added") }
+        return result
+    }
+
+    func appendCoreData<T1, T2> (source: T1) -> [T2] {
+        if let context = context,
+           let entity = NSEntityDescription.entity(forEntityName: getEntityName(typeArg: T2.self), in: context)
+        {
+            if let coreData: T2 = NSManagedObject(entity: entity, insertInto: context) as? T2 {
+                guard let convert = coreData as? CopyDelegate else { assert(false) }
+                convert.copy(with: source)
+                return Array(arrayLiteral: coreData)
+            }
+        }
+        assert(false)
+    }
+
+    func getEntityName<T>(typeArg: T) -> String {
+        if T.self == Ddip.Type.self { return entity.ddip }
+        if T.self == Contract.Type.self { return entity.contract }
+        assert(false)
     }
 }

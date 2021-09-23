@@ -10,45 +10,7 @@ import Foundation
 import CoreData
 
 @objc(Ddip)
-class Ddip: NSManagedObject, Codable {
-
-    private enum CodingKeys: CodingKey {
-        case id, title, createTime, startTime, ddipToken, latitude, longitude, placeName, remainSlot
-    //        case id, title, createTime, startTime, ddipToken, coordinate, placeName, remainSlot, coordinate
-    }
-
-    required convenience init(from decoder: Decoder) throws {
-        guard let context = decoder.userInfo[.managedObjectContext] as? NSManagedObjectContext else {
-            throw DecoderConfigurationError.missingManagedObjectContext
-        }
-        self.init(context: context)
-        
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int64.self, forKey: .id)
-        title = try container.decode(String.self, forKey: .title)
-        createTime = try container.decode(Date.self, forKey: .createTime)
-        startTime = try container.decode(Date.self, forKey: .startTime)
-        ddipToken = try container.decode(String.self, forKey: .ddipToken)
-        latitude = try container.decode(Double.self, forKey: .latitude)
-        longitude = try container.decode(Double.self, forKey: .longitude)
-        placeName = try container.decode(String.self, forKey: .placeName)
-        remainSlot = try container.decode(Int16.self, forKey: .remainSlot)
-    //        completions = try container.decode(Set<DdipCompletion>.self, forKey: .completions) as NSSet
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(title, forKey: .title)
-        try container.encode(createTime, forKey: .createTime)
-        try container.encode(startTime, forKey: .startTime)
-        try container.encode(ddipToken, forKey: .ddipToken)
-        try container.encode(latitude, forKey: .latitude)
-        try container.encode(longitude, forKey: .longitude)
-        try container.encode(placeName, forKey: .placeName)
-        try container.encode(remainSlot, forKey: .remainSlot)
-    }
-
+class Ddip: NSManagedObject {
     @nonobjc class func fetchRequest() -> NSFetchRequest<Ddip> {
         return NSFetchRequest<Ddip>(entityName: ENTITY().ddip)
     }
@@ -64,9 +26,21 @@ class Ddip: NSManagedObject, Codable {
     @NSManaged var ddipToken: String
 }
 
+struct DdipForm: Codable {
+    var id: Int64
+    var createTime: Date
+    var startTime: Date
+    var title: String
+    var placeName: String
+    var latitude: Double
+    var longitude: Double
+    var remainSlot: Int16
+    var ddipToken: String
+}
+
 extension Ddip: CopyDelegate {
     func copy<T>(with: T) {
-        guard let convert = with as? Ddip else { assert(false) }
+        guard let convert = with as? DdipForm else { assert(false) }
         
         self.id = convert.id
         self.createTime = convert.createTime
@@ -80,6 +54,15 @@ extension Ddip: CopyDelegate {
     }
     
     func getId() -> Int64 { return self.id }
+    
+    func getDdipForm() -> DdipForm {
+        return DdipForm(id: id, createTime: createTime, startTime: startTime, title: title, placeName: placeName, latitude: latitude, longitude: longitude, remainSlot: remainSlot, ddipToken: ddipToken)
+    }
+    
+    func getContractForm() -> ContractForm {
+        assert(false)
+        return ContractForm(id: 0, ddipToken: "", userToken: "")
+    }
 }
 
 extension Ddip : Identifiable {

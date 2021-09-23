@@ -45,14 +45,8 @@ struct TableView: UIViewRepresentable {
 
             cell.textLabel?.text = "asdf"
             cell.titleLabel.text = "\(type(of:cell))"
-            cell.subtitleLabel.text = "hello"
+            cell.subtitleLabel.text = "hell;o"
             return cell
         }
-    }
-}
-
-struct TableView_Previews: PreviewProvider {
-    static var previews: some View {
-        TableView(searchText: .constant(""))
     }
 }

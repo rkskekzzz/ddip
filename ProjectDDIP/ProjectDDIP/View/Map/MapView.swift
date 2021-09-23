@@ -10,9 +10,10 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
+    let mapView = MKMapView()
     
     func makeUIView(context: Context) -> UIViewType {
-        let mapView = MKMapView()
+//        let mapView = MKMapView()
         
         mapView.delegate = context.coordinator
         return mapView
@@ -29,107 +30,16 @@ struct MapView: UIViewRepresentable {
         return Coordinator(self)
     }
     
-    class Coordinator: NSObject, MKMapViewDelegate, UIGestureRecognizerDelegate {
+    class Coordinator: NSObject, MKMapViewDelegate {
         var mapView: MapView
-        
-        private var gesturePin = AnnotationPin(title: nil, locationName: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
-        private var selectedView: MKAnnotationView?
-        private var selectedPin: AnnotationPin?
-        private var annotations: [AnnotationPin] = []
         
         init(_ mapView: MapView) {
             self.mapView = mapView
         }
-
+        
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
             print(mapView.centerCoordinate)
         }
         
-        func mapView(_: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped _: UIControl) {
-            guard let annotationPin = view.annotation as? AnnotationPin else { return }
-
-            let driving = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-            annotationPin.mapItem?.openInMaps(launchOptions: driving)
-        }
-
-        func mapView(_ map: MKMapView, didSelect view: MKAnnotationView) {
-            guard let annotationPin = view.annotation as? AnnotationPin else { return }
-            deselectAnnotation()
-            selectedView = view
-            selectedPin = annotationPin
-            view.image = annotationPin.selectImage
-            map.centerToLocation(annotationPin.coordinate, "current")
-            delegate?.didUpdateMapVCAnnotation(annotationPin: annotationPin)
-        }
-
-//        func UIGestureInit() {
-//            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.handleTapGesture(gestureRecognizer:)))
-//            mapView.addGestureRecognizer(tapGesture)
-//        }
-//
-//        @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
-//            let hitObject = mapView.hitTest(gestureRecognizer.location(in: mapView), with: nil) as? AnnotationView
-//
-//            if mapView.selectedAnnotations.count > 0 {
-//                if hitObject == nil {
-//                    deSelectAnnotation()
-//                    selectedView = nil
-//                    selectedPin = nil
-//                    annotationDeselectBehaviourDefines()
-//                }
-//                return
-//            }
-//            if hitObject != nil { return }
-//
-//            if gestureRecognizer.state == UIGestureRecognizer.State.ended {
-//                let locationCoordinate = mapView.convert(gestureRecognizer.location(in: mapView), toCoordinateFrom: mapView)
-//                gesturePin.resetAttributes("title", "location name", "discipline", locationCoordinate)
-//                replocateAnnotation(gesturePin)
-//                print("Tapped at Latitiude: \(locationCoordinate.latitude), Longitude: \(locationCoordinate.longitude)")
-//            }
-//        }
     }
 }
-
-extension MKMapView {
-    func centerToLocation(_ location: CLLocation, regionRadius _: CLLocationDistance = 1000) {
-        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: camera.centerCoordinateDistance, longitudinalMeters: camera.centerCoordinateDistance)
-        setRegion(coordinateRegion, animated: true)
-    }
-
-    func centerToLocation(_ location: CLLocationCoordinate2D, regionRadius _: CLLocationDistance = 1000) {
-        let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: camera.centerCoordinateDistance, longitudinalMeters: camera.centerCoordinateDistance)
-        setRegion(coordinateRegion, animated: true)
-    }
-
-    func centerToLocation(_ location: CLLocation, _ zoomLevel: String) {
-        switch zoomLevel {
-        case "current":
-            setCenter(location.coordinate, animated: true)
-            return
-        default:
-            centerToLocation(location)
-        }
-    }
-
-    func centerToLocation(_ location: CLLocationCoordinate2D, _ zoomLevel: String) {
-        switch zoomLevel {
-        case "current":
-            setCenter(location, animated: true)
-            return
-        default:
-            centerToLocation(location)
-        }
-    }
-
-    func visibleAnnotations() -> [MKAnnotation] { return annotations(in: visibleMapRect).map { obj -> MKAnnotation in obj as! MKAnnotation } }
-}
-
-
-//
-//struct MapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MapView()
-//    }
-//}
-//

@@ -11,10 +11,10 @@ import UIKit
 class AnnotationView: MKAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
-            guard let annotationObject = newValue as? AnnotationObject else { return }
+            guard let annotationPin = newValue as? AnnotationPin else { return }
 
             canShowCallout = false
-            image = annotationObject.image
+            image = annotationPin.deselectImage
         }
     }
 }
