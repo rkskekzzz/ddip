@@ -25,7 +25,7 @@ class CoreDataManager {
     }
     
     func deleteCoreData<T>(object: T) {
-        guard let convert = object as? CopyDelegate else { assert(false) }
+        guard let convert = object as? ICoreData else { assert(false) }
         deleteCoreData(entityName: getEntityName(typeArg: T.self), id: convert.getId())
     }
 
@@ -62,14 +62,14 @@ class CoreDataManager {
         let fromCoreData:[T] = fromCoreData()
         
         for item in fromCoreData {
-            guard let convert = item as? CopyDelegate else { assert(false) }
+            guard let convert = item as? ICoreData else { assert(false) }
             if convert.getId() == id { array.append(item) }
         }
         return array
     }
 
     func toJson<T>(code: [T]) -> String {
-        guard let convert = code as? [CopyDelegate] else { assert(false) }
+        guard let convert = code as? [ICoreData] else { assert(false) }
         if T.self == Ddip.self {
             var array:[DdipForm] = []
             for item in convert {
@@ -168,7 +168,7 @@ private extension CoreDataManager {
            let entity = NSEntityDescription.entity(forEntityName: getEntityName(typeArg: T2.self), in: context)
         {
             if let coreData: T2 = NSManagedObject(entity: entity, insertInto: context) as? T2 {
-                guard let convert = coreData as? CopyDelegate else { assert(false) }
+                guard let convert = coreData as? ICoreData else { assert(false) }
                 convert.copy(with: source)
                 return Array(arrayLiteral: coreData)
             }

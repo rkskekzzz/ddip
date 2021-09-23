@@ -9,6 +9,14 @@
 import Foundation
 import CoreData
 
+enum DecoderConfigurationError: Error {
+    case missingManagedObjectContext
+}
+
+extension CodingUserInfoKey {
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
+}
+
 @objc(Ddip)
 class Ddip: NSManagedObject {
     @nonobjc class func fetchRequest() -> NSFetchRequest<Ddip> {
@@ -38,7 +46,7 @@ struct DdipForm: Codable {
     var ddipToken: String
 }
 
-extension Ddip: CopyDelegate {
+extension Ddip: ICoreData {
     func copy<T>(with: T) {
         guard let convert = with as? DdipForm else { assert(false) }
         

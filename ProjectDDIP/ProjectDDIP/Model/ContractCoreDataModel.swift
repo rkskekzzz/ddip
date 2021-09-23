@@ -26,7 +26,7 @@ struct ContractForm: Codable {
     var userToken: String
 }
 
-extension Contract: CopyDelegate {
+extension Contract: ICoreData {
     
     func copy<T>(with: T) {
         guard let convert = with as? ContractForm else { assert(false) }
