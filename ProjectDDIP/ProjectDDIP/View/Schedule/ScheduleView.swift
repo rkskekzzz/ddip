@@ -7,26 +7,25 @@
 
 import SwiftUI
 
-class EnData: ObservableObject {
-    @Published var score = Schedule.data
-    
+class MySchedule: ObservableObject {
+    @Published var item = Schedule.data
 }
 
 struct ScheduleView: View {
     @Binding var showingScheduleView: Bool
     @State private var activateDeleteButton:Bool = false
 
-    @EnvironmentObject var mySchedule: EnData
+    @EnvironmentObject var mySchedule: MySchedule
 
     func deleteSchedule(id: UUID) {
-        mySchedule.score = mySchedule.score.filter { $0.id != id }
+        mySchedule.item = mySchedule.item.filter { $0.id != id }
     }
     
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack {
-                    ForEach(mySchedule.score, id: \.id) { schedule in
+                    ForEach(mySchedule.item, id: \.id) { schedule in
                         ScheduleCard(activateDeleteButton: $activateDeleteButton, schedule: schedule, deleteScheldule: deleteSchedule)
                     }.background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(radius: 4))
                     .padding(.vertical, 5)
@@ -35,7 +34,9 @@ struct ScheduleView: View {
                 .padding(.horizontal, 20)
             }
             .navigationTitle("Schedule")
-            .navigationBarItems(leading: Button(action: { showingScheduleView = false }, label: {
+            .navigationBarItems(leading: Button(action: { showingScheduleView.toggle()
+                print(showingScheduleView)
+            }, label: {
                 Text("back")
             }), trailing: Button(action: { activateDeleteButton.toggle() }, label: {
                 Text("edit")
@@ -44,8 +45,8 @@ struct ScheduleView: View {
     }
 }
 
-struct ScheduleView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScheduleView(showingScheduleView: .constant(true)).environmentObject(EnData())
-    }
-}
+//struct ScheduleView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ScheduleView(showingScheduleView: .constant(true)).environmentObject(EnData())
+//    }
+//}

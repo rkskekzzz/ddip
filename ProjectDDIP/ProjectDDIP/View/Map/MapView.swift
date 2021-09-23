@@ -60,7 +60,7 @@ extension MapView {
         
         // MapViewControllerDelegate 함수 정의
         func didUpdateMapVCAnnotation(annotationObject: AnnotationObject) {
-            <#code#>
+//            <#code#>
         }
         
         // 여기서부터 MKMapViewDelegate 함수 정의
@@ -174,9 +174,9 @@ extension MKMapView {
 
 
 
-//struct MapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MapView()
-//    }
-//}
+struct MapView_Previews: PreviewProvider {
+    static var previews: some View {
+        MapView()
+    }
+}
 

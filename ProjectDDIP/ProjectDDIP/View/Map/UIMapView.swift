@@ -21,7 +21,7 @@ struct UIMapView: View {
     
     var body: some View {
         if showingScheduleView {
-            ScheduleView(showingScheduleView: $showingScheduleView, mySchedule: EnvironmentObject<EnData>())
+            ScheduleView(showingScheduleView: $showingScheduleView, mySchedule: EnvironmentObject<MySchedule>())
                 .animation(.spring())
         } else {
             ZStack {
@@ -47,7 +47,6 @@ struct UIMapView: View {
     }
     
 }
-
 //
 //struct UIMapView_Previews: PreviewProvider {
 //    static var previews: some View {

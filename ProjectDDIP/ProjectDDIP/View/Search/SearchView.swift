@@ -26,33 +26,28 @@ struct SearchView: View {
     var body: some View {
         VStack {
             SearchBar(searchText: $searchText, searchResult: $searchResult, searchBarPosition: $searchBarPosition, test: $test)
-            ScrollView {
-                LazyVStack(alignment: .leading) {
-                    ForEach(searchResult) { result in
-                        Button(action: { }) {
-                            VStack(alignment: .leading) {
-                                Text("\(result.title)")
-                                    .font(.headline)
-                                if !result.subtitle.isEmpty {
-                                    Text("\(result.subtitle)")
-                                        .font(.caption)
-                                }
-                            }
+
+            List(searchResult) { result in
+                Button(action: { }) {
+                    VStack(alignment: .leading) {
+                        Text("\(result.title)")
+                            .font(.headline)
+                        if !result.subtitle.isEmpty {
+                            Text("\(result.subtitle)")
+                                .font(.caption)
                         }
-                        .foregroundColor(Color.black)
-                        Spacer()
                     }
                 }
-                .padding(.horizontal, 20)
-                .background(Color.white)
-            .animation(nil)
+                .foregroundColor(Color.black)
             }
+            .listStyle(.plain)
+            .animation(nil)
         }
     }
 }
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView(searchText: "", searchResult: [], test: 0, searchBarPosition: .constant(.bottom))
-    }
-}
+//struct SearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchView(searchText: "", searchResult: [], test: 0, searchBarPosition: .constant(.bottom))
+//    }
+//}

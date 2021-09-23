@@ -50,6 +50,7 @@ struct ScheduleCard: View {
 
     let schedule: Schedule
     var deleteScheldule : (UUID) -> ()
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(schedule.remainTime) 시간 후 시작")
