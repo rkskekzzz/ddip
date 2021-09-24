@@ -58,7 +58,7 @@ struct ScheduleCard: View {
 //    }
 //}
 
-
+//
 //struct ScheduleCard_Previews: PreviewProvider {
 //    static var schedule = Schedule.data[0]
 //
