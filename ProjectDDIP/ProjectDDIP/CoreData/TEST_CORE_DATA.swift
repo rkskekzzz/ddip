@@ -8,12 +8,17 @@
 import Foundation
 
 class TEST_CORE_DATA {
-    func AddDdip_TEST() {
-        let id:Int64 = 10
-        let title:String = "test10"
-        let placeName:String = "ten"
-        let la:Double = 37.624415113540215
-        let lo:Double = 127.12942313110083
+    func AddDdip_TEST(id: Int64, title: String, placeName: String, la: Double, lo: Double) {
+        let id:Int64 = id
+        let title:String = title
+        let placeName:String = placeName
+        let la:Double = la
+        let lo:Double = lo
+//        let id:Int64 = 10
+//        let title:String = "test10"
+//        let placeName:String = "ten"
+//        let la:Double = 37.624415113540215
+//        let lo:Double = 127.12942313110083
         let testDdipString:String = "[{\"id\":\(id),\"title\":\"\(title)\",\"placeName\":\"\(placeName)\",\"startTime\":652897657.92252302,\"createTime\":652897557.92252302,\"remainSlot\":3,\"ddipToken\":\"ddipToken\",\"latitude\":\(la),\"longitude\":\(lo)}]"
         print(testDdipString)
         print("-------------------!!!0")
