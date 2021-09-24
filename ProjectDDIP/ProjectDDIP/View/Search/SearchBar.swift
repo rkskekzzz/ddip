@@ -16,8 +16,6 @@ struct SearchBar: UIViewRepresentable {
     @Binding var searchResult: [SearchLocation]
     @Binding var searchBarPosition: CardPosition
     
-    @Binding var test: Int
-    
     func makeUIView(context: Context) -> UIViewType {
         let view = UISearchBar()
         view.searchBarStyle = .minimal
@@ -80,7 +78,7 @@ struct SearchBar: UIViewRepresentable {
             
             // completer가 결과를 업데이트 할때
             func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-                searchbar.test += 1
+                
                 searchbar.searchResult.removeAll()
                 for (index, item) in completer.results.enumerated() {
                     searchbar.searchResult.append(SearchLocation(id: index, title: item.title, subtitle: item.subtitle))
@@ -88,7 +86,7 @@ struct SearchBar: UIViewRepresentable {
             }
             
             func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-                searchbar.test += 1
+                
                 if let error = error as NSError? { // 나중에 가드로 수정해주세요 to 의민
                     print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription). The query fragment is: \"\(completer.queryFragment)\"")
                     searchbar.searchResult.removeAll()

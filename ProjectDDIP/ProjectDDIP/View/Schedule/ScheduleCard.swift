@@ -7,48 +7,10 @@
 
 import SwiftUI
 
-struct Schedule: Identifiable {
-    let id: UUID
-    var title: String
-    var remainTime: Int
-    
-    var totalAttendees: Int
-    var currentAttendees: Int
-    
-    var position: String
-    
-    var startTime: Int
-    var endTime: Int
-    
-    init(id: UUID = UUID(), title: String, remainTime: Int, totalAttendees: Int, currentAttendees: Int, position: String, startTime: Int, endTime: Int) {
-        self.id = id
-        self.title = title
-        self.remainTime = remainTime
-        self.totalAttendees = totalAttendees
-        self.currentAttendees = currentAttendees
-        self.position = position
-        self.startTime = startTime
-        self.endTime = endTime
-    }
-   
-    
-}
-
-extension Schedule {
-    static var data: [Schedule] {
-        [
-            Schedule(title: "면접 스터디", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
-            Schedule(title: "모여서 각자 코딩", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
-            Schedule(title: "커피마시기 모임", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24),
-            Schedule(title: "책읽고 독후감쓰기", remainTime: 3,totalAttendees: 10, currentAttendees: 9, position: "사보이시티 잠실",startTime: 8, endTime: 24)
-        ]
-    }
-}
-
 struct ScheduleCard: View {
     @Binding var activateDeleteButton: Bool
 
-    let schedule: Schedule
+    let schedule: ScheduleModel
     var deleteScheldule : (UUID) -> ()
     
     var body: some View {
