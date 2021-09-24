@@ -25,7 +25,7 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        let coordinate = CLLocationCoordinate2D(latitude: -33.523065, longitude: 151.394551)
+        let coordinate = CLLocationCoordinate2D(latitude: 37.529510664039876, longitude: 127.02840863820876)
         let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         uiView.setRegion(region, animated: true)
@@ -54,6 +54,18 @@ extension MapView {
             self.parent = parent
             super.init()
             self.UIGestureInit()
+            self.setAnnotation()
+        }
+
+        func setAnnotation() {
+            let coreData: [Ddip] = CoreDataManager.shared.fromCoreData()
+            guard !coreData.isEmpty else { return }
+            
+            annotations.removeAll()
+            for item in coreData {
+                annotations.append(AnnotationPin(item: item))
+            }
+            parent.mapView.addAnnotations(annotations)
         }
 
 //        func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
