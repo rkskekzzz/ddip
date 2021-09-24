@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import MapKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -17,8 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         let mySchedule = MySchedule()
-        let uiMapView = UIMapView(searchText: "", searchResult: []).environmentObject(mySchedule)
-//        let uiMapView = MainViewUI()
+        
+        let mapCenterModel = MapCenterModel()
+        
+        let uiMapView = MainView()
+            .environmentObject(mySchedule)
+            .environmentObject(mapCenterModel)
+
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: uiMapView)

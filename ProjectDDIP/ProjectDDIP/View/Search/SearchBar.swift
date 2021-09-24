@@ -12,87 +12,63 @@ import SlideOverCard
 struct SearchBar: UIViewRepresentable {
     typealias UIViewType = UISearchBar
     
-    @Binding var searchText: String
-    @Binding var searchResult: [SearchLocation]
+    let searchView = UISearchBar()
+    
     @Binding var searchBarPosition: CardPosition
     
+    @ObservedObject var viewModel: SearchViewModel
+    
     func makeUIView(context: Context) -> UIViewType {
-        let view = UISearchBar()
-        view.searchBarStyle = .minimal
-
-        return view
-    }
-
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        uiView.delegate = context.coordinator
+        searchView.searchBarStyle = .minimal
+        searchView.delegate = context.coordinator
+        return searchView
     }
     
-
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        viewModel.test = 10
+    }
+    
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }
-    
+}
+
+extension SearchBar {
     class Coordinator: NSObject, UISearchBarDelegate, MKLocalSearchCompleterDelegate {
+        var parent: SearchBar
+        
         private var searchCompleterDelegate: MKLocalSearchCompleterDelegate
         private var searchCompleter = MKLocalSearchCompleter()
-        var searchbar: SearchBar
         
-        init(_ searchBar: SearchBar) {
-            self.searchbar = searchBar
-            self.searchCompleterDelegate = SearchCompleterDelegate(searchbar)
+        init(_ parent: SearchBar) {
+            self.parent = parent
+            self.searchCompleterDelegate = SearchCompleterDelegate(parent)
             self.searchCompleter.delegate = self.searchCompleterDelegate
             self.searchCompleter.resultTypes = .query
             self.searchCompleter.region = MKCoordinateRegion(MKMapRect.world)
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            searchbar.searchText = searchText
+            parent.viewModel.searchText = searchText
             self.searchCompleter.queryFragment = searchText
         }
         
         func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-            searchbar.searchBarPosition = .top
+            parent.searchBarPosition = .top
             searchBar.setShowsCancelButton(true, animated: true)
         }
         
         func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-            searchbar.searchBarPosition = .bottom
+            parent.searchBarPosition = .bottom
             searchBar.setShowsCancelButton(false, animated: true)
         }
         
         func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-            searchbar.searchBarPosition = .bottom
+            parent.searchBarPosition = .bottom
             searchBar.text = nil
             
             self.searchCompleter.queryFragment = ""
             searchBar.resignFirstResponder()
         }
-        
-        class SearchCompleterDelegate: NSObject, MKLocalSearchCompleterDelegate {
-            var searchbar: SearchBar
-
-            init(_ searchBar: SearchBar) {
-                
-                self.searchbar = searchBar
-            }
-            
-            // completer가 결과를 업데이트 할때
-            func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-                
-                searchbar.searchResult.removeAll()
-                for (index, item) in completer.results.enumerated() {
-                    searchbar.searchResult.append(SearchLocation(id: index, title: item.title, subtitle: item.subtitle))
-                }
-            }
-            
-            func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-                
-                if let error = error as NSError? { // 나중에 가드로 수정해주세요 to 의민
-                    print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription). The query fragment is: \"\(completer.queryFragment)\"")
-                    searchbar.searchResult.removeAll()
-                }
-            }
-        }
-       
     }
 }

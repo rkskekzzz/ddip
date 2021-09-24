@@ -9,22 +9,22 @@
 //import MapKit
 //
 //class SearchViewController: UIViewController {
-//    
+//
 //    @IBOutlet weak var tableView: UITableView!
 //    @IBOutlet weak var searchBar: UISearchBar!
 //    @IBOutlet weak var visualEffectView: UIVisualEffectView!
 //    var movePanelToTip: () -> Void = {}
 //    var movePanelToFull: () -> Void = {}
 //    var centerToSearchLocation: (CLLocationDegrees, CLLocationDegrees, CLLocationDistance) -> Void = {la, lo, dis in }
-//    
+//
 //    // 검색을 도와주는 변수
 //    private var searchCompleter: MKLocalSearchCompleter?
-//    
+//
 //    // 검색 지역 범위 설정 변수
 //    // .world : 전세계
 //    private var searchRegion: MKCoordinateRegion = MKCoordinateRegion(MKMapRect.world)
 ////    private var searchRegion: MKCoordinateRegion = mapView.region
-//    
+//
 //    // 검색 결과를 배열로 담는다
 //    var completerResults: [MKLocalSearchCompletion]?
 //
@@ -41,7 +41,7 @@
 //            localSearch?.cancel()
 //        }
 //    }
-//    
+//
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //
@@ -59,15 +59,15 @@
 ////        searchCompleter?.region = mapView.region
 ////        searchRegion 변수가 가지고 있는 지역 기준으로 검색지역 설정
 //        searchCompleter?.region = searchRegion
-//    
+//
 //    }
-//    
+//
 //    // Completer 참조 해제
 //    override func viewDidDisappear(_ animated: Bool) {
 //        super.viewDidDisappear(animated)
 //        searchCompleter = nil
 //    }
-//    
+//
 //    // SearchBar click event
 ////    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 ////        print("search button clicked")
@@ -77,7 +77,7 @@
 ////    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 ////        print("here?")
 ////    }
-//    
+//
 //}
 //
 //
@@ -117,7 +117,7 @@
 //        // tableView reload
 //        tableView.reloadData()
 //    }
-//    
+//
 //    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
 //        if let error = error as NSError? {
 //            print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription). The query fragment is: \"\(completer.queryFragment)\"")
@@ -132,18 +132,18 @@
 ////        print("\(completerResults?.count ?? 0)")
 //        return completerResults?.count ?? 0
 //    }
-//    
+//
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //
 //        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? Cell else { return UITableViewCell() }
-//        
+//
 //        if let suggestion = completerResults?[indexPath.row] {
 ////            print(suggestion.title)
 ////            print(suggestion.subtitle)
 ////            print("------------------")
 //            cell.titleLabel.text = suggestion.title
 //            cell.subtitleLabel.text = suggestion.subtitle
-//            
+//
 //        }
 //        return cell
 //    }
@@ -160,7 +160,7 @@
 //            //deactivate
 //        }
 //    }
-//    
+//
 //    private func search(for suggestedCompletion: MKLocalSearchCompletion) {
 //        let searchRequest = MKLocalSearch.Request(completion: suggestedCompletion)
 //        search(using: searchRequest)
@@ -186,9 +186,9 @@
 //                print("p : \(p.placemark.coordinate.longitude)")
 //                print("p : \(a.radius)")
 //                centerToSearchLocation(p.placemark.coordinate.latitude, p.placemark.coordinate.longitude, a.radius)
-//                
+//
 //            }
-//            
+//
 ////            print("위도 경도 : \(places?.placemark.coordinate)") // 위경도 가져옴
 //        }
 //    }
