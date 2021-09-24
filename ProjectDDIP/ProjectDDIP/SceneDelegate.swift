@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         let mySchedule = MySchedule()
-        let uiMapView = UIMapView(searchText: "", searchResult: [], test: 24).environmentObject(mySchedule)
+        let uiMapView = UIMapView(searchText: "", searchResult: []).environmentObject(mySchedule)
 //        let uiMapView = MainViewUI()
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

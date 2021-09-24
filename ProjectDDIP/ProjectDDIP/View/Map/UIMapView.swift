@@ -17,7 +17,6 @@ struct UIMapView: View {
     
     @State var searchText: String
     @State var searchResult: [SearchLocation]
-    @State var test: Int
     
     var body: some View {
         if showingScheduleView {
@@ -36,7 +35,7 @@ struct UIMapView: View {
                 .padding(.horizontal, 40)
                 SlideOverCard($searchBarPosition, backgroundStyle: $searchBarBackground) {
                     VStack {
-                        SearchView(searchText: searchText, searchResult: searchResult, test: test, searchBarPosition: $searchBarPosition)
+                        SearchView(searchText: searchText, searchResult: searchResult, searchBarPosition: $searchBarPosition)
                             .padding(.horizontal, 10)
                             .animation(.default)
                     }

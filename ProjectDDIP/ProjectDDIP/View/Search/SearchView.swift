@@ -18,7 +18,7 @@ struct SearchLocation: Identifiable, Hashable {
 
 struct SearchView: View {
     @State var searchText: String
-    @ObservedObject var viewModel = ViewModel()
+//    @ObservedObject var viewModel = ViewModel()
     @State var searchResult: [SearchLocation]
     
     @Binding var searchBarPosition: CardPosition
