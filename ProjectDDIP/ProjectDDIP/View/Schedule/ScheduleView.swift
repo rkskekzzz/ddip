@@ -8,7 +8,7 @@
 import SwiftUI
 
 class MySchedule: ObservableObject {
-    @Published var item = Schedule.data
+    @Published var item = ScheduleModel.data
 }
 
 struct ScheduleView: View {

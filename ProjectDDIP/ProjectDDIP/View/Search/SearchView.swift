@@ -17,15 +17,15 @@ struct SearchLocation: Identifiable, Hashable {
 
 struct SearchView: View {
     @State var searchText: String
+    @ObservedObject var viewModel = ViewModel()
     @State var searchResult: [SearchLocation]
-    @State var test: Int
     
     var body: some View {
         VStack {
-            SearchBar(searchText: $searchText, searchResult: $searchResult, searchBarPosition: $searchBarPosition, test: $test)
+            SearchBar(searchText: $searchText, searchResult: $searchResult, searchBarPosition: $searchBarPosition)
 
             List(searchResult) { result in
-                Button(action: { }) {
+                Button(action: {  }) {
                     VStack(alignment: .leading) {
                         Text("\(result.title)")
                             .font(.headline)
@@ -42,6 +42,7 @@ struct SearchView: View {
         }
     }
 }
+
 
 //struct SearchView_Previews: PreviewProvider {
 //    static var previews: some View {
