@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SlideOverCard
 
 struct ScheduleCard: View {
     @Binding var activateDeleteButton: Bool
@@ -48,7 +49,14 @@ struct ScheduleCard: View {
         .padding(30)
     }
 }
-
+//
+//extension CardPosition {
+//    case TEST_CORE_DATA
+//
+//    func offsetFromTop() -> CGFloat {
+//
+//    }
+//}
 
 
 //struct ScheduleCard_Previews: PreviewProvider {
