@@ -16,14 +16,12 @@ class Contract: NSManagedObject {
     }
 
     @NSManaged var id: String
-//    @NSManaged var id: Int64
     @NSManaged var ddipToken: String
     @NSManaged var userToken: String
 }
 
 struct ContractForm: Codable {
     var id: String
-//    var id: Int64
     var ddipToken: String
     var userToken: String
 }
@@ -38,12 +36,10 @@ extension Contract: ICoreData {
     }
     
     func getId() -> String { return self.id }
-//    func getId() -> Int64 { return self.id }
 
     func getDdipForm() -> DdipForm {
         assert(false)
         return DdipForm(id: "", createTime: Date(), startTime: Date(), title: "", placeName: "", latitude: 0, longitude: 0, remainSlot: 0, ddipToken: "")
-//        return DdipForm(id: 0, createTime: Date(), startTime: Date(), title: "", placeName: "", latitude: 0, longitude: 0, remainSlot: 0, ddipToken: "")
     }
 
     func getContractForm() -> ContractForm {

@@ -24,7 +24,6 @@ class Ddip: NSManagedObject {
     }
 
     @NSManaged var id: String
-//    @NSManaged var id: Int64
     @NSManaged var createTime: Date
     @NSManaged var startTime: Date
     @NSManaged var title: String
@@ -37,7 +36,6 @@ class Ddip: NSManagedObject {
 
 struct DdipForm: Codable {
     var id: String
-//    var id: Int64
     var createTime: Date
     var startTime: Date
     var title: String
@@ -64,7 +62,6 @@ extension Ddip: ICoreData {
     }
     
     func getId() -> String { return self.id }
-//    func getId() -> Int64 { return self.id }
     
     func getDdipForm() -> DdipForm {
         return DdipForm(id: id, createTime: createTime, startTime: startTime, title: title, placeName: placeName, latitude: latitude, longitude: longitude, remainSlot: remainSlot, ddipToken: ddipToken)
@@ -73,7 +70,6 @@ extension Ddip: ICoreData {
     func getContractForm() -> ContractForm {
         assert(false)
         return ContractForm(id: "", ddipToken: "", userToken: "")
-//        return ContractForm(id: 0, ddipToken: "", userToken: "")
     }
 }
 
