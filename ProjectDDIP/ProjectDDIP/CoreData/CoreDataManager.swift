@@ -15,8 +15,8 @@ class CoreDataManager {
     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
     
-//    func deleteCoreData(entityName: String, id: UUID) {
-    func deleteCoreData(entityName: String, id: Int64) {
+    func deleteCoreData(entityName: String, id: String) {
+//    func deleteCoreData(entityName: String, id: Int64) {
         let result = fetchResult(id: id, entityName: entityName)
         if !result.isEmpty {
             for item in result { context?.delete(item) }
@@ -57,8 +57,8 @@ class CoreDataManager {
         return array
     }
 
-//    func fromCoreData<T> (id: UUID) -> [T] {
-    func fromCoreData<T> (id: Int64) -> [T] {
+    func fromCoreData<T> (id: String) -> [T] {
+//    func fromCoreData<T> (id: Int64) -> [T] {
         var array:[T] = []
         let fromCoreData:[T] = fromCoreData()
         
@@ -102,16 +102,16 @@ class CoreDataManager {
 }
 
 private extension CoreDataManager {
-//    func filteredRequest(id: UUID, entityName: String) -> NSFetchRequest<NSFetchRequestResult> {
-    func filteredRequest(id: Int64, entityName: String) -> NSFetchRequest<NSFetchRequestResult> {
+    func filteredRequest(id: String, entityName: String) -> NSFetchRequest<NSFetchRequestResult> {
+//    func filteredRequest(id: Int64, entityName: String) -> NSFetchRequest<NSFetchRequestResult> {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-//        fetchRequest.predicate = NSPredicate(format: "id = %@", id.uuidString)
-        fetchRequest.predicate = NSPredicate(format: "id = %@", NSNumber(value: id))
+        fetchRequest.predicate = NSPredicate(format: "id = %@", id)
+//        fetchRequest.predicate = NSPredicate(format: "id = %@", NSNumber(value: id))
         return fetchRequest
     }
 
-//    func fetchResult(id: UUID, entityName: String) -> [NSManagedObject] {
-    func fetchResult(id: Int64, entityName: String) -> [NSManagedObject] {
+    func fetchResult(id: String, entityName: String) -> [NSManagedObject] {
+//    func fetchResult(id: Int64, entityName: String) -> [NSManagedObject] {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = filteredRequest(id: id, entityName: entityName)
         do {
             if let results: [NSManagedObject] = try context?.fetch(fetchRequest) as? [NSManagedObject] { return results }

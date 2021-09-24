@@ -40,7 +40,6 @@ struct MapView: UIViewRepresentable {
 }
 
 extension MapView {
-//    class Coordinator: NSObject, MKMapViewDelegate, UIGestureRecognizerDelegate, MapViewControllerDelegate {
     class Coordinator: NSObject, MKMapViewDelegate, UIGestureRecognizerDelegate {
         
         var parent: MapView
@@ -55,25 +54,15 @@ extension MapView {
             self.parent = parent
             super.init()
             self.UIGestureInit()
-            parent.data.AddDdip_TEST(id: 13, title: "hello", placeName: "hi", la: 37.519139425842084, lo: 126.99917786897805)
+            
+//            TEST_CORE_DATA.shared.AddDdip_TEST(id: UUID().uuidString, title: "one", placeName: "one", la: 37.52628887090283, lo: 127.0293461382089)
+            
             self.setAnnotation()
         }
 
         func setAnnotation() {
             let coreData: [Ddip] = CoreDataManager.shared.fromCoreData()
             guard !coreData.isEmpty else { return }
-            
-            
-            
-            
-            for item in coreData {
-                CoreDataManager.shared.context?.delete(item)
-            }
-            do { try CoreDataManager.shared.context?.save() }
-            catch let error as NSError { print("Could not save: \(error), \(error.userInfo)") }
-
-            
-            
             
             annotations.removeAll()
             for item in coreData {
