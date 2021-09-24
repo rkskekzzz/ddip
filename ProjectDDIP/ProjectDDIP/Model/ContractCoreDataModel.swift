@@ -15,12 +15,14 @@ class Contract: NSManagedObject {
         return NSFetchRequest<Contract>(entityName: ENTITY().contract)
     }
 
+//    @NSManaged var id: UUID
     @NSManaged var id: Int64
     @NSManaged var ddipToken: String
     @NSManaged var userToken: String
 }
 
 struct ContractForm: Codable {
+//    var id: UUID
     var id: Int64
     var ddipToken: String
     var userToken: String
@@ -35,10 +37,12 @@ extension Contract: ICoreData {
         self.userToken = convert.userToken
     }
     
+//    func getId() -> UUID { return self.id }
     func getId() -> Int64 { return self.id }
 
     func getDdipForm() -> DdipForm {
         assert(false)
+//        return DdipForm(id: UUID(), createTime: Date(), startTime: Date(), title: "", placeName: "", latitude: 0, longitude: 0, remainSlot: 0, ddipToken: "")
         return DdipForm(id: 0, createTime: Date(), startTime: Date(), title: "", placeName: "", latitude: 0, longitude: 0, remainSlot: 0, ddipToken: "")
     }
 

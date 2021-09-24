@@ -65,23 +65,23 @@ class TEST_CORE_DATA {
         print(jsonArray)
     }
     
-    func FROMJSON_TEST() {
-        let id:Int64 = 9
-        let title:String = "test9"
-        let placeName:String = "nine"
-        let la:Double = 37.5307749196663
-        let lo:Double = 127.02579994220088
-        let testDdipString:String = "[{\"id\":\(id),\"title\":\"\(title)\",\"placeName\":\"\(placeName)\",\"startTime\":652897657.92252302,\"createTime\":652897557.92252302,\"remainSlot\":3,\"ddipToken\":\"ddipToken\",\"latitude\":\(la),\"longitude\":\(lo)}]"
-
-        let data:[DdipForm] = CoreDataManager.shared.fromJson(json: testDdipString)
-        for item in data {
-            print(item.id)
-            print(item.placeName)
-        }
-        let tt:[Ddip] = CoreDataManager.shared.fromCoreData(id:8)
-        let st = CoreDataManager.shared.toJson(code: tt)
-        print(st)
-    }
+//    func FROMJSON_TEST() {
+//        let id:Int64 = 9
+//        let title:String = "test9"
+//        let placeName:String = "nine"
+//        let la:Double = 37.5307749196663
+//        let lo:Double = 127.02579994220088
+//        let testDdipString:String = "[{\"id\":\(id),\"title\":\"\(title)\",\"placeName\":\"\(placeName)\",\"startTime\":652897657.92252302,\"createTime\":652897557.92252302,\"remainSlot\":3,\"ddipToken\":\"ddipToken\",\"latitude\":\(la),\"longitude\":\(lo)}]"
+//
+//        let data:[DdipForm] = CoreDataManager.shared.fromJson(json: testDdipString)
+//        for item in data {
+//            print(item.id)
+//            print(item.placeName)
+//        }
+//        let tt:[Ddip] = CoreDataManager.shared.fromCoreData(id:8)
+//        let st = CoreDataManager.shared.toJson(code: tt)
+//        print(st)
+//    }
     
     func FROMJSONARRAY_TEST() {
         let code:[Ddip] = CoreDataManager.shared.fromCoreData()
@@ -95,7 +95,7 @@ class TEST_CORE_DATA {
         print(st)
     }
     
-    func DELETE_TEST() {
-        CoreDataManager.shared.deleteCoreData(entityName: ENTITY().ddip, id: 7)
-    }
+//    func DELETE_TEST() {
+//        CoreDataManager.shared.deleteCoreData(entityName: ENTITY().ddip, id: 7)
+//    }
 }

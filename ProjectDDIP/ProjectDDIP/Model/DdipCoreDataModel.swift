@@ -23,6 +23,7 @@ class Ddip: NSManagedObject {
         return NSFetchRequest<Ddip>(entityName: ENTITY().ddip)
     }
 
+//    @NSManaged var id: UUID
     @NSManaged var id: Int64
     @NSManaged var createTime: Date
     @NSManaged var startTime: Date
@@ -35,6 +36,7 @@ class Ddip: NSManagedObject {
 }
 
 struct DdipForm: Codable {
+//    var id: UUID
     var id: Int64
     var createTime: Date
     var startTime: Date
@@ -61,6 +63,7 @@ extension Ddip: ICoreData {
         self.ddipToken = convert.ddipToken
     }
     
+//    func getId() -> UUID { return self.id }
     func getId() -> Int64 { return self.id }
     
     func getDdipForm() -> DdipForm {
@@ -69,6 +72,7 @@ extension Ddip: ICoreData {
     
     func getContractForm() -> ContractForm {
         assert(false)
+//        return ContractForm(id: UUID(), ddipToken: "", userToken: "")
         return ContractForm(id: 0, ddipToken: "", userToken: "")
     }
 }

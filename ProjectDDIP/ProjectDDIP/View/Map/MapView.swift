@@ -61,6 +61,18 @@ extension MapView {
             let coreData: [Ddip] = CoreDataManager.shared.fromCoreData()
             guard !coreData.isEmpty else { return }
             
+            
+            
+            
+            for item in coreData {
+                CoreDataManager.shared.context?.delete(item)
+            }
+            do { try CoreDataManager.shared.context?.save() }
+            catch let error as NSError { print("Could not save: \(error), \(error.userInfo)") }
+
+            
+            
+            
             annotations.removeAll()
             for item in coreData {
                 annotations.append(AnnotationPin(item: item))
