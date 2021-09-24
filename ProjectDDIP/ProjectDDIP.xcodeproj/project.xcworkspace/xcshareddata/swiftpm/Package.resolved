@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "FloatingButton",
-        "repositoryURL": "https://github.com/exyte/FloatingButton",
-        "state": {
-          "branch": null,
-          "revision": "c7b4e753286f0462a0adcb23a6fac7d94917b605",
-          "version": "0.0.3"
-        }
-      },
-      {
         "package": "FloatingPanel",
         "repositoryURL": "https://github.com/scenee/FloatingPanel",
         "state": {

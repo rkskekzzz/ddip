@@ -25,7 +25,6 @@ struct UIMapView: View {
                 .animation(.spring())
         } else {
             ZStack {
-
                 MapView()
                 Button(action: {
                     self.showingScheduleView.toggle()
@@ -37,12 +36,11 @@ struct UIMapView: View {
                 .padding(.horizontal, 40)
                 SlideOverCard($searchBarPosition, backgroundStyle: $searchBarBackground) {
                     VStack {
-                        SearchView(searchText: searchText, searchResult: searchResult, searchBarPosition: $searchBarPosition)
+                        SearchView(searchText: searchText, searchResult: searchResult, test: test, searchBarPosition: $searchBarPosition)
                             .padding(.horizontal, 10)
                             .animation(.default)
                     }
                 }
-                Text("\(test)")
             }
             .edgesIgnoringSafeArea(.all)
         }
