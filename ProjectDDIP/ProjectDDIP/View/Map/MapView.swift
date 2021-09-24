@@ -208,10 +208,10 @@ extension MKMapView {
     func visibleAnnotations() -> [MKAnnotation] { return annotations(in: visibleMapRect).map { obj -> MKAnnotation in obj as! MKAnnotation } }
 }
 
-//
-//struct MapView_Previews: PreviewProvider {
+
+// struct MapView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        MapView()
 //    }
-//}
+// }
 

@@ -50,3 +50,9 @@ struct TableView: UIViewRepresentable {
         }
     }
 }
+//
+//struct TableView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TableView(searchText: .constant(""))
+//    }
+//}

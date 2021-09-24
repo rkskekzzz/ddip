@@ -47,6 +47,7 @@ extension Schedule {
 
 struct ScheduleCard: View {
     let schedule: Schedule
+    var deleteScheldule : (UUID) -> ()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -77,11 +78,11 @@ struct ScheduleCard: View {
         .padding(30)
     }
 }
-
-struct ScheduleCard_Previews: PreviewProvider {
-    static var schedule = Schedule.data[0]
-    
-    static var previews: some View {
-        ScheduleCard(schedule: schedule)
-    }
-}
+//
+//struct ScheduleCard_Previews: PreviewProvider {
+//    static var schedule = Schedule.data[0]
+//
+//    static var previews: some View {
+//        ScheduleCard(schedule: schedule)
+//    }
+//}

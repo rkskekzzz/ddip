@@ -22,11 +22,10 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            SearchBar(searchText: $searchText, searchResult: $searchResult, test: $test)
-            //            Text("count : \(searchResult.count)")
-            //            Text("test : \(test)")
+            SearchBar(searchText: $searchText, searchResult: $searchResult, searchBarPosition: $searchBarPosition, test: $test)
+
             List(searchResult) { result in
-                Button(action: {}) {
+                Button(action: { }) {
                     VStack(alignment: .leading) {
                         Text("\(result.title)")
                             .font(.headline)
@@ -36,14 +35,16 @@ struct SearchView: View {
                         }
                     }
                 }
+                .foregroundColor(Color.black)
             }
+            .listStyle(.plain)
             .animation(nil)
         }
     }
 }
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView(searchText: "", searchResult: [], test: 0)
-    }
-}
+//struct SearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchView(searchText: "", searchResult: [], test: 0, searchBarPosition: .constant(.bottom))
+//    }
+//}
