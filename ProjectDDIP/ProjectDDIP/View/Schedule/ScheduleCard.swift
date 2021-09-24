@@ -23,6 +23,12 @@ struct ScheduleCard: View {
                 Text("\(schedule.currentAttendees)/\(schedule.totalAttendees)")
                     .font(.caption2)
                     .foregroundColor(.primary)
+                Spacer()
+                if activateDeleteButton {
+                    Button(action: { deleteScheldule(schedule.id) }, label: { Image(systemName: "minus.circle") })
+                        .font(.title2)  //size of minus.circle button
+                        .foregroundColor(.red)
+                }
                 
             }
             Spacer()
@@ -42,11 +48,13 @@ struct ScheduleCard: View {
         .padding(30)
     }
 }
-//
+
+
+
 //struct ScheduleCard_Previews: PreviewProvider {
 //    static var schedule = Schedule.data[0]
 //
 //    static var previews: some View {
-//        ScheduleCard(schedule: schedule)
+//        ScheduleCard(activateDeleteButton: <#T##Binding<Bool>#>, schedule: <#T##Schedule#>, deleteScheldule: <#T##(UUID) -> ()#>)
 //    }
 //}

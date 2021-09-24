@@ -7,6 +7,7 @@
 import MapKit
 import UIKit
 import SwiftUI
+import SlideOverCard
 
 struct SearchBar: UIViewRepresentable {
     typealias UIViewType = UISearchBar
@@ -38,7 +39,7 @@ struct SearchBar: UIViewRepresentable {
         
         init(_ searchBar: SearchBar) {
             self.searchbar = searchBar
-            self.searchCompleterDelegate = abc(searchbar)
+            self.searchCompleterDelegate = SearchCompleterDelegate(searchbar)
             self.searchCompleter.delegate = self.searchCompleterDelegate
             self.searchCompleter.resultTypes = .query
             self.searchCompleter.region = MKCoordinateRegion(MKMapRect.world)
@@ -49,7 +50,25 @@ struct SearchBar: UIViewRepresentable {
             self.searchCompleter.queryFragment = searchText
         }
         
-        class abc: NSObject, MKLocalSearchCompleterDelegate {
+        func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+            searchbar.searchBarPosition = .top
+            searchBar.setShowsCancelButton(true, animated: true)
+        }
+        
+        func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+            searchbar.searchBarPosition = .bottom
+            searchBar.setShowsCancelButton(false, animated: true)
+        }
+        
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchbar.searchBarPosition = .bottom
+            searchBar.text = nil
+            
+            self.searchCompleter.queryFragment = ""
+            searchBar.resignFirstResponder()
+        }
+        
+        class SearchCompleterDelegate: NSObject, MKLocalSearchCompleterDelegate {
             var searchbar: SearchBar
 
             init(_ searchBar: SearchBar) {

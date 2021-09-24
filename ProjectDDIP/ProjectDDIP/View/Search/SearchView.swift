@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import SlideOverCard
 
 struct SearchLocation: Identifiable, Hashable {
     var id: Int
@@ -19,6 +20,8 @@ struct SearchView: View {
     @State var searchText: String
     @ObservedObject var viewModel = ViewModel()
     @State var searchResult: [SearchLocation]
+    
+    @Binding var searchBarPosition: CardPosition
     
     var body: some View {
         VStack {
