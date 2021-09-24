@@ -16,6 +16,7 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
+    let data = TEST_CORE_DATA()
     let mapView = MKMapView()
     
     func makeUIView(context: Context) -> UIViewType {
@@ -54,6 +55,7 @@ extension MapView {
             self.parent = parent
             super.init()
             self.UIGestureInit()
+            parent.data.AddDdip_TEST(id: 13, title: "hello", placeName: "hi", la: 37.519139425842084, lo: 126.99917786897805)
             self.setAnnotation()
         }
 

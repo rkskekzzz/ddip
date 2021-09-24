@@ -18,6 +18,8 @@ struct UIMapView: View {
     @State var searchText: String
     @State var searchResult: [SearchLocation]
     
+    
+    
     var body: some View {
         if showingScheduleView {
             ScheduleView(showingScheduleView: $showingScheduleView, mySchedule: EnvironmentObject<MySchedule>())
