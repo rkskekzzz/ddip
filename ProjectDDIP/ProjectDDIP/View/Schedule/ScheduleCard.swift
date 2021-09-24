@@ -49,14 +49,14 @@ struct ScheduleCard: View {
         .padding(30)
     }
 }
-
-extension CardPosition {
-    case TEST_CORE_DATA
-    
-    func offsetFromTop() -> CGFloat {
-        
-    }
-}
+//
+//extension CardPosition {
+//    case TEST_CORE_DATA
+//
+//    func offsetFromTop() -> CGFloat {
+//
+//    }
+//}
 
 
 //struct ScheduleCard_Previews: PreviewProvider {
