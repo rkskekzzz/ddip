@@ -48,10 +48,10 @@ struct UIMapView: View {
     }
     
 }
-//
-//struct UIMapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UIMapView(searchText: "", searchResult: [], test: 0)
-//    }
-//
-//}
+
+struct UIMapView_Previews: PreviewProvider {
+    static var previews: some View {
+        UIMapView(searchText: "", searchResult: [])
+    }
+
+}
