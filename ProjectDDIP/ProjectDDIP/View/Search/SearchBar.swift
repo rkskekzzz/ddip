@@ -12,11 +12,11 @@ import SlideOverCard
 struct SearchBar: UIViewRepresentable {
     typealias UIViewType = UISearchBar
     
-    let searchView = UISearchBar()
     
     @Binding var searchBarPosition: CardPosition
-    
     @ObservedObject var viewModel: SearchViewModel
+    
+    let searchView = UISearchBar()
     
     func makeUIView(context: Context) -> UIViewType {
         searchView.searchBarStyle = .minimal
@@ -25,7 +25,7 @@ struct SearchBar: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        viewModel.test = 10
+        // do something with change
     }
     
     func makeCoordinator() -> Coordinator {
@@ -36,21 +36,13 @@ struct SearchBar: UIViewRepresentable {
 extension SearchBar {
     class Coordinator: NSObject, UISearchBarDelegate, MKLocalSearchCompleterDelegate {
         var parent: SearchBar
-        
-        private var searchCompleterDelegate: MKLocalSearchCompleterDelegate
-        private var searchCompleter = MKLocalSearchCompleter()
-        
+ 
         init(_ parent: SearchBar) {
             self.parent = parent
-            self.searchCompleterDelegate = SearchCompleterDelegate(parent)
-            self.searchCompleter.delegate = self.searchCompleterDelegate
-            self.searchCompleter.resultTypes = .query
-            self.searchCompleter.region = MKCoordinateRegion(MKMapRect.world)
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             parent.viewModel.searchText = searchText
-            self.searchCompleter.queryFragment = searchText
         }
         
         func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -66,8 +58,6 @@ extension SearchBar {
         func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
             parent.searchBarPosition = .bottom
             searchBar.text = nil
-            
-            self.searchCompleter.queryFragment = ""
             searchBar.resignFirstResponder()
         }
     }

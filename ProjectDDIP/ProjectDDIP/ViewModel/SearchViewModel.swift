@@ -6,21 +6,20 @@
 //
 
 import SwiftUI
+import UIKit
 import MapKit
 import Combine
 
-class SearchViewModel: NSObject, ObservableObject {
+final class SearchViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
+    
     @Published var searchText: String = ""
     @Published var searchResult: [MKLocalSearchCompletion] = []
     
-    var center: CLLocationCoordinate2D
+    var center: MapCenter
     
-    override init() {
-
-    }
-    
+    private var completer: MKLocalSearchCompleter
+    private var cancellable: AnyCancellable?
     private var places: MKMapItem?
-    
     private var localSearch: MKLocalSearch? {
         willSet {
             places = nil
@@ -28,16 +27,20 @@ class SearchViewModel: NSObject, ObservableObject {
         }
     }
     
-//    @Published var completerResults: [MKLocalSearchCompletion]?
-//    init(searchText: String) {
-//        self.searchText = searchText
-//    }
+    init(center: MapCenter) {
+        completer = MKLocalSearchCompleter()
+        self.center = center
+        super.init()
+        cancellable = $searchText.assign(to: \.queryFragment, on: self.completer)
+        completer.delegate = self
+    }
+    
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        self.searchResult = completer.results
+    }
     
     func moveToLocation (result: MKLocalSearchCompletion) -> Void {
         search(for: result)
-//        movePanelToTip()
-//        searchBarSetDefault()
-//        self.searchBar.resignFirstResponder()
     }
     
     
@@ -47,13 +50,9 @@ class SearchViewModel: NSObject, ObservableObject {
     }
 
     private func search(using searchRequest: MKLocalSearch.Request) {
-        // 검색 지역 설정
         searchRequest.region = MKCoordinateRegion(MKMapRect.world)
-        // 검색 유형 설정
         searchRequest.resultTypes = .pointOfInterest
-        // MKLocalSearch 생성
         localSearch = MKLocalSearch(request: searchRequest)
-        // 비동기로 검색 실행
         localSearch?.start { [unowned self] (response, error) in
             guard error == nil else {
                 return
@@ -65,8 +64,8 @@ class SearchViewModel: NSObject, ObservableObject {
                 print("p : \(p.placemark.coordinate.latitude)")
                 print("p : \(p.placemark.coordinate.longitude)")
                 print("p : \(a.radius)")
-//                centerModel.mapCenter.coordinate = p.placemark.coordinate
-//                centerModel.mapCenter.zoomLevel = "default"
+                center.coordinate = p.placemark.coordinate
+                center.zoomLevel = "default"
             }
         }
     }

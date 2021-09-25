@@ -12,13 +12,11 @@ import Combine
 
 
 struct MapSearchView: View {
-    @Binding var viewState:ViewState
-    
+    @ObservedObject var viewModel: MapViewModel = MapViewModel()
     @State private var searchBarPosition = CardPosition.bottom
     
-    @ObservedObject var viewModel: MapViewModel = MapViewModel()
-    
-    var searchViewModel: SearchViewModel = SearchViewModel()
+    @Binding var viewState:ViewState
+    var searchViewModel: SearchViewModel
     
     var body: some View {
         ZStack {

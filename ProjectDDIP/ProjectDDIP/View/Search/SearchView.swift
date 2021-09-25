@@ -9,16 +9,12 @@ import SwiftUI
 import MapKit
 import SlideOverCard
 
-extension MKLocalSearchCompletion: Identifiable {
-
-}
+extension MKLocalSearchCompletion: Identifiable {}
 
 struct SearchView: View {
-//    @State var searchResult: [SearchLocation]
     @Binding var searchBarPosition: CardPosition
 
     @ObservedObject var viewModel: SearchViewModel
-    @EnvironmentObject var centerModel: MapCenterModel
     
     var body: some View {
         VStack {
@@ -27,8 +23,8 @@ struct SearchView: View {
                 Button(action: {
                     viewModel.moveToLocation(result: result)
                 }) {
-
                     VStack(alignment: .leading) {
+                        Text(center.mapCenter.coordinate.latitude)
                         Text("\(result.title)")
                             .font(.headline)
                         if !result.subtitle.isEmpty {
