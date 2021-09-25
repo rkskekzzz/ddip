@@ -1,4 +1,5 @@
-import * as meetingModel from '../model/pin.js';
+import { Pin } from '../model/pin.js';
+import { Meeting } from '../model/meeting.js';
 
 export async function getMeeting(req, res, next) {
     res.status(200).send("getMeeting")
