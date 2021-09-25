@@ -24,7 +24,6 @@ struct SearchView: View {
                     viewModel.moveToLocation(result: result)
                 }) {
                     VStack(alignment: .leading) {
-                        Text(center.mapCenter.coordinate.latitude)
                         Text("\(result.title)")
                             .font(.headline)
                         if !result.subtitle.isEmpty {
