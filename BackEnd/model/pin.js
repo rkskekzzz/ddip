@@ -36,12 +36,7 @@ export const Pin = sequelize.define(
     },
     {
         freezeTableName: true,
-        timestamps: false
+        createdAt: false,
+        underscored: true
     }
 );
-// Pin.belongsTo(Meeting, {
-//     foreignKey: {
-//       name: 'meeting_id',
-//       primaryKey: true,
-//     }
-//   });

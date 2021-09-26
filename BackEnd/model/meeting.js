@@ -42,6 +42,7 @@ export const Meeting = sequelize.define(
         }
     },
     {
-        freezeTableName: true
+        freezeTableName: true,
+        underscored: true
     }
 );
