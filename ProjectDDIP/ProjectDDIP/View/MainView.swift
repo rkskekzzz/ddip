@@ -13,19 +13,17 @@ enum ViewState {
 }
 
 struct MainView: View {
-    @EnvironmentObject var center: MapCenterModel
     @State var viewState:ViewState = .mapview
    
     var body: some View {
         switch viewState {
         case .mapview:
-            MapSearchView(viewState: $viewState, searchViewModel: SearchViewModel(center: center.mapCenter))
+            MapSearchView(viewState: $viewState, searchViewModel: SearchViewModel())
         case .sceduleview:
             ScheduleView(viewState: $viewState, mySchedule: EnvironmentObject<MySchedule>())
                 .animation(.spring())
         }
     }
-    
 }
 //
 //struct UIMapView_Previews: PreviewProvider {

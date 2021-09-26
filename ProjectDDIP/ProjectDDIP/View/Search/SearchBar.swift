@@ -12,7 +12,6 @@ import SlideOverCard
 struct SearchBar: UIViewRepresentable {
     typealias UIViewType = UISearchBar
     
-    
     @Binding var searchBarPosition: CardPosition
     @ObservedObject var viewModel: SearchViewModel
     

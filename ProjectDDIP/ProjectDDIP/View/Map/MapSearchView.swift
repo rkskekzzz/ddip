@@ -14,6 +14,7 @@ import Combine
 struct MapSearchView: View {
     @ObservedObject var viewModel: MapViewModel = MapViewModel()
     @State private var searchBarPosition = CardPosition.bottom
+
     
     @Binding var viewState:ViewState
     var searchViewModel: SearchViewModel

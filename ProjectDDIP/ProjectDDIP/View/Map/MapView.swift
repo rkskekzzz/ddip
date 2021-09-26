@@ -15,8 +15,6 @@ struct MapView: UIViewRepresentable {
     
     @ObservedObject var viewModel: MapViewModel
     
-    @EnvironmentObject var centerModel: MapCenterModel
-    
     func makeUIView(context: Context) -> UIViewType {
         mapView.delegate = context.coordinator
         let coordinate = CLLocationCoordinate2D(
@@ -33,8 +31,9 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) {
 //        mapView.removeAnnotation(<#T##annotation: MKAnnotation##MKAnnotation#>)
 //        mapView.addAnnotations(viewModel.annotations)
-        mapView.center(to: centerModel.mapCenter.coordinate, zoomLevel: centerModel.mapCenter.zoomLevel)
+//        mapView.center(to: centerModel.mapCenter.coordinate, zoomLevel: centerModel.mapCenter.zoomLevel)
 //        mapView.center(to: self.viewModel.selectedPin.coordinate, zoomLevel: "current")
+//        mapView.center(to: )
     }
     
     func makeCoordinator() -> Coordinator {

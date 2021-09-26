@@ -14,22 +14,20 @@ final class SearchViewModel: NSObject, ObservableObject, MKLocalSearchCompleterD
     
     @Published var searchText: String = ""
     @Published var searchResult: [MKLocalSearchCompletion] = []
-    
-    var center: MapCenter
+    @Published var resultItem: MKMapItem? = nil
     
     private var completer: MKLocalSearchCompleter
     private var cancellable: AnyCancellable?
-    private var places: MKMapItem?
+    private var mapItem: MKMapItem?
     private var localSearch: MKLocalSearch? {
         willSet {
-            places = nil
+            mapItem = nil
             localSearch?.cancel()
         }
     }
     
-    init(center: MapCenter) {
+    override init() {
         completer = MKLocalSearchCompleter()
-        self.center = center
         super.init()
         cancellable = $searchText.assign(to: \.queryFragment, on: self.completer)
         completer.delegate = self
@@ -54,18 +52,13 @@ final class SearchViewModel: NSObject, ObservableObject, MKLocalSearchCompleterD
         searchRequest.resultTypes = .pointOfInterest
         localSearch = MKLocalSearch(request: searchRequest)
         localSearch?.start { [unowned self] (response, error) in
-            guard error == nil else {
-                return
-            }
+            guard error == nil else { return }
             // 검색한 결과 : reponse의 mapItems 값을 가져온다.
-            places = response?.mapItems[0]
-            if let p = places {
-                let a:CLCircularRegion = p.placemark.region as! CLCircularRegion
-                print("p : \(p.placemark.coordinate.latitude)")
-                print("p : \(p.placemark.coordinate.longitude)")
-                print("p : \(a.radius)")
-                center.coordinate = p.placemark.coordinate
-                center.zoomLevel = "default"
+            mapItem = response?.mapItems[0]
+            if let mapItem = mapItem {
+                print("p : \(mapItem.placemark.coordinate.latitude)")
+                print("p : \(mapItem.placemark.coordinate.longitude)")
+                resultItem = mapItem
             }
         }
     }

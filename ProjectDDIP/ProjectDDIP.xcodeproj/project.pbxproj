@@ -186,8 +186,8 @@
 		90728F0C26F610ED00657FE5 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				9081635E26FDD623006FD4E9 /* MapSearchView.swift */,
 				906F4AE426F6334D00EF0638 /* MapView.swift */,
+				9081635E26FDD623006FD4E9 /* MapSearchView.swift */,
 				90F8E06726FA523B00859E61 /* TempMapVC.swift */,
 			);
 			path = Map;

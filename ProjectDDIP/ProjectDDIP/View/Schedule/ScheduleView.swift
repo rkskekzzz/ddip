@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 class MySchedule: ObservableObject {
     @Published var item = ScheduleModel.data

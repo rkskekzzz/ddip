@@ -9,18 +9,8 @@ import SwiftUI
 import MapKit
 import Combine
 
-struct MapCenter {
-    var coordinate: CLLocationCoordinate2D
-    var zoomLevel: String
-}
-
-class MapCenterModel: ObservableObject {
-    @Published var mapCenter = MapCenter.init(
-        coordinate: CLLocationCoordinate2D(
-            latitude: 37.529510664039876,
-            longitude: 127.02840863820876),
-        zoomLevel: "default"
-    )
+class MapItemModel: ObservableObject {
+    @Published var mapItem: MKMapItem?
 }
 
 final class MapViewModel: ObservableObject {
@@ -28,7 +18,6 @@ final class MapViewModel: ObservableObject {
     @Published var focusedView: MKAnnotationView? = nil // selectedPinView
     @Published var selectedPin: AnnotationPin? = nil // selectedPin
     @Published var annotations: [AnnotationPin] = [] // Meeting
-    @EnvironmentObject var centerModel: MapCenterModel
     
     private let gesturePin = AnnotationPin(title: nil, locationName: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0)) // PinTemplate
     
@@ -38,8 +27,7 @@ final class MapViewModel: ObservableObject {
     }
     
     func center(to location: CLLocation, zoomLevel: String) {
-        centerModel.mapCenter.coordinate = location.coordinate
-        centerModel.mapCenter.zoomLevel = zoomLevel
+        
     }
 //
 //    func setAnnotation() {

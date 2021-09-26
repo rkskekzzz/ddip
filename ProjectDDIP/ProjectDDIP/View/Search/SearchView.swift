@@ -15,6 +15,7 @@ struct SearchView: View {
     @Binding var searchBarPosition: CardPosition
 
     @ObservedObject var viewModel: SearchViewModel
+    @EnvironmentObject var mapItem: MapItemModel
     
     var body: some View {
         VStack {
@@ -22,6 +23,7 @@ struct SearchView: View {
             List(viewModel.searchResult) { result in
                 Button(action: {
                     viewModel.moveToLocation(result: result)
+                    mapItem.mapItem = viewModel.resultItem
                 }) {
                     VStack(alignment: .leading) {
                         Text("\(result.title)")
