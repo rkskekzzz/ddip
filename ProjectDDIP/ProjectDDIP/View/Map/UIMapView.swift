@@ -29,12 +29,18 @@ struct UIMapView: View {
                 MapView()
                 Button(action: {
                     self.showingScheduleView.toggle()
-                }) {
-                    Text("go to schedule")
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                .padding(.vertical, 100)
-                .padding(.horizontal, 40)
+                }, label: {
+                    Image(systemName: "calendar.circle")
+                    
+                })
+                    .font(.system(size: 50))
+                    .foregroundColor(.white)
+                    .background(Color.pink)
+                    .cornerRadius(100)
+                    .shadow(color: Color.pink.opacity(0.3), radius: 20, x: 0, y: 10)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                    .padding(.vertical, 100)
+                    .padding(.horizontal, 40)
                 SlideOverCard($searchBarPosition, backgroundStyle: $searchBarBackground) {
                     VStack {
                         SearchView(searchText: searchText, searchResult: searchResult, searchBarPosition: $searchBarPosition)
