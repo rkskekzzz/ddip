@@ -1,3 +1,5 @@
+name: Swift Formatter
+
 on: [pull_request]
 
 jobs:
