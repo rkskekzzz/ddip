@@ -13,7 +13,7 @@ struct MapView: UIViewRepresentable {
 
     let mapView = MKMapView()
 
-    @ObservedObject var viewModel: MapViewModel
+    @ObservedObject var mapViewModel: MapViewModel
 
     func makeUIView(context: Context) -> UIViewType {
         mapView.delegate = context.coordinator
