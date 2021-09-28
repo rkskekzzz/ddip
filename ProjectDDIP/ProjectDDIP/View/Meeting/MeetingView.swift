@@ -11,31 +11,34 @@ import SlideOverCard
 struct MeetingView: View {
     @State private var meetingCardPosition = CardPosition.middle
     @State private var meetingCardBackground = BackgroundStyle.solid
-    
-    
+    let schedule: ScheduleModel = ScheduleModel.data[0]
+
+
     var body: some View {
-        ZStack {
+        let date = Date()
+
+        return ZStack {
             MapView()
             SlideOverCard($meetingCardPosition, backgroundStyle: $meetingCardBackground) {
                 VStack {
                     VStack(spacing: 5) {
-                        Text("6시간 후 시작")
+                        Text("\(schedule.remainTime) 시간 후 시작")
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Spacer()
                         HStack(alignment: .bottom) {
-                            Text("면접 스터디 모임")
-                                .font(.title)
+                            Text(schedule.title)
+                                .font(.largeTitle)
                                 .fontWeight(.bold)
-                            Text("9/10")
-                                .font(.caption2)
-                            Spacer(minLength: 70)
+                            Text("\(schedule.currentAttendees)/\(schedule.totalAttendees)")
+                                .font(.caption)
+                            Spacer()
                         }
                         Spacer()
                         HStack {
                             VStack {
-                                Text("2021. 7. 8")
+                                Text(date, style: .date)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                Text("8:00AM - 10:00AM")
+                                Text(date, style: .time)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundColor(.red)
                             }
@@ -61,10 +64,11 @@ struct MeetingView: View {
                     //CardPosition.middle 이 안 가져와져서 UIScreen.main.bounds.height/1.8 값으로 직접 넣어줌
                     VStack {
                         VStack(alignment: .leading, spacing: 10){
-                            Label("서울 종로구 창경궁로", systemImage: "location.circle")
+                            Label("\(schedule.position)", systemImage: "location.circle")
                             Label("2021. 7. 8", systemImage: "calendar.circle")
-                            Label("8:00AM - 10:00AM", systemImage: "clock.circle")
-                            Label("9명", systemImage: "person.circle")
+                                .foregroundColor(.red)
+                            Label("\(schedule.startTime) - \(schedule.endTime)", systemImage: "clock.circle")
+                            Label("\(schedule.currentAttendees)명", systemImage: "person.circle")
                         }
                     }
                 }
