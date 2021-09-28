@@ -4,11 +4,15 @@ on:
   push:
     branches:
       - main
+      - feature/*
     paths:
       - ".github/workflows/swift.yaml"
       - "**.swift"
       - "**/Package.resolved"
   pull_request:
+    branches:
+      - main
+      - feature/*
     paths:
       - ".github/workflows/swift.yaml"
       - "**.swift"
