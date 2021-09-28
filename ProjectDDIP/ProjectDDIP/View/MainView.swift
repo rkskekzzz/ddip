@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import MapKit
+import SlideOverCard
+import Combine
 
 enum MainViewState {
     case mapview
@@ -13,16 +16,38 @@ enum MainViewState {
 }
 
 struct MainView: View {
+    @ObservedObject var viewModel: MapViewModel = MapViewModel()
     @State var viewState:MainViewState = .mapview
    
     var body: some View {
-        switch viewState {
-        case .mapview:
-            MapSearchView(viewState: $viewState, searchViewModel: SearchViewModel())
-        case .sceduleview:
-            ScheduleView(viewState: $viewState, mySchedule: EnvironmentObject<MySchedule>())
-                .animation(.spring())
-        }
+            NavigationView {
+                ZStack {
+                    MapSearchView(viewModel: viewModel)
+                    HStack {
+                        NavigationLink(destination: NewMeetingView()) {
+                            Image(systemName: "plus.circle")
+                                .font(.system(size: 50))
+                                .foregroundColor(.white)
+                                .background(Color.blue)
+                                .cornerRadius(100)
+                                .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
+                        }
+                        NavigationLink(destination: ScheduleView()) {
+                            Image(systemName: "calendar.circle")
+                                .font(.system(size: 50))
+                                .foregroundColor(.white)
+                                .background(Color.pink)
+                                .cornerRadius(100)
+                                .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                    .padding(.vertical, 100)
+                    .padding(.horizontal, 40)
+                }
+            }
+            .edgesIgnoringSafeArea(.all)
     }
 }
 //
