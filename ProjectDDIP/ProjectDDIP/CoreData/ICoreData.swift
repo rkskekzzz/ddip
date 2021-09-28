@@ -9,8 +9,7 @@ import Foundation
 
 protocol ICoreData {
     func copy<T>(with: T)
-    func getId() -> Int64
-//    func getId() -> UUID
+    func getId() -> String
     func getDdipForm() -> DdipForm
     func getContractForm() -> ContractForm
 }

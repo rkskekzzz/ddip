@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A191E192702251100865F8D /* NewMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A191E182702251100865F8D /* NewMeetingView.swift */; };
+		3AD1CA3226FDB5D200B454F4 /* MeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1CA3126FDB5D200B454F4 /* MeetingView.swift */; };
 		6924CFE126D788DC004828AB /* DdipNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924CFE026D788DC004828AB /* DdipNotification.swift */; };
 		694EF45E26E87FF600025C7B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694EF45D26E87FF600025C7B /* CoreDataManager.swift */; };
 		694EF47426E92B1E00025C7B /* Ddip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 694EF47226E92B1E00025C7B /* Ddip.xcdatamodeld */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A191E182702251100865F8D /* NewMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMeetingView.swift; sourceTree = "<group>"; };
+		3AD1CA3126FDB5D200B454F4 /* MeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingView.swift; sourceTree = "<group>"; };
 		6924CFE026D788DC004828AB /* DdipNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdipNotification.swift; sourceTree = "<group>"; };
 		694EF45D26E87FF600025C7B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		694EF47326E92B1E00025C7B /* Ddip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ddip.xcdatamodel; sourceTree = "<group>"; };
@@ -85,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AD1CA3026FDB45500B454F4 /* Meeting */ = {
+			isa = PBXGroup;
+			children = (
+				3AD1CA3126FDB5D200B454F4 /* MeetingView.swift */,
+				3A191E182702251100865F8D /* NewMeetingView.swift */,
+			);
+			path = Meeting;
+			sourceTree = "<group>";
+		};
 		694EF45F26E912A000025C7B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +164,7 @@
 				90728F0A26F60C8D00657FE5 /* Search */,
 				90728F0B26F60CA700657FE5 /* Schedule */,
 				90728F0C26F610ED00657FE5 /* Map */,
+				3AD1CA3026FDB45500B454F4 /* Meeting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -281,6 +295,7 @@
 				6924CFE126D788DC004828AB /* DdipNotification.swift in Sources */,
 				694EF45E26E87FF600025C7B /* CoreDataManager.swift in Sources */,
 				695D591D26FC605D00EA77E5 /* ICoreData.swift in Sources */,
+				3A191E192702251100865F8D /* NewMeetingView.swift in Sources */,
 				69E9592926F7976E006D76AA /* Extensions.swift in Sources */,
 				90BF216726F4F47200E00B73 /* SearchView.swift in Sources */,
 				9081635826FDC128006FD4E9 /* TempSearchVC.swift in Sources */,
@@ -292,6 +307,7 @@
 				9081635F26FDD623006FD4E9 /* MapSearchView.swift in Sources */,
 				9081635226FDA3E2006FD4E9 /* SceduleDatabase.swift in Sources */,
 				9081634F26FDA386006FD4E9 /* ScheduleModel.swift in Sources */,
+				3AD1CA3226FDB5D200B454F4 /* MeetingView.swift in Sources */,
 				90728F0926F5D96700657FE5 /* ScheduleView.swift in Sources */,
 				904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */,
 				694EF47426E92B1E00025C7B /* Ddip.xcdatamodeld in Sources */,

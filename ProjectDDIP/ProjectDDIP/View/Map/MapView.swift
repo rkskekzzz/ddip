@@ -49,7 +49,9 @@ extension MapView {
             self.parent = parent
             super.init()
             self.UIGestureInit()
-            parent.data.AddDdip_TEST(id: 13, title: "hello", placeName: "hi", la: 37.519139425842084, lo: 126.99917786897805)
+
+//            TEST_CORE_DATA.shared.AddDdip_TEST(id: UUID().uuidString, title: "one", placeName: "one", la: 37.52628887090283, lo: 127.0293461382089)
+
             self.setAnnotation()
         }
 

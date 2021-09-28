@@ -21,7 +21,7 @@ struct ScheduleView: View {
     func deleteSchedule(id: UUID) {
         mySchedule.item = mySchedule.item.filter { $0.id != id }
     }
-    
+
     var body: some View {
         NavigationView {
             ScrollView {

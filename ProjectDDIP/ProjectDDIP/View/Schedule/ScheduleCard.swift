@@ -59,10 +59,10 @@ struct ScheduleCard: View {
 //}
 
 
-//struct ScheduleCard_Previews: PreviewProvider {
-//    static var schedule = Schedule.data[0]
-//
-//    static var previews: some View {
-//        ScheduleCard(activateDeleteButton: <#T##Binding<Bool>#>, schedule: <#T##Schedule#>, deleteScheldule: <#T##(UUID) -> ()#>)
-//    }
-//}
+struct ScheduleCard_Previews: PreviewProvider {
+//    static var schedule = MySchedule
+
+    static var previews: some View {
+        ScheduleCard(activateDeleteButton: .constant(false), schedule: ScheduleModel.data[0], deleteScheldule: {id in print(id)})
+    }
+}
