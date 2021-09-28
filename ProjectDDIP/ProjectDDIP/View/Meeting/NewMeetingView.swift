@@ -22,14 +22,6 @@ struct NewMeetingView: View {
 
     var body: some View {
         NavigationView {
-//            HStack {
-////                Button(action: {}, label: {Image(systemName: "chevron.backward")})
-////                Spacer()
-////                Text("새로운 모임")
-////                    .fontWeight(.bold)
-////                Spacer()
-////                Button(action: {}, label: {Text("완료")})
-//            }
             Form {
                 Section {
                     TextField("모임 제목을 입력하세요.", text: $meetingTitle)
@@ -37,6 +29,7 @@ struct NewMeetingView: View {
                     NavigationLink(destination: chooseLocationView()) { Text("위치를 입력하세요.") }
                     DatePicker("날짜, 시간 입력", selection: $date, in: Date()...)
                         .labelsHidden()
+                    //여기의 date 변수를 MeetingView에서도 받아서 쓰고 싶은데 아직 구현 못함
                 }
                 .padding()
             }
