@@ -29,7 +29,7 @@ struct SlideCardView: View {
 	var body: some View {
         switch slideCardState {
         case .none:
-            Text("hello")
+            Text("hello") // 여기 뭐넣지
         case .search:
             SlideOverCard($searchViewPosition, backgroundStyle: $backgroundStyle) {
                 SearchView(searchBarPosition: $searchViewPosition, viewModel: searchViewModel)
