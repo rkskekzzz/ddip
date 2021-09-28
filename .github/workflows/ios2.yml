@@ -2,9 +2,11 @@ name: iOS test
 
 on:
   push:
-    branches: [ test/githubaction ]
+    branches: 
+    - test/githubaction
   pull_request:
-    branches: [ test/githubaction ]
+    branches: 
+    - test/githubaction
 
 jobs:
   build:
