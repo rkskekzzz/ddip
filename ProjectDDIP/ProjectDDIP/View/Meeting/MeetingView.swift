@@ -7,6 +7,11 @@
 
 import SwiftUI
 import SlideOverCard
+import MapKit
+
+/*
+ * 아직 MapSearchView
+ */
 
 struct MeetingView: View {
     @State private var meetingCardPosition = CardPosition.middle
@@ -18,7 +23,6 @@ struct MeetingView: View {
         let date = Date()
 
         return ZStack {
-            MapView()
             SlideOverCard($meetingCardPosition, backgroundStyle: $meetingCardBackground) {
                 VStack {
                     VStack(spacing: 5) {
@@ -77,14 +81,14 @@ struct MeetingView: View {
     }
 }
 
-struct MeetingView_Previews: PreviewProvider {
-    static var previews: some View {
-        MeetingView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-            .previewDisplayName("iPhone SE")
-        
-        MeetingView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
-            .previewDisplayName("iPhone 12 Pro Max")
-    }
-}
+//struct MeetingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MeetingView()
+//            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+//            .previewDisplayName("iPhone SE")
+//        
+//        MeetingView()
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
+//            .previewDisplayName("iPhone 12 Pro Max")
+//    }
+//}

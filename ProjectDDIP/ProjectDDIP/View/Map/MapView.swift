@@ -48,7 +48,7 @@ extension MapView {
         init(_ parent: MapView) {
             self.parent = parent
             super.init()
-            self.UIGestureInit()
+//            self.UIGestureInit()
 
 //            TEST_CORE_DATA.shared.AddDdip_TEST(id: UUID().uuidString, title: "one", placeName: "one", la: 37.52628887090283, lo: 127.0293461382089)
 
@@ -59,23 +59,10 @@ extension MapView {
             let coreData: [Ddip] = CoreDataManager.shared.fromCoreData()
             guard !coreData.isEmpty else { return }
 
-
-
-
+            parent.mapView.removeAnnotations(parent.mapView.annotations)
             for item in coreData {
-                CoreDataManager.shared.context?.delete(item)
+//                parent.mapView.addAnnotation(DdipPinModel(item: item))
             }
-            do { try CoreDataManager.shared.context?.save() }
-            catch let error as NSError { print("Could not save: \(error), \(error.userInfo)") }
-
-
-
-
-            annotations.removeAll()
-            for item in coreData {
-                annotations.append(AnnotationPin(item: item))
-            }
-            parent.mapView.addAnnotations(annotations)
         }
 
         // 여기서부터 MKMapViewDelegate 함수 정의

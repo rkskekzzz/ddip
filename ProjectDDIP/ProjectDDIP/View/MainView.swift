@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-enum ViewState {
+enum MainViewState {
     case mapview
     case sceduleview
 }
 
 struct MainView: View {
-    @State var viewState:ViewState = .mapview
+    @State var viewState:MainViewState = .mapview
    
     var body: some View {
         switch viewState {

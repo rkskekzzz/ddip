@@ -13,7 +13,6 @@ class MySchedule: ObservableObject {
 }
 
 struct ScheduleView: View {
-    @Binding var viewState:ViewState
     @State private var activateDeleteButton:Bool = false
 
     @EnvironmentObject var mySchedule: MySchedule
@@ -35,13 +34,13 @@ struct ScheduleView: View {
                 .padding(.horizontal, 20)
             }
             .navigationTitle("Schedule")
-            .navigationBarItems(leading: Button(action: {
-                self.viewState = .mapview
-            }, label: {
-                Text("back")
-            }), trailing: Button(action: { activateDeleteButton.toggle() }, label: {
-                Text("edit")
-            }))
+//            .navigationBarItems(leading: Button(action: {
+//                self.viewState = .mapview
+//            }, label: {
+//                Text("back")
+//            }), trailing: Button(action: { activateDeleteButton.toggle() }, label: {
+//                Text("edit")
+//            }))
         }
     }
 }
