@@ -12,7 +12,7 @@ class MySchedule: ObservableObject {
 }
 
 struct ScheduleView: View {
-    @Binding var showingScheduleView: Bool
+//    @Binding var showingScheduleView: Bool
     @State private var activateDeleteButton:Bool = false
 
     @EnvironmentObject var mySchedule: MySchedule
@@ -34,13 +34,13 @@ struct ScheduleView: View {
                 .padding(.horizontal, 20)
             }
             .navigationTitle("Schedule")
-            .navigationBarItems(leading: Button(action: { showingScheduleView.toggle()
-                print(showingScheduleView)
-            }, label: {
-                Text("back")
-            }), trailing: Button(action: { activateDeleteButton.toggle() }, label: {
-                Text("edit")
-            }))
+//            .navigationBarItems(leading: Button(action: { showingScheduleView.toggle()
+//                print(showingScheduleView)
+//            }, label: {
+//                Text("back")
+//            }), trailing: Button(action: { activateDeleteButton.toggle() }, label: {
+//                Text("edit")
+//            }))
         }
     }
 }

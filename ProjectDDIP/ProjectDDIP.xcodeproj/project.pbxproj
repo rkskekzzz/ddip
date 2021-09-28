@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A191E192702251100865F8D /* NewMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A191E182702251100865F8D /* NewMeetingView.swift */; };
 		3AD1CA3226FDB5D200B454F4 /* MeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1CA3126FDB5D200B454F4 /* MeetingView.swift */; };
 		6924CFE126D788DC004828AB /* DdipNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924CFE026D788DC004828AB /* DdipNotification.swift */; };
 		694EF45E26E87FF600025C7B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694EF45D26E87FF600025C7B /* CoreDataManager.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A191E182702251100865F8D /* NewMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMeetingView.swift; sourceTree = "<group>"; };
 		3AD1CA3126FDB5D200B454F4 /* MeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingView.swift; sourceTree = "<group>"; };
 		6924CFE026D788DC004828AB /* DdipNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdipNotification.swift; sourceTree = "<group>"; };
 		694EF45D26E87FF600025C7B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				3AD1CA3126FDB5D200B454F4 /* MeetingView.swift */,
+				3A191E182702251100865F8D /* NewMeetingView.swift */,
 			);
 			path = Meeting;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				6924CFE126D788DC004828AB /* DdipNotification.swift in Sources */,
 				694EF45E26E87FF600025C7B /* CoreDataManager.swift in Sources */,
 				695D591D26FC605D00EA77E5 /* ICoreData.swift in Sources */,
+				3A191E192702251100865F8D /* NewMeetingView.swift in Sources */,
 				69E9592926F7976E006D76AA /* Extensions.swift in Sources */,
 				90BF216726F4F47200E00B73 /* SearchView.swift in Sources */,
 				90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */,
