@@ -26,6 +26,7 @@
 		904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6826D3CDEE00FDC55D /* SceneDelegate.swift */; };
 		904C4B7026D3CDF000FDC55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904C4B6F26D3CDF000FDC55D /* Assets.xcassets */; };
 		904C4B7326D3CDF000FDC55D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904C4B7126D3CDF000FDC55D /* LaunchScreen.storyboard */; };
+		905A9FE027043735009E45C9 /* ProjectDDIPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905A9FDF27043735009E45C9 /* ProjectDDIPTests.swift */; };
 		906F4AE526F6334D00EF0638 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F4AE426F6334D00EF0638 /* MapView.swift */; };
 		90728F0526F52EEF00657FE5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0426F52EEF00657FE5 /* MainView.swift */; };
 		90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0626F5D1B900657FE5 /* ScheduleCard.swift */; };
@@ -41,6 +42,16 @@
 		90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216826F4F5AA00E00B73 /* SearchBar.swift */; };
 		90F8E06826FA523B00859E61 /* _TempMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F8E06726FA523B00859E61 /* _TempMapVC.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		905A9FE127043735009E45C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 904C4B5B26D3CDED00FDC55D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 904C4B6226D3CDEE00FDC55D;
+			remoteInfo = ProjectDDIP;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3A191E182702251100865F8D /* NewMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMeetingView.swift; sourceTree = "<group>"; };
@@ -63,6 +74,8 @@
 		904C4B6F26D3CDF000FDC55D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		904C4B7226D3CDF000FDC55D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		904C4B7426D3CDF000FDC55D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		905A9FDD27043735009E45C9 /* ProjectDDIPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectDDIPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		905A9FDF27043735009E45C9 /* ProjectDDIPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDDIPTests.swift; sourceTree = "<group>"; };
 		906F4AE426F6334D00EF0638 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		90728F0426F52EEF00657FE5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		90728F0626F5D1B900657FE5 /* ScheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCard.swift; sourceTree = "<group>"; };
@@ -85,6 +98,13 @@
 			files = (
 				90728F0F26F61E4500657FE5 /* SlideOverCard in Frameworks */,
 				70F4760D26D42DEA00905070 /* FloatingPanel in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		905A9FDA27043735009E45C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				904C4B6526D3CDEE00FDC55D /* ProjectDDIP */,
+				905A9FDE27043735009E45C9 /* ProjectDDIPTests */,
 				904C4B6426D3CDEE00FDC55D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -164,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */,
+				905A9FDD27043735009E45C9 /* ProjectDDIPTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,6 +226,14 @@
 				7001217627030A59001735B9 /* MeetingViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		905A9FDE27043735009E45C9 /* ProjectDDIPTests */ = {
+			isa = PBXGroup;
+			children = (
+				905A9FDF27043735009E45C9 /* ProjectDDIPTests.swift */,
+			);
+			path = ProjectDDIPTests;
 			sourceTree = "<group>";
 		};
 		90728F0A26F60C8D00657FE5 /* Search */ = {
@@ -266,17 +296,39 @@
 			productReference = 904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */;
 			productType = "com.apple.product-type.application";
 		};
+		905A9FDC27043735009E45C9 /* ProjectDDIPTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 905A9FE527043735009E45C9 /* Build configuration list for PBXNativeTarget "ProjectDDIPTests" */;
+			buildPhases = (
+				905A9FD927043735009E45C9 /* Sources */,
+				905A9FDA27043735009E45C9 /* Frameworks */,
+				905A9FDB27043735009E45C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				905A9FE227043735009E45C9 /* PBXTargetDependency */,
+			);
+			name = ProjectDDIPTests;
+			productName = ProjectDDIPTests;
+			productReference = 905A9FDD27043735009E45C9 /* ProjectDDIPTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		904C4B5B26D3CDED00FDC55D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					904C4B6226D3CDEE00FDC55D = {
 						CreatedOnToolsVersion = 12.5.1;
+					};
+					905A9FDC27043735009E45C9 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 904C4B6226D3CDEE00FDC55D;
 					};
 				};
 			};
@@ -298,6 +350,7 @@
 			projectRoot = "";
 			targets = (
 				904C4B6226D3CDEE00FDC55D /* ProjectDDIP */,
+				905A9FDC27043735009E45C9 /* ProjectDDIPTests */,
 			);
 		};
 /* End PBXProject section */
@@ -309,6 +362,13 @@
 			files = (
 				904C4B7326D3CDF000FDC55D /* LaunchScreen.storyboard in Resources */,
 				904C4B7026D3CDF000FDC55D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		905A9FDB27043735009E45C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +411,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		905A9FD927043735009E45C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				905A9FE027043735009E45C9 /* ProjectDDIPTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		905A9FE227043735009E45C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 904C4B6226D3CDEE00FDC55D /* ProjectDDIP */;
+			targetProxy = 905A9FE127043735009E45C9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		904C4B7126D3CDF000FDC55D /* LaunchScreen.storyboard */ = {
@@ -519,6 +595,54 @@
 			};
 			name = Release;
 		};
+		905A9FE327043735009E45C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.suhshin.ProjectDDIPTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProjectDDIP.app/ProjectDDIP";
+			};
+			name = Debug;
+		};
+		905A9FE427043735009E45C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.suhshin.ProjectDDIPTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProjectDDIP.app/ProjectDDIP";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -536,6 +660,15 @@
 			buildConfigurations = (
 				904C4B7826D3CDF000FDC55D /* Debug */,
 				904C4B7926D3CDF000FDC55D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		905A9FE527043735009E45C9 /* Build configuration list for PBXNativeTarget "ProjectDDIPTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				905A9FE327043735009E45C9 /* Debug */,
+				905A9FE427043735009E45C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
