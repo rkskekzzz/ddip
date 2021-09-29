@@ -29,7 +29,7 @@ struct MapView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        print("--> call updateUIView <--")
+//        print("--> call updateUIView <--")
     }
 
     func makeCoordinator() -> Coordinator {
@@ -40,14 +40,13 @@ struct MapView: UIViewRepresentable {
 extension MapView {
     class Coordinator: NSObject, MKMapViewDelegate, UIGestureRecognizerDelegate {
         var parent: MapView
-
+        
         init(_ parent: MapView) {
             self.parent = parent
             super.init()
+            
+            //            TEST_CORE_DATA.shared.AddDdip_TEST(id: UUID().uuidString, title: "one", placeName: "one", la: 37.52628887090283, lo: 127.0293461382089)
             self.UIGestureInit()
-
-//            TEST_CORE_DATA.shared.AddDdip_TEST(id: UUID().uuidString, title: "one", placeName: "one", la: 37.52628887090283, lo: 127.0293461382089)
-
             self.setAnnotation()
         }
 
@@ -66,47 +65,78 @@ extension MapView {
             parent.mapView.addGestureRecognizer(tapGesture)
         }
 
-        @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
-            let moveGesturePin: Bool = parent.mapView.selectedAnnotations.isEmpty
+        
+        
+        
+        
+        
+        
+        
+        func disposeDdipZone(with model: DdipPinModel) {
+            if parent.mapViewModel.selectedPin?.id == model.id { return }
             
-            let coordinate = parent.mapView.convert(gestureRecognizer.location(in: parent.mapView), toCoordinateFrom: parent.mapView)
-            for item in parent.mapView.visibleAnnotations() {
-                let view = parent.mapView.view(for: item)
-                let hit = view?.hitTest(gestureRecognizer.location(in: view), with: nil)
-                if hit != nil {
-                    switchingGestureStatus(with: item)
-                    return
-                }
-            }
-
-            if moveGesturePin {
-                parent.mapViewModel.gesturePin.set(id: UUID().uuidString, title: "gesturePin", location: coordinate)
-                appendAnnotation(with: parent.mapViewModel.gesturePin)
-            }
-            
-            switchingGestureStatus()
-            print("Tapped at Latitiude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
+            deselectPin(with: model)
+            model.view?.setSelected(true, animated: true)
         }
         
-        func switchingGestureStatus(with annotation: MKAnnotation) {
-            if getId(from: annotation) == parent.mapViewModel.gesturePin.id {
-                gesturePinState = .onGesturePin
-                print("[+]: on")
-            } else {
-                gesturePinState = .offGesturePin
-                print("[-]: off")
+        func deselectPin(with model:DdipPinModel?) {
+            parent.mapViewModel.selectedPin?.view?.setSelected(false, animated: true)
+            parent.mapViewModel.selectedPin = model
+
+            if parent.mapViewModel.gesturePin.id != "" && (model == nil || model?.id == parent.mapViewModel.gesturePin.id) { gesturePinState = .onGesturePin }
+            else { gesturePinState = .offGesturePin }
+        }
+        
+        func putGesturePin(location coordinate: CLLocationCoordinate2D) {
+            parent.mapViewModel.gesturePin.set(id: UUID().uuidString, title: "gesturePin", location: coordinate)
+            appendAnnotation(with: parent.mapViewModel.gesturePin)
+            gesturePinState = .onGesturePin
+        }
+        
+        func disposeEmptyZone(with model: DdipPinModel, location coordinate: CLLocationCoordinate2D) {
+            if parent.mapViewModel.selectedPin != nil {
+                deselectPin(with: nil)
+                return
             }
+            putGesturePin(location: coordinate)
         }
 
-        func switchingGestureStatus() {
-            if !parent.mapViewModel.gesturePin.id.isEmpty {
-                gesturePinState = .onGesturePin
-                print("[+]: on")
-            } else {
-                gesturePinState = .offGesturePin
-                print("[-]: off")
+        
+        @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
+            let coordinate = parent.mapView.convert(gestureRecognizer.location(in: parent.mapView), toCoordinateFrom: parent.mapView)
+            for item in parent.mapView.visibleAnnotations() {
+                if let model = item as? DdipPinModel {
+                    if (model.view?.hitTest(gestureRecognizer.location(in: model.view), with: nil)) != nil {
+                        disposeDdipZone(with: model)
+#if DEBUG
+                        printDebug(with: coordinate)
+#endif
+                        return
+                    }
+                }
             }
+            disposeEmptyZone(with: parent.mapViewModel.gesturePin, location: coordinate)
+#if DEBUG
+            printDebug(with: coordinate)
+#endif
         }
+        
+        func printDebug(with coordinate: CLLocationCoordinate2D) {
+            print("is Enable (+) = \((gesturePinState == .onGesturePin) ? true : false)")
+            if (gesturePinState == .onGesturePin && parent.mapViewModel.selectedPin == nil) { print("GesturePin is on the map. So you can access GesturePin even if selectedPin is NULL") }
+            if parent.mapViewModel.selectedPin != nil { print("Activate target = \(parent.mapViewModel.selectedPin!.title!)") }
+            else { print("Activate target (selectedPin) = NULL") }
+            print("Tapped at Latitiude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
+            print("------------------------------------------------")
+        }
+        
+        
+        
+        
+        
+        
+        
+        
 
         func appendAnnotation(with annotation: MKAnnotation) {
             parent.mapView.removeAnnotation(annotation)
@@ -116,15 +146,6 @@ extension MapView {
         func getId(from annotation: MKAnnotation) -> String {
             guard let convert = annotation as? DdipPinModel else { assert(false) }
             return convert.id
-        }
-        
-        func mapView(_ : MKMapView, didSelect view: MKAnnotationView) {
-            guard let annotationPin = view.annotation as? DdipPinModel else { return }
-//            releaseFocusedView()
-//            focusedView = view
-//            selectedPin = annotationPin
-//            view.image = annotationPin.selectImage
-            parent.mapView.center(to: annotationPin.coordinate, zoomLevel: "current")
         }
     }
 }
