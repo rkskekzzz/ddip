@@ -16,10 +16,10 @@ class MapItemModel: ObservableObject {
 final class MapViewModel: ObservableObject {
     
     @Published var focusedView: MKAnnotationView? = nil // selectedPinView
-    @Published var selectedPin: AnnotationPin? = nil // selectedPin
-    @Published var annotations: [AnnotationPin] = [] // Meeting
+    @Published var selectedPin: DdipPinModel? = nil // selectedPin
+    @Published var annotations: [DdipPinModel] = [] // Meeting
     
-    private let gesturePin = AnnotationPin(title: nil, locationName: nil, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0)) // PinTemplate
+    @Published var gesturePin = DdipPinModel(meetingName: "", location: CLLocationCoordinate2D(latitude: 0, longitude: 0)) // PinTemplate
     
     init() {
 //        setAnnotation()

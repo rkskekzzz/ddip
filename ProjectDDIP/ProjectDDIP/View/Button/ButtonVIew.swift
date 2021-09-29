@@ -26,7 +26,7 @@ struct ButtonView: View {
 					.cornerRadius(100)
 					.shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
 			}
-			.buttonStyle(.plain)
+//			.buttonStyle(.plain)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 		.padding(.vertical, 100)

@@ -48,7 +48,7 @@ extension MapView {
         init(_ parent: MapView) {
             self.parent = parent
             super.init()
-//            self.UIGestureInit()
+            self.UIGestureInit()
 
 //            TEST_CORE_DATA.shared.AddDdip_TEST(id: UUID().uuidString, title: "one", placeName: "one", la: 37.52628887090283, lo: 127.0293461382089)
 
@@ -61,23 +61,43 @@ extension MapView {
 
             parent.mapView.removeAnnotations(parent.mapView.annotations)
             for item in coreData {
-//                parent.mapView.addAnnotation(DdipPinModel(item: item))
+                parent.mapView.addAnnotation(DdipPinModel(item: item))
             }
         }
-
-        // 여기서부터 MKMapViewDelegate 함수 정의
-        func mapView(_: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped _: UIControl) {
-            guard let annotationPin = view.annotation as? AnnotationPin else { return }
-
-            let driving = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-            annotationPin.mapItem?.openInMaps(launchOptions: driving)
+        
+        func UIGestureInit() {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(gestureRecognizer:)))
+            parent.mapView.addGestureRecognizer(tapGesture)
         }
+        
+        @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
+            guard parent.mapView.selectedAnnotations.isEmpty else { return }
+            let coordinate = parent.mapView.convert(gestureRecognizer.location(in: parent.mapView), toCoordinateFrom: parent.mapView)
+            for item in parent.mapView.visibleAnnotations() {
+                let view = parent.mapView.view(for: item)
+                let hit = view?.hitTest(gestureRecognizer.location(in: view), with: nil)
+                if hit != nil { return }
+            }
+            
+            parent.mapViewModel.gesturePin.set(title: "custom", location: coordinate)
+            parent.mapView.removeAnnotation(parent.mapViewModel.gesturePin)
+            parent.mapView.addAnnotation(parent.mapViewModel.gesturePin)
+//            print("Tapped at Latitiude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
+        }
+        
+        // 여기서부터 MKMapViewDelegate 함수 정의
+//        func mapView(_: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped _: UIControl) {
+//            guard let annotationPin = view.annotation as? DdipPinModel else { return }
+//
+//            let driving = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+//            DdipPinModel.mapItem?.openInMaps(launchOptions: driving)
+//        }
         func mapView(_ : MKMapView, didSelect view: MKAnnotationView) {
-            guard let annotationPin = view.annotation as? AnnotationPin else { return }
+            guard let annotationPin = view.annotation as? DdipPinModel else { return }
 //            releaseFocusedView()
 //            focusedView = view
 //            selectedPin = annotationPin
-            view.image = annotationPin.selectImage
+//            view.image = annotationPin.selectImage
             parent.mapView.center(to: annotationPin.coordinate, zoomLevel: "current")
         }
     }
