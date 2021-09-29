@@ -11,9 +11,6 @@ on:
     - main
     - feature/*
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_13.0.app/Contents/Developer
-
 # workflow의 실행은 하나 이상의 job으로 구성 됨
 jobs:
   # 이 workflow 는 "build" 라는 single job 으로 구성
