@@ -29,11 +29,7 @@ struct MapView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
-//        mapView.removeAnnotation(<#T##annotation: MKAnnotation##MKAnnotation#>)
-//        mapView.addAnnotations(viewModel.annotations)
-//        mapView.center(to: centerModel.mapCenter.coordinate, zoomLevel: centerModel.mapCenter.zoomLevel)
-//        mapView.center(to: self.viewModel.selectedPin.coordinate, zoomLevel: "current")
-//        mapView.center(to: )
+        print("--> call updateUIView <--")
     }
 
     func makeCoordinator() -> Coordinator {
@@ -69,29 +65,59 @@ extension MapView {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(gestureRecognizer:)))
             parent.mapView.addGestureRecognizer(tapGesture)
         }
-        
+
         @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
-            guard parent.mapView.selectedAnnotations.isEmpty else { return }
+            let moveGesturePin: Bool = parent.mapView.selectedAnnotations.isEmpty
+            
             let coordinate = parent.mapView.convert(gestureRecognizer.location(in: parent.mapView), toCoordinateFrom: parent.mapView)
             for item in parent.mapView.visibleAnnotations() {
                 let view = parent.mapView.view(for: item)
                 let hit = view?.hitTest(gestureRecognizer.location(in: view), with: nil)
-                if hit != nil { return }
+                if hit != nil {
+                    switchingGestureStatus(with: item)
+                    return
+                }
+            }
+
+            if moveGesturePin {
+                parent.mapViewModel.gesturePin.set(id: UUID().uuidString, title: "gesturePin", location: coordinate)
+                appendAnnotation(with: parent.mapViewModel.gesturePin)
             }
             
-            parent.mapViewModel.gesturePin.set(title: "custom", location: coordinate)
-            parent.mapView.removeAnnotation(parent.mapViewModel.gesturePin)
-            parent.mapView.addAnnotation(parent.mapViewModel.gesturePin)
-//            print("Tapped at Latitiude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
+            switchingGestureStatus()
+            print("Tapped at Latitiude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
         }
         
-        // 여기서부터 MKMapViewDelegate 함수 정의
-//        func mapView(_: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped _: UIControl) {
-//            guard let annotationPin = view.annotation as? DdipPinModel else { return }
-//
-//            let driving = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-//            DdipPinModel.mapItem?.openInMaps(launchOptions: driving)
-//        }
+        func switchingGestureStatus(with annotation: MKAnnotation) {
+            if getId(from: annotation) == parent.mapViewModel.gesturePin.id {
+                gesturePinState = .onGesturePin
+                print("[+]: on")
+            } else {
+                gesturePinState = .offGesturePin
+                print("[-]: off")
+            }
+        }
+
+        func switchingGestureStatus() {
+            if !parent.mapViewModel.gesturePin.id.isEmpty {
+                gesturePinState = .onGesturePin
+                print("[+]: on")
+            } else {
+                gesturePinState = .offGesturePin
+                print("[-]: off")
+            }
+        }
+
+        func appendAnnotation(with annotation: MKAnnotation) {
+            parent.mapView.removeAnnotation(annotation)
+            parent.mapView.addAnnotation(annotation)
+        }
+        
+        func getId(from annotation: MKAnnotation) -> String {
+            guard let convert = annotation as? DdipPinModel else { assert(false) }
+            return convert.id
+        }
+        
         func mapView(_ : MKMapView, didSelect view: MKAnnotationView) {
             guard let annotationPin = view.annotation as? DdipPinModel else { return }
 //            releaseFocusedView()

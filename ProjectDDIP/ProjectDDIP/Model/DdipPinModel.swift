@@ -11,10 +11,12 @@ class DdipPinModel: NSObject, MKAnnotation, ObservableObject {
     
     @Published var selected: Bool = false
     
+    var id: String
     var title: String?
     var coordinate: CLLocationCoordinate2D
     
-    init (meetingName: String?, location: CLLocationCoordinate2D) {
+    init (id: String, meetingName: String?, location: CLLocationCoordinate2D) {
+        self.id = id
         self.title = meetingName
         self.coordinate = location
     }
@@ -22,11 +24,13 @@ class DdipPinModel: NSObject, MKAnnotation, ObservableObject {
     init (item: NSManagedObject) {
         guard let converted = item as? Ddip else { assert(false) }
         
-        self.coordinate = CLLocationCoordinate2D(latitude: converted.latitude, longitude: converted.longitude)
+        self.id = converted.id
         self.title = converted.title
+        self.coordinate = CLLocationCoordinate2D(latitude: converted.latitude, longitude: converted.longitude)
     }
     
-    func set(title: String, location: CLLocationCoordinate2D) {
+    func set(id: String, title: String, location: CLLocationCoordinate2D) {
+        self.id = id
         self.title = title
         coordinate = location
     }
