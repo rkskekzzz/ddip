@@ -25,4 +25,4 @@ jobs:
     # shell 이용해서 하나의 command 수행
     - name: Start xcode build 🛠
       run: |
-        xcodebuild clean test -project ProjectDDIP/ProjectDDIP.xcodeproj -scheme ProjectDDIP -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.4'
+        xcodebuild clean test -project ProjectDDIP/ProjectDDIP.xcodeproj -scheme ProjectDDIP -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=15.0'
