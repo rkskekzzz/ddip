@@ -14,6 +14,7 @@
 		694EF47426E92B1E00025C7B /* Ddip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 694EF47226E92B1E00025C7B /* Ddip.xcdatamodeld */; };
 		695D591D26FC605D00EA77E5 /* ICoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D591C26FC605D00EA77E5 /* ICoreData.swift */; };
 		695D591F26FC61FD00EA77E5 /* TEST_CORE_DATA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D591E26FC61FD00EA77E5 /* TEST_CORE_DATA.swift */; };
+		6973D51227043C4A00F2ABFC /* MapStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973D51127043C4A00F2ABFC /* MapStatus.swift */; };
 		6983A89726F8EFE400158265 /* ContractCoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983A89326F8EFE400158265 /* ContractCoreDataModel.swift */; };
 		6983A89926F8EFE400158265 /* DdipCoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983A89526F8EFE400158265 /* DdipCoreDataModel.swift */; };
 		69A6ED6526D407B300C1A4D5 /* DdipPinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6ED6426D407B300C1A4D5 /* DdipPinModel.swift */; };
@@ -61,6 +62,7 @@
 		694EF47326E92B1E00025C7B /* Ddip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ddip.xcdatamodel; sourceTree = "<group>"; };
 		695D591C26FC605D00EA77E5 /* ICoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoreData.swift; sourceTree = "<group>"; };
 		695D591E26FC61FD00EA77E5 /* TEST_CORE_DATA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEST_CORE_DATA.swift; sourceTree = "<group>"; };
+		6973D51127043C4A00F2ABFC /* MapStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatus.swift; sourceTree = "<group>"; };
 		6983A89326F8EFE400158265 /* ContractCoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCoreDataModel.swift; sourceTree = "<group>"; };
 		6983A89526F8EFE400158265 /* DdipCoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdipCoreDataModel.swift; sourceTree = "<group>"; };
 		69A6ED6426D407B300C1A4D5 /* DdipPinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DdipPinModel.swift; path = ProjectDDIP/Model/DdipPinModel.swift; sourceTree = SOURCE_ROOT; };
@@ -260,6 +262,7 @@
 			children = (
 				906F4AE426F6334D00EF0638 /* MapView.swift */,
 				90F8E06726FA523B00859E61 /* _TempMapVC.swift */,
+				6973D51127043C4A00F2ABFC /* MapStatus.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6973D51227043C4A00F2ABFC /* MapStatus.swift in Sources */,
 				6924CFE126D788DC004828AB /* DdipNotification.swift in Sources */,
 				694EF45E26E87FF600025C7B /* CoreDataManager.swift in Sources */,
 				695D591D26FC605D00EA77E5 /* ICoreData.swift in Sources */,
