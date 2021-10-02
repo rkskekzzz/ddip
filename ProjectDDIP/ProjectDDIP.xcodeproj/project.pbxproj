@@ -15,6 +15,8 @@
 		695D591D26FC605D00EA77E5 /* ICoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D591C26FC605D00EA77E5 /* ICoreData.swift */; };
 		695D591F26FC61FD00EA77E5 /* TEST_CORE_DATA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D591E26FC61FD00EA77E5 /* TEST_CORE_DATA.swift */; };
 		6973D51227043C4A00F2ABFC /* MapStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973D51127043C4A00F2ABFC /* MapStatus.swift */; };
+		697A453D270865F300B2BB79 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 697A453C270865F300B2BB79 /* Alamofire */; };
+		697A4540270866FB00B2BB79 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A453F270866FB00B2BB79 /* Network.swift */; };
 		6983A89726F8EFE400158265 /* ContractCoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983A89326F8EFE400158265 /* ContractCoreDataModel.swift */; };
 		6983A89926F8EFE400158265 /* DdipCoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983A89526F8EFE400158265 /* DdipCoreDataModel.swift */; };
 		69A6ED6526D407B300C1A4D5 /* DdipPinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6ED6426D407B300C1A4D5 /* DdipPinModel.swift */; };
@@ -63,6 +65,7 @@
 		695D591C26FC605D00EA77E5 /* ICoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoreData.swift; sourceTree = "<group>"; };
 		695D591E26FC61FD00EA77E5 /* TEST_CORE_DATA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEST_CORE_DATA.swift; sourceTree = "<group>"; };
 		6973D51127043C4A00F2ABFC /* MapStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatus.swift; sourceTree = "<group>"; };
+		697A453F270866FB00B2BB79 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		6983A89326F8EFE400158265 /* ContractCoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCoreDataModel.swift; sourceTree = "<group>"; };
 		6983A89526F8EFE400158265 /* DdipCoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdipCoreDataModel.swift; sourceTree = "<group>"; };
 		69A6ED6426D407B300C1A4D5 /* DdipPinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DdipPinModel.swift; path = ProjectDDIP/Model/DdipPinModel.swift; sourceTree = SOURCE_ROOT; };
@@ -98,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				697A453D270865F300B2BB79 /* Alamofire in Frameworks */,
 				90728F0F26F61E4500657FE5 /* SlideOverCard in Frameworks */,
 				70F4760D26D42DEA00905070 /* FloatingPanel in Frameworks */,
 			);
@@ -130,6 +134,14 @@
 				695D591E26FC61FD00EA77E5 /* TEST_CORE_DATA.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		697A453E270866E400B2BB79 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				697A453F270866FB00B2BB79 /* Network.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		69A6ED6E26D409F900C1A4D5 /* Model */ = {
@@ -195,6 +207,7 @@
 		904C4B6526D3CDEE00FDC55D /* ProjectDDIP */ = {
 			isa = PBXGroup;
 			children = (
+				697A453E270866E400B2BB79 /* Network */,
 				9081635026FDA3E2006FD4E9 /* Preview Content */,
 				694EF45F26E912A000025C7B /* CoreData */,
 				69A6ED6E26D409F900C1A4D5 /* Model */,
@@ -294,6 +307,7 @@
 			packageProductDependencies = (
 				70F4760C26D42DEA00905070 /* FloatingPanel */,
 				90728F0E26F61E4500657FE5 /* SlideOverCard */,
+				697A453C270865F300B2BB79 /* Alamofire */,
 			);
 			productName = ProjectDDIP;
 			productReference = 904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */;
@@ -347,6 +361,7 @@
 			packageReferences = (
 				70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 				90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */,
+				697A453B270865F300B2BB79 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 904C4B6426D3CDEE00FDC55D /* Products */;
 			projectDirPath = "";
@@ -390,6 +405,7 @@
 				69E9592926F7976E006D76AA /* Extensions.swift in Sources */,
 				90BF216726F4F47200E00B73 /* SearchView.swift in Sources */,
 				9081635826FDC128006FD4E9 /* _TempSearchVC.swift in Sources */,
+				697A4540270866FB00B2BB79 /* Network.swift in Sources */,
 				90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */,
 				90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */,
 				90728F0526F52EEF00657FE5 /* MainView.swift in Sources */,
@@ -682,6 +698,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		697A453B270865F300B2BB79 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
@@ -701,6 +725,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		697A453C270865F300B2BB79 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 697A453B270865F300B2BB79 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		70F4760C26D42DEA00905070 /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */;

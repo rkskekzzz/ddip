@@ -48,6 +48,11 @@ extension MapView {
             //            TEST_CORE_DATA.shared.AddDdip_TEST(id: UUID().uuidString, title: "one", placeName: "one", la: 37.52628887090283, lo: 127.0293461382089)
             self.UIGestureInit()
             self.setAnnotation()
+            
+#if DEBUG
+            print("call netDebug")
+            self.netDebug()
+#endif
         }
 
         func setAnnotation() {
@@ -121,6 +126,7 @@ extension MapView {
 #endif
         }
         
+#if DEBUG
         func printDebug(with coordinate: CLLocationCoordinate2D) {
             print("is Enable (+) = \((gesturePinState == .onGesturePin) ? true : false)")
             if (gesturePinState == .onGesturePin && parent.mapViewModel.selectedPin == nil) { print("GesturePin is on the map. So you can access GesturePin even if selectedPin is NULL") }
@@ -129,12 +135,15 @@ extension MapView {
             print("Tapped at Latitiude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
             print("------------------------------------------------")
         }
-        
-        
-        
-        
-        
-        
+#endif
+
+        #if DEBUG
+        func netDebug() {
+            let network = Network()
+            network.getTest()
+            network.postTest()
+        }
+        #endif
         
         
 
