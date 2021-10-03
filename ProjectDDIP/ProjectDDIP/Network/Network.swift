@@ -27,6 +27,7 @@ struct Network {
     }
     
     
+    
     func postTest() {
             var request = URLRequest(url: URL(string: postUrl)!)
             request.httpMethod = "POST"
@@ -34,7 +35,7 @@ struct Network {
             request.timeoutInterval = 10
             
             // POST 로 보낼 정보
-            let params = ["id":"아이디", "pw":"패스워드"] as Dictionary
+            let params = ["id":"hello", "pw":"world"] as Dictionary
 
             // httpBody 에 parameters 추가
             do {
