@@ -19,9 +19,10 @@ struct chooseLocationView: View {
 struct NewMeetingView: View {
     @State private var meetingTitle = ""
     @State private var date = Date()
-
+    
     var body: some View {
         NavigationView {
+            
             Form {
                 Section {
                     TextField("모임 제목을 입력하세요.", text: $meetingTitle)
@@ -31,11 +32,13 @@ struct NewMeetingView: View {
                         .labelsHidden()
                     //여기의 date 변수를 MeetingView에서도 받아서 쓰고 싶은데 아직 구현 못함
                 }
+                .navigationBarHidden(true)
                 .padding()
             }
-            .navigationTitle("새로운 모임")
-
+            
         }
+        .navigationTitle("모임 만들기")
+        .navigationBarBackButtonHidden(false)
     }
 }
 

@@ -10,42 +10,39 @@ import MapKit
 import SlideOverCard
 import Combine
 
-enum SlideCardState {
-	case none
-	case search
-	case meeting
-}
-
 struct SlideCardView: View {
-	@State private var slideCardState: SlideCardState = .none
-    @State private var backgroundStyle = BackgroundStyle.solid
-	
-	@State private var searchViewPosition = CardPosition.bottom
-	@State private var meetingViewPosition = CardPosition.middle
-	
-	var searchViewModel: SearchViewModel = SearchViewModel()
-	var meetingViewModel: MeetingViewModel
-	
-	var body: some View {
-        switch slideCardState {
-        case .none:
-            Text("hello world") // 여기 뭐넣지
-        case .search:
-            SlideOverCard($searchViewPosition, backgroundStyle: $backgroundStyle) {
+    @Binding var slideCardState: SlideCardState
+    
+    @State private var searchViewPosition = CardPosition.bottom
+    @State private var meetingViewPosition = CardPosition.middle
+    
+    var searchViewModel: SearchViewModel = SearchViewModel()
+    var meetingViewModel: MeetingViewModel
+    
+    var body: some View {
+        ZStack {
+            SlideOverCard($searchViewPosition, backgroundStyle: .constant(BackgroundStyle.solid)) {
                 SearchView(searchBarPosition: $searchViewPosition, viewModel: searchViewModel)
                     .padding(.horizontal, 10)
-                    .animation(.default)
+                    .animation(.default, value: 3)
             }
-        case .meeting:
-            SlideOverCard($meetingViewPosition, backgroundStyle: $backgroundStyle) {
-                MeetingView()
-                    .padding(.horizontal, 10)
-                    .animation(.default)
+            .transition(.offset(x: 0, y: 80))
+            .animation(.easeInOut(duration: 1), value: 0.5)
+            .zIndex(1)
+            if slideCardState == .meeting {
+                SlideOverCard($meetingViewPosition, backgroundStyle: .constant(BackgroundStyle.solid)) {
+                    MeetingView(slideCardState: $slideCardState)
+                        .padding(.horizontal, 10)
+                        .animation(.default, value: 3)
+                }
+                .onDisappear { meetingViewPosition = .middle }
+                .transition(.offset(x: 0, y: getSlideCardPositionValue(meetingViewPosition)))
+                .animation(.easeInOut(duration: 1), value: 0.5)
+                .zIndex(2)
             }
         }
         
-		
-		
-	}
+        
+    }
 }
 

@@ -1,4 +1,4 @@
-//
+
 //  UIMapView.swift
 //  ProjectDDIP
 //
@@ -10,19 +10,26 @@ import MapKit
 import SlideOverCard
 import Combine
 
+
+enum SlideCardState {
+    case search
+    case meeting
+}
+
 struct MainView: View {
-	var mapViewModel: MapViewModel = MapViewModel()
-	var searchViewModel: SearchViewModel = SearchViewModel()
-	var meetingViewModel: MeetingViewModel = MeetingViewModel()
-   
+    @State private var slideCardState: SlideCardState = .search
+    var mapViewModel: MapViewModel = MapViewModel()
+    var searchViewModel: SearchViewModel = SearchViewModel()
+    var meetingViewModel: MeetingViewModel = MeetingViewModel()
+    
     var body: some View {
-            NavigationView {
-                ZStack {
-					MapView(mapViewModel: mapViewModel)
-					ButtonView()
-					SlideCardView(searchViewModel: searchViewModel, meetingViewModel: meetingViewModel)
-                }
-            }
-            .edgesIgnoringSafeArea(.all)
+        ZStack {
+            MapView(mapViewModel: mapViewModel)
+            ButtonView(slideCardState: $slideCardState)
+            SlideCardView(slideCardState: $slideCardState, searchViewModel: searchViewModel, meetingViewModel: meetingViewModel)
+                .zIndex(1)
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
+
