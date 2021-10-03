@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct ButtonView: View {
-    @Binding var slideCardViewState: Bool
+    @Binding var slideCardState: SlideCardState
     
     var body: some View {
         HStack {
-            NavigationLink(
-                destination: NewMeetingView()
-                    .onAppear { withAnimation { slideCardViewState.toggle() } }
-                    .onDisappear { withAnimation { slideCardViewState.toggle() } }
-            ) {
+            Button(action: {
+                slideCardState = .meeting
+            }) {
                 Image(systemName: "plus.circle")
                     .font(.system(size: 50))
                     .foregroundColor(.white)
@@ -24,12 +22,15 @@ struct ButtonView: View {
                     .cornerRadius(100)
                     .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             }
-            NavigationLink(destination: ScheduleView()) {
+            
+            Button(action: {
+                slideCardState = .meeting
+            }) {
                 Image(systemName: "calendar.circle")
-                    .font(.system(size: 50))
-                    .foregroundColor(.white)
-                    .background(Color.pink)
-                    .cornerRadius(100)
+                        .font(.system(size: 50))
+                        .foregroundColor(.white)
+                        .background(Color.pink)
+                        .cornerRadius(100)
                     .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             }
             //			.buttonStyle(.plain)
