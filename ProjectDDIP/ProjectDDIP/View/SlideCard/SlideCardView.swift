@@ -17,7 +17,7 @@ enum SlideCardState {
 }
 
 struct SlideCardView: View {
-	@State private var slideCardState: SlideCardState = .none
+    @State private var slideCardState: SlideCardState = .search
     @State private var backgroundStyle = BackgroundStyle.solid
 	
 	@State private var searchViewPosition = CardPosition.bottom
@@ -29,18 +29,18 @@ struct SlideCardView: View {
 	var body: some View {
         switch slideCardState {
         case .none:
-            Text("hello world") // 여기 뭐넣지
+            Spacer()
         case .search:
             SlideOverCard($searchViewPosition, backgroundStyle: $backgroundStyle) {
                 SearchView(searchBarPosition: $searchViewPosition, viewModel: searchViewModel)
                     .padding(.horizontal, 10)
-                    .animation(.default)
+                    .animation(.default, value: 3)
             }
         case .meeting:
             SlideOverCard($meetingViewPosition, backgroundStyle: $backgroundStyle) {
                 MeetingView()
                     .padding(.horizontal, 10)
-                    .animation(.default)
+                    .animation(.default, value: 3)
             }
         }
         

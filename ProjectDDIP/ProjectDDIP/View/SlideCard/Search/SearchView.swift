@@ -36,8 +36,8 @@ struct SearchView: View {
                 }
                 .foregroundColor(Color.black)
             }
-//            .listStyle(.plain)
-            .animation(nil)
+            .listStyle(.plain)
+            .animation(nil, value: 3)
         }
     }
 }

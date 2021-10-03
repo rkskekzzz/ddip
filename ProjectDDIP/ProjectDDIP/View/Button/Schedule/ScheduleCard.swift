@@ -39,6 +39,7 @@ struct ScheduleCard: View {
             }
             .font(.subheadline)
         }
+        .navigationBarHidden(true)
         .frame(
               minWidth: 0,
               maxWidth: .infinity,
