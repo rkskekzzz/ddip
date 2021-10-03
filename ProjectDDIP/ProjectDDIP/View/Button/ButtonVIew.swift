@@ -13,6 +13,16 @@ struct ButtonView: View {
     var body: some View {
         HStack {
             Button(action: {
+                // 여기에 액션 넣으면 됩니당
+            }) {
+                Image(systemName: "minus.circle")
+                    .font(.system(size: 50))
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    .cornerRadius(100)
+                    .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
+            }
+            Button(action: {
                 slideCardState = .meeting
             }) {
                 Image(systemName: "plus.circle")
@@ -22,7 +32,6 @@ struct ButtonView: View {
                     .cornerRadius(100)
                     .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             }
-            
             Button(action: {
                 slideCardState = .meeting
             }) {
