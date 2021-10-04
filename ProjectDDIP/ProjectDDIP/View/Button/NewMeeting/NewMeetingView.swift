@@ -22,7 +22,6 @@ struct NewMeetingView: View {
     
     var body: some View {
         NavigationView {
-            
             Form {
                 Section {
                     TextField("모임 제목을 입력하세요.", text: $meetingTitle)

@@ -39,11 +39,9 @@ struct SlideCardView: View {
                         .padding(.horizontal, 10)
                         .animation(.default, value: 3)
                 }
-                .onChange(of: meetingViewPosition, perform: {
-                    if $0 == .bottom || $0 == .min { slideCardState = .search }
-                })
-                .onDisappear { meetingViewPosition = .middle }
-                .transition(.offset(x: 0, y: getSlideCardPositionValue(meetingViewPosition)))
+                .onChange(of: meetingViewPosition, perform: closeMeetingView)
+                .onDisappear(perform: restoreMeetingView)
+                .transition(.offset(y: getSlideCardPositionValue(meetingViewPosition)))
                 .animation(.easeInOut(duration: 1), value: 0.5)
                 .zIndex(2)
             }
@@ -59,8 +57,17 @@ struct SlideCardView: View {
 //                .zIndex(3)
 //            }
         }
-        
-        
     }
+    
+    private func closeMeetingView(currentPosition: CardPosition) {
+        if currentPosition == .bottom || currentPosition == .top {
+            slideCardState = .search
+        }
+    }
+    
+    private func restoreMeetingView() {
+        meetingViewPosition = .middle
+    }
+    
 }
 
