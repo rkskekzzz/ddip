@@ -15,6 +15,7 @@ struct SlideCardView: View {
     
     @State private var searchViewPosition = CardPosition.bottom
     @State private var meetingViewPosition = CardPosition.middle
+    @State private var scheduleViewPosition = CardPosition.top
     
     var searchViewModel: SearchViewModel = SearchViewModel()
     var meetingViewModel: MeetingViewModel
@@ -39,6 +40,17 @@ struct SlideCardView: View {
                 .transition(.offset(x: 0, y: getSlideCardPositionValue(meetingViewPosition)))
                 .animation(.easeInOut(duration: 1), value: 0.5)
                 .zIndex(2)
+            }
+            if slideCardState == .schedule {
+                SlideOverCard($scheduleViewPosition, backgroundStyle: .constant(BackgroundStyle.solid)) {
+                    ScheduleView(slideCardState: $slideCardState, mySchedule: EnvironmentObject<MySchedule>())
+                        .padding(.horizontal, 10)
+                        .animation(.default, value: 3)
+                }
+                .onDisappear { scheduleViewPosition = .top }
+                .transition(.offset(x: 0, y: getSlideCardPositionValue(scheduleViewPosition)))
+                .animation(.easeInOut(duration: 1), value: 0.5)
+                .zIndex(3)
             }
         }
         

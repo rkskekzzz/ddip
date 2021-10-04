@@ -33,7 +33,7 @@ struct ButtonView: View {
                     .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             }
             Button(action: {
-                slideCardState = .meeting
+                slideCardState = .schedule
             }) {
                 Image(systemName: "calendar.circle")
                         .font(.system(size: 50))

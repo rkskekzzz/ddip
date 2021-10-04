@@ -14,6 +14,7 @@ import Combine
 enum SlideCardState {
     case search
     case meeting
+    case schedule
 }
 
 struct MainView: View {
