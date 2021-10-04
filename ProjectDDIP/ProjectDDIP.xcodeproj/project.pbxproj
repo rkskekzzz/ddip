@@ -22,7 +22,6 @@
 		69E9592B26F79FF8006D76AA /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E9592A26F79FF8006D76AA /* Defines.swift */; };
 		7001217727030A59001735B9 /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7001217627030A59001735B9 /* MeetingViewModel.swift */; };
 		7001217A27030B40001735B9 /* ButtonVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7001217927030B40001735B9 /* ButtonVIew.swift */; };
-		70F4760D26D42DEA00905070 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 70F4760C26D42DEA00905070 /* FloatingPanel */; };
 		904C4B6726D3CDEE00FDC55D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6626D3CDEE00FDC55D /* AppDelegate.swift */; };
 		904C4B6926D3CDEE00FDC55D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C4B6826D3CDEE00FDC55D /* SceneDelegate.swift */; };
 		904C4B7026D3CDF000FDC55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904C4B6F26D3CDF000FDC55D /* Assets.xcassets */; };
@@ -32,7 +31,6 @@
 		90728F0526F52EEF00657FE5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0426F52EEF00657FE5 /* MainView.swift */; };
 		90728F0726F5D1B900657FE5 /* ScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0626F5D1B900657FE5 /* ScheduleCard.swift */; };
 		90728F0926F5D96700657FE5 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90728F0826F5D96700657FE5 /* ScheduleView.swift */; };
-		90728F0F26F61E4500657FE5 /* SlideOverCard in Frameworks */ = {isa = PBXBuildFile; productRef = 90728F0E26F61E4500657FE5 /* SlideOverCard */; };
 		9081634F26FDA386006FD4E9 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081634E26FDA386006FD4E9 /* ScheduleModel.swift */; };
 		9081635226FDA3E2006FD4E9 /* SceduleDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081635126FDA3E2006FD4E9 /* SceduleDatabase.swift */; };
 		9081635626FDAD49006FD4E9 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081635526FDAD49006FD4E9 /* SearchViewModel.swift */; };
@@ -40,6 +38,7 @@
 		9081635D26FDC784006FD4E9 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081635C26FDC784006FD4E9 /* MapViewModel.swift */; };
 		9081635F26FDD623006FD4E9 /* SlideCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081635E26FDD623006FD4E9 /* SlideCardView.swift */; };
 		90937F01270A49CC002D3820 /* Utiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90937F00270A49CC002D3820 /* Utiles.swift */; };
+		90937F75270B211C002D3820 /* SlideOverCard in Frameworks */ = {isa = PBXBuildFile; productRef = 90937F74270B211C002D3820 /* SlideOverCard */; };
 		90BF216726F4F47200E00B73 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216626F4F47200E00B73 /* SearchView.swift */; };
 		90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216826F4F5AA00E00B73 /* SearchBar.swift */; };
 		90F8E06826FA523B00859E61 /* _TempMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F8E06726FA523B00859E61 /* _TempMapVC.swift */; };
@@ -100,8 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90728F0F26F61E4500657FE5 /* SlideOverCard in Frameworks */,
-				70F4760D26D42DEA00905070 /* FloatingPanel in Frameworks */,
+				90937F75270B211C002D3820 /* SlideOverCard in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,8 +293,7 @@
 			);
 			name = ProjectDDIP;
 			packageProductDependencies = (
-				70F4760C26D42DEA00905070 /* FloatingPanel */,
-				90728F0E26F61E4500657FE5 /* SlideOverCard */,
+				90937F74270B211C002D3820 /* SlideOverCard */,
 			);
 			productName = ProjectDDIP;
 			productReference = 904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */;
@@ -348,8 +345,7 @@
 			);
 			mainGroup = 904C4B5A26D3CDED00FDC55D;
 			packageReferences = (
-				70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
-				90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */,
+				90937F73270B211C002D3820 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */,
 			);
 			productRefGroup = 904C4B6426D3CDEE00FDC55D /* Products */;
 			projectDirPath = "";
@@ -686,33 +682,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+		90937F73270B211C002D3820 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scenee/FloatingPanel";
+			repositoryURL = "https://github.com/rkskekzzz/swiftUI-slide-over-card.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.4.0;
-			};
-		};
-		90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/moifort/swiftUI-slide-over-card";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.1;
+				kind = revision;
+				revision = aeb222b8b720a755bb29aa64c1cb7a5d49009449;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		70F4760C26D42DEA00905070 /* FloatingPanel */ = {
+		90937F74270B211C002D3820 /* SlideOverCard */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
-			productName = FloatingPanel;
-		};
-		90728F0E26F61E4500657FE5 /* SlideOverCard */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 90728F0D26F61E4500657FE5 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */;
+			package = 90937F73270B211C002D3820 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */;
 			productName = SlideOverCard;
 		};
 /* End XCSwiftPackageProductDependency section */

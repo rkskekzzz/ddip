@@ -15,27 +15,34 @@ struct SlideCardView: View {
     
     @State private var searchViewPosition = CardPosition.bottom
     @State private var meetingViewPosition = CardPosition.middle
-    @State private var scheduleViewPosition = CardPosition.top
+    @State private var scheduleViewPosition = CardPosition.max
     
     var searchViewModel: SearchViewModel = SearchViewModel()
     var meetingViewModel: MeetingViewModel
     
+    
+    // 왜 else if / switch case 하면 안되나요
     var body: some View {
         ZStack {
-            SlideOverCard($searchViewPosition, backgroundStyle: .constant(BackgroundStyle.solid)) {
-                SearchView(searchBarPosition: $searchViewPosition, viewModel: searchViewModel)
-                    .padding(.horizontal, 10)
-                    .animation(.default, value: 3)
+            if slideCardState == .search {
+                SlideOverCard($searchViewPosition, backgroundStyle: .constant(BackgroundStyle.solid)) {
+                    SearchView(searchBarPosition: $searchViewPosition, viewModel: searchViewModel)
+                        .padding(.horizontal, 10)
+                        .animation(.default, value: 3)
+                }
+                .transition(.offset(x: 0, y: 80))
+                .animation(.easeInOut(duration: 1), value: 0.5)
+                .zIndex(1)
             }
-            .transition(.offset(x: 0, y: 80))
-            .animation(.easeInOut(duration: 1), value: 0.5)
-            .zIndex(1)
             if slideCardState == .meeting {
-                SlideOverCard($meetingViewPosition, backgroundStyle: .constant(BackgroundStyle.solid)) {
+                SlideOverCard($meetingViewPosition, backgroundStyle: .constant(BackgroundStyle.solid), minDragPosition: .constant(.min)) {
                     MeetingView(slideCardState: $slideCardState)
                         .padding(.horizontal, 10)
                         .animation(.default, value: 3)
                 }
+                .onChange(of: meetingViewPosition, perform: {
+                    if $0 == .bottom || $0 == .min { slideCardState = .search }
+                })
                 .onDisappear { meetingViewPosition = .middle }
                 .transition(.offset(x: 0, y: getSlideCardPositionValue(meetingViewPosition)))
                 .animation(.easeInOut(duration: 1), value: 0.5)
@@ -47,7 +54,7 @@ struct SlideCardView: View {
                         .padding(.horizontal, 10)
                         .animation(.default, value: 3)
                 }
-                .onDisappear { scheduleViewPosition = .top }
+                .onDisappear { scheduleViewPosition = .max }
                 .transition(.offset(x: 0, y: getSlideCardPositionValue(scheduleViewPosition)))
                 .animation(.easeInOut(duration: 1), value: 0.5)
                 .zIndex(3)

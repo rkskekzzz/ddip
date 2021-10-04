@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ButtonView: View {
     @Binding var slideCardState: SlideCardState
+    @State var state: Bool = false
     
     var body: some View {
         HStack {

@@ -10,11 +10,15 @@ import SlideOverCard
 
 func getSlideCardPositionValue(_ position: CardPosition) -> CGFloat {
     switch position {
+    case .min:
+        return 0
     case .bottom:
         return 80
     case .middle:
         return UIScreen.main.bounds.height * (1 - 1/1.8)
     case .top:
         return UIScreen.main.bounds.height - 80
+    case .max:
+        return UIScreen.main.bounds.height
     }
 }
