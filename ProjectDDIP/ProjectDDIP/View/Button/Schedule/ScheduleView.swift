@@ -13,6 +13,8 @@ class MySchedule: ObservableObject {
 }
 
 struct ScheduleView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @Binding var slideCardState: SlideCardState
     @State private var activateDeleteButton:Bool = false
     
@@ -24,25 +26,45 @@ struct ScheduleView: View {
     }
     
     var body: some View {
+        
         NavigationView {
-            List(mySchedule.item) { schedule in
-                ScheduleCard(activateDeleteButton: $activateDeleteButton, schedule: schedule, deleteScheldule: deleteSchedule)
-                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(radius: 4))
-                    .padding(.vertical, 5)
+//            List(mySchedule.item) { schedule in
+            List {
+                ForEach(mySchedule.item, id: \.id) { schedule in
+                    ScheduleCard(activateDeleteButton: $activateDeleteButton, schedule: schedule)
+                        .background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(radius: 4))
+                        .padding(.vertical, 5)
+    //
+                }
+                .onDelete(perform: onDelete)
+                .onMove(perform: onMove)
+                
+            }
+            .toolbar {
+                EditButton()
             }
             .listStyle(.plain)
             .navigationBarHidden(false)
             .navigationBarBackButtonHidden(false)
             .navigationTitle("Schedule")
             .navigationBarItems(leading: Button(action: {
-                slideCardState = .search
+//                slideCardState = .search
+                presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("back")
-            }), trailing: Button(action: { activateDeleteButton.toggle() }, label: {
-                Text("edit")
             }))
+            
         }
     }
+    
+    private func onDelete(at offsets: IndexSet) {
+        mySchedule.item.remove(atOffsets: offsets)
+    }
+    
+    private func onMove(source: IndexSet, destination: Int) {
+        mySchedule.item.move(fromOffsets: source, toOffset: destination)
+    }
+    
 }
 
 //struct ScheduleView_Previews: PreviewProvider {

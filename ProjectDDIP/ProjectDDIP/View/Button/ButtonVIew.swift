@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ButtonView: View {
     @Binding var slideCardState: SlideCardState
-    @State var state: Bool = false
+    @State var showSheet: Bool = false
     
     var body: some View {
         HStack {
@@ -34,7 +34,8 @@ struct ButtonView: View {
                     .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             }
             Button(action: {
-                slideCardState = .schedule
+//                slideCardState = .schedule
+                showSheet = true
             }) {
                 Image(systemName: "calendar.circle")
                         .font(.system(size: 50))
@@ -43,7 +44,12 @@ struct ButtonView: View {
                         .cornerRadius(100)
                     .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             }
-            //			.buttonStyle(.plain)
+//            .fullScreenCover(isPresented: $showSheet, content: {
+//                ScheduleView(slideCardState: $slideCardState, mySchedule: EnvironmentObject<MySchedule>())
+//            })
+            .sheet(isPresented: $showSheet, content: {
+                ScheduleView(slideCardState: $slideCardState, mySchedule: EnvironmentObject<MySchedule>())
+            })
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         .padding(.vertical, 100)

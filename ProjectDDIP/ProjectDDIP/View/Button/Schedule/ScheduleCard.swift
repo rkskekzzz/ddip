@@ -12,7 +12,7 @@ struct ScheduleCard: View {
     @Binding var activateDeleteButton: Bool
 
     let schedule: ScheduleModel
-    var deleteScheldule : (UUID) -> ()
+//    var deleteScheldule : (UUID) -> ()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,11 +25,11 @@ struct ScheduleCard: View {
                     .font(.caption2)
                     .foregroundColor(.primary)
                 Spacer()
-                if activateDeleteButton {
-                    Button(action: { deleteScheldule(schedule.id) }, label: { Image(systemName: "minus.circle") })
-                        .font(.title2)  //size of minus.circle button
-                        .foregroundColor(.red)
-                }
+//                if activateDeleteButton {
+//                    Button(action: { deleteScheldule(schedule.id) }, label: { Image(systemName: "minus.circle") })
+//                        .font(.title2)  //size of minus.circle button
+//                        .foregroundColor(.red)
+//                }
                 
             }
             Spacer()
@@ -60,10 +60,10 @@ struct ScheduleCard: View {
 //}
 
 
-struct ScheduleCard_Previews: PreviewProvider {
-//    static var schedule = MySchedule
-
-    static var previews: some View {
-        ScheduleCard(activateDeleteButton: .constant(false), schedule: ScheduleModel.data[0], deleteScheldule: {id in print(id)})
-    }
-}
+//struct ScheduleCard_Previews: PreviewProvider {
+////    static var schedule = MySchedule
+//
+//    static var previews: some View {
+//        ScheduleCard(activateDeleteButton: .constant(false), schedule: ScheduleModel.data[0], deleteScheldule: {id in print(id)})
+//    }
+//}

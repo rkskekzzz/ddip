@@ -152,6 +152,7 @@
 				9081635E26FDD623006FD4E9 /* SlideCardView.swift */,
 				90728F0A26F60C8D00657FE5 /* Search */,
 				3AD1CA3026FDB45500B454F4 /* Meeting */,
+				9081635C26FDC784006FD4E9 /* MapViewModel.swift */,
 			);
 			path = SlideCard;
 			sourceTree = "<group>";
@@ -224,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				9081635526FDAD49006FD4E9 /* SearchViewModel.swift */,
-				9081635C26FDC784006FD4E9 /* MapViewModel.swift */,
 				7001217627030A59001735B9 /* MeetingViewModel.swift */,
 				90937F00270A49CC002D3820 /* Utiles.swift */,
 			);
@@ -687,7 +687,7 @@
 			repositoryURL = "https://github.com/rkskekzzz/swiftUI-slide-over-card.git";
 			requirement = {
 				kind = revision;
-				revision = aeb222b8b720a755bb29aa64c1cb7a5d49009449;
+				revision = 29e380cdf638c3001634782207e735087319c2a6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

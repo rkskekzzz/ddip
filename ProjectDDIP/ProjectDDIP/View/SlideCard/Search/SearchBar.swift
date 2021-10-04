@@ -24,7 +24,11 @@ struct SearchBar: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        // do something with change
+        if searchBarPosition != .top {
+            uiView.text = nil
+            uiView.resignFirstResponder()
+//            self.viewModel.searchText = ""
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -58,6 +62,10 @@ extension SearchBar {
             parent.searchBarPosition = .bottom
             searchBar.text = nil
             searchBar.resignFirstResponder()
+        }
+        
+        func searchCanceled(_ searchBar: UISearchBar) {
+            searchBarCancelButtonClicked(searchBar)
         }
     }
 }

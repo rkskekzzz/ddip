@@ -15,12 +15,11 @@ struct SlideCardView: View {
     
     @State private var searchViewPosition = CardPosition.bottom
     @State private var meetingViewPosition = CardPosition.middle
-    @State private var scheduleViewPosition = CardPosition.max
-    
+    @State private var scheduleViewPosition = CardPosition.top
+    @State private var touch: Bool = true
     var searchViewModel: SearchViewModel = SearchViewModel()
     var meetingViewModel: MeetingViewModel
-    
-    
+
     // 왜 else if / switch case 하면 안되나요
     var body: some View {
         ZStack {
@@ -48,17 +47,17 @@ struct SlideCardView: View {
                 .animation(.easeInOut(duration: 1), value: 0.5)
                 .zIndex(2)
             }
-            if slideCardState == .schedule {
-                SlideOverCard($scheduleViewPosition, backgroundStyle: .constant(BackgroundStyle.solid)) {
-                    ScheduleView(slideCardState: $slideCardState, mySchedule: EnvironmentObject<MySchedule>())
-                        .padding(.horizontal, 10)
-                        .animation(.default, value: 3)
-                }
-                .onDisappear { scheduleViewPosition = .max }
-                .transition(.offset(x: 0, y: getSlideCardPositionValue(scheduleViewPosition)))
-                .animation(.easeInOut(duration: 1), value: 0.5)
-                .zIndex(3)
-            }
+//            if slideCardState == .schedule {
+//                SlideOverCard($scheduleViewPosition, backgroundStyle: .constant(BackgroundStyle.solid)) {
+//                    ScheduleView(slideCardState: $slideCardState, mySchedule: EnvironmentObject<MySchedule>())
+//                    .padding(.horizontal, 10)
+//                    .animation(.default, value: 3)
+//                }
+//                .onDisappear { scheduleViewPosition = .top }
+//                .transition(.offset(x: 0, y: getSlideCardPositionValue(scheduleViewPosition)))
+//                .animation(.easeInOut(duration: 1), value: 0.5)
+//                .zIndex(3)
+//            }
         }
         
         
