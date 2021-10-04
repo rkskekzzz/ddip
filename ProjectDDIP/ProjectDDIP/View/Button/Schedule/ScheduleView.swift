@@ -21,38 +21,35 @@ struct ScheduleView: View {
     
     @EnvironmentObject var mySchedule: MySchedule
     
-    func deleteSchedule(id: UUID) {
-        mySchedule.item = mySchedule.item.filter { $0.id != id }
-    }
+//    지워도 될듯
+//    func deleteSchedule(id: UUID) {
+//        mySchedule.item = mySchedule.item.filter { $0.id != id }
+//    }
     
     var body: some View {
         
         NavigationView {
-//            List(mySchedule.item) { schedule in
+            //            List(mySchedule.item) { schedule in
             List {
                 ForEach(mySchedule.item, id: \.id) { schedule in
                     ScheduleCard(activateDeleteButton: $activateDeleteButton, schedule: schedule)
                         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(radius: 4))
                         .padding(.vertical, 5)
-    //
+                    //
                 }
                 .onDelete(perform: onDelete)
                 .onMove(perform: onMove)
                 
-            }
-            .toolbar {
-                EditButton()
             }
             .listStyle(.plain)
             .navigationBarHidden(false)
             .navigationBarBackButtonHidden(false)
             .navigationTitle("Schedule")
             .navigationBarItems(leading: Button(action: {
-//                slideCardState = .search
+                //                slideCardState = .search
                 presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("back")
-            }))
+            }, label: { Text("back")
+            }), trailing: EditButton() )
             
         }
     }
