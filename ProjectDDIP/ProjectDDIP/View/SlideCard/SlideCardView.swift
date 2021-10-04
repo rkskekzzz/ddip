@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MapKit
+//import MapKit
 import SlideOverCard
 import Combine
 
@@ -41,8 +41,6 @@ struct SlideCardView: View {
                 .zIndex(2)
             }
         }
-        
-        
     }
 }
 

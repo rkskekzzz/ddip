@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import Combine
 
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
@@ -14,7 +15,8 @@ struct MapView: UIViewRepresentable {
     let mapView = MKMapView()
 
     @ObservedObject var mapViewModel: MapViewModel
-
+    @Binding var gesturePinState: GesturePinState
+    
     func makeUIView(context: Context) -> UIViewType {
         mapView.delegate = context.coordinator
         let coordinate = CLLocationCoordinate2D(
@@ -35,6 +37,13 @@ struct MapView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }
+    
+//    func makeUIViewController(context: UIViewRepresentableContext<MapView>) -> UIHostingController<MainView> {
+//        return UIHostingController(rootView: MainView())
+//    }
+//
+//    func updateUIViewController(_ uiViewController: UIHostingController<MainView>, context: UIViewRepresentableContext<MapView>) {
+//    }
 }
 
 extension MapView {
@@ -46,6 +55,7 @@ extension MapView {
             super.init()
             
             //            TEST_CORE_DATA.shared.AddDdip_TEST(id: UUID().uuidString, title: "one", placeName: "one", la: 37.52628887090283, lo: 127.0293461382089)
+            Network.share.set(coordinator: self)
             self.UIGestureInit()
             self.setAnnotation()
             
@@ -88,14 +98,14 @@ extension MapView {
             parent.mapViewModel.selectedPin?.view?.setSelected(false, animated: true)
             parent.mapViewModel.selectedPin = model
 
-            if parent.mapViewModel.gesturePin.id != "" && (model == nil || model?.id == parent.mapViewModel.gesturePin.id) { gesturePinState = .onGesturePin }
-            else { gesturePinState = .offGesturePin }
+            if parent.mapViewModel.gesturePin.id != "" && (model == nil || model?.id == parent.mapViewModel.gesturePin.id) { parent.gesturePinState = .on }
+            else { parent.gesturePinState = .off }
         }
         
         func putGesturePin(location coordinate: CLLocationCoordinate2D) {
             parent.mapViewModel.gesturePin.set(id: UUID().uuidString, title: "gesturePin", location: coordinate)
             appendAnnotation(with: parent.mapViewModel.gesturePin)
-            gesturePinState = .onGesturePin
+            parent.gesturePinState = .on
         }
         
         func disposeEmptyZone(with model: DdipPinModel, location coordinate: CLLocationCoordinate2D) {
@@ -128,9 +138,12 @@ extension MapView {
         
 #if DEBUG
         func printDebug(with coordinate: CLLocationCoordinate2D) {
-            print("is Enable (+) = \((gesturePinState == .onGesturePin) ? true : false)")
-            if (gesturePinState == .onGesturePin && parent.mapViewModel.selectedPin == nil) { print("GesturePin is on the map. So you can access GesturePin even if selectedPin is NULL") }
-            if parent.mapViewModel.selectedPin != nil { print("Activate target = \(parent.mapViewModel.selectedPin!.title!)") }
+            print("is Enable (+) = \((parent.gesturePinState == .on) ? true : false)")
+            if (parent.gesturePinState == .on && parent.mapViewModel.selectedPin == nil) {
+                print("GesturePin is on the map. So you can access GesturePin even if selectedPin is NULL")
+            }
+            if parent.mapViewModel.selectedPin != nil { print("Activate target = \(parent.mapViewModel.selectedPin!.title!)")
+            }
             else { print("Activate target (selectedPin) = NULL") }
             print("Tapped at Latitiude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
             print("------------------------------------------------")
@@ -139,9 +152,8 @@ extension MapView {
 
         #if DEBUG
         func netDebug() {
-            let network = Network()
-            network.getTest()
-            network.postTest()
+//            networkModel.getTest()
+//            networkModel.postTest()
         }
         #endif
         

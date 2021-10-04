@@ -15,21 +15,17 @@ class MapItemModel: ObservableObject {
 
 final class MapViewModel: ObservableObject {
     
-//    @Published var focusedView: MKAnnotationView? = nil // selectedPinView
-//    @Published var annotations: [DdipPinModel] = [] // Meeting
-    
     @Published var selectedPin: DdipPinModel? = nil
     @Published var gesturePin = DdipPinModel(id: "", meetingName: "", location: CLLocationCoordinate2D(latitude: 0, longitude: 0)) // PinTemplate
-
+    
     init() {
+        
 //        setAnnotation()
 //        UIGestureInit()
     }
     
-    func center(to location: CLLocation, zoomLevel: String) {
-        
-    }
-    
-    
+//    func center(to location: CLLocation, zoomLevel: String) {
+//
+//    }
     
 }
