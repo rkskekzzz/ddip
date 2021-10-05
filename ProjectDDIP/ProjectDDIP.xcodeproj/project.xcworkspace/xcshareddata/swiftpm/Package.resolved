@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/scenee/FloatingPanel",
         "state": {
           "branch": null,
-          "revision": "b8fcb50874f50bb511173700f87b09344c568c6a",
-          "version": "2.4.0"
+          "revision": "29beea0ff9b8744da4ba618907f48c0439995d00",
+          "version": "2.5.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/moifort/swiftUI-slide-over-card",
         "state": {
           "branch": null,
-          "revision": "9fdc77c16d639d80a789daad0e036a24faf00825",
-          "version": "1.2.1"
+          "revision": "8ef209792c080bc1852074f91289ba46339367bb",
+          "version": "1.2.2"
         }
       }
     ]
