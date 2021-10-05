@@ -14,7 +14,6 @@
 		694EF47426E92B1E00025C7B /* Ddip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 694EF47226E92B1E00025C7B /* Ddip.xcdatamodeld */; };
 		695D591D26FC605D00EA77E5 /* ICoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D591C26FC605D00EA77E5 /* ICoreData.swift */; };
 		695D591F26FC61FD00EA77E5 /* TEST_CORE_DATA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D591E26FC61FD00EA77E5 /* TEST_CORE_DATA.swift */; };
-		697A453D270865F300B2BB79 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 697A453C270865F300B2BB79 /* Alamofire */; };
 		697A4544270B04E900B2BB79 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A4543270B04E900B2BB79 /* Network.swift */; };
 		6983A89726F8EFE400158265 /* ContractCoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983A89326F8EFE400158265 /* ContractCoreDataModel.swift */; };
 		6983A89926F8EFE400158265 /* DdipCoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983A89526F8EFE400158265 /* DdipCoreDataModel.swift */; };
@@ -40,6 +39,8 @@
 		9081635F26FDD623006FD4E9 /* SlideCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081635E26FDD623006FD4E9 /* SlideCardView.swift */; };
 		90937F01270A49CC002D3820 /* Utiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90937F00270A49CC002D3820 /* Utiles.swift */; };
 		90937F75270B211C002D3820 /* SlideOverCard in Frameworks */ = {isa = PBXBuildFile; productRef = 90937F74270B211C002D3820 /* SlideOverCard */; };
+		90937F76270C4386002D3820 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 70F4760C26D42DEA00905070 /* FloatingPanel */; };
+		90937F79270C43E2002D3820 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 90937F78270C43E2002D3820 /* Alamofire */; };
 		90BF216726F4F47200E00B73 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216626F4F47200E00B73 /* SearchView.swift */; };
 		90BF216926F4F5AA00E00B73 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BF216826F4F5AA00E00B73 /* SearchBar.swift */; };
 		90F8E06826FA523B00859E61 /* _TempMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F8E06726FA523B00859E61 /* _TempMapVC.swift */; };
@@ -100,8 +101,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90937F79270C43E2002D3820 /* Alamofire in Frameworks */,
+				90937F76270C4386002D3820 /* FloatingPanel in Frameworks */,
 				90937F75270B211C002D3820 /* SlideOverCard in Frameworks */,
-				697A453D270865F300B2BB79 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +307,7 @@
 			packageProductDependencies = (
 				90937F74270B211C002D3820 /* SlideOverCard */,
 				70F4760C26D42DEA00905070 /* FloatingPanel */,
+				90937F78270C43E2002D3820 /* Alamofire */,
 			);
 			productName = ProjectDDIP;
 			productReference = 904C4B6326D3CDEE00FDC55D /* ProjectDDIP.app */;
@@ -358,6 +361,7 @@
 			packageReferences = (
 				90937F73270B211C002D3820 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */,
 				70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				90937F77270C43E2002D3820 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 904C4B6426D3CDEE00FDC55D /* Products */;
 			projectDirPath = "";
@@ -694,14 +698,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		697A453B270865F300B2BB79 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
@@ -718,14 +714,17 @@
 				revision = 29e380cdf638c3001634782207e735087319c2a6;
 			};
 		};
+		90937F77270C43E2002D3820 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		697A453C270865F300B2BB79 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 697A453B270865F300B2BB79 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		70F4760C26D42DEA00905070 /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 70F4760B26D42DEA00905070 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
@@ -735,6 +734,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 90937F73270B211C002D3820 /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */;
 			productName = SlideOverCard;
+		};
+		90937F78270C43E2002D3820 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90937F77270C43E2002D3820 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 

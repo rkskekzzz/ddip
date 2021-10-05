@@ -38,7 +38,7 @@ struct ScheduleView: View {
                     //
                 }
                 .onDelete(perform: onDelete)
-                .onMove(perform: onMove)
+//                .onMove(perform: onMove)
                 
             }
             .listStyle(.plain)
