@@ -15,6 +15,7 @@ struct ButtonView: View {
         HStack {
             Button(action: {
                 // 여기에 액션 넣으면 됩니당
+                Network.share.postButtonTest()
             }) {
                 Image(systemName: "minus.circle")
                     .font(.system(size: 50))
