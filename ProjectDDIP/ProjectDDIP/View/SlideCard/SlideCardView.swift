@@ -60,7 +60,7 @@ struct SlideCardView: View {
     }
     
     private func closeMeetingView(currentPosition: CardPosition) {
-        if currentPosition == .bottom || currentPosition == .top {
+        if currentPosition == .bottom || currentPosition == .min {
             slideCardState = .search
         }
     }
