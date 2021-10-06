@@ -1,4 +1,4 @@
-import { AttendModel } from "../../model/index.js";
+import { AttendModel } from "../../models/index.js";
 import ApiError from "../../modules/error.js"
 
 async function getUserAttend(user_id) {

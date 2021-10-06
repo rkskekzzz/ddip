@@ -1,4 +1,4 @@
-import { MeetingPinModel } from "../../model/index.js";
+import { MeetingPinModel } from "../../models/index.js";
 import ApiError from "../../modules/error.js"
 
 async function getMeetingPin(id) {

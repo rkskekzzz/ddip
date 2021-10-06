@@ -1,5 +1,5 @@
-import { MeetingDetailModel } from "../../model/index.js";
-import { MeetingPinModel } from "../../model/index.js";
+import { MeetingDetailModel } from "../../models/index.js";
+import { MeetingPinModel } from "../../models/index.js";
 import ApiError from "../../modules/error.js"
 
 // TODO: check all transaction is well conform

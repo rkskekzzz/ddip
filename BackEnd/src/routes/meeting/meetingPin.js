@@ -1,7 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 
-import MeetingPinController from '../../controller/meeting/meetingPin.js';
+import MeetingPinController from '../../controllers/meeting/meetingPin.js';
 
 const router = express.Router();
 

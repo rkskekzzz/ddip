@@ -1,7 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 
-import UserController from '../../controller/user/user.js';
+import UserController from '../../controllers/user/user.js';
 import { validateUser } from '../../middleware/validator/validateUser.js';
 import { validateError } from '../../middleware/validator/validateError.js';
   

@@ -1,4 +1,4 @@
-import { UserModel } from "../../model/index.js";
+import { UserModel } from "../../models/index.js";
 import ApiError from "../../modules/error.js"
 
 async function getUser(id) {

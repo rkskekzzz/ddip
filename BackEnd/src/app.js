@@ -1,12 +1,12 @@
 import express from 'express';
 
 import config from './config/index.js';
-import { Sequelize } from './model/database.js';
+import { Sequelize } from './models/database.js';
 import routes from './routes/index.js';
 
-import swaggerLoader from './loader/swagger.js';
-import expressLoader from './loader/express.js'
-import errorLoader from './loader/error.js';
+import swaggerLoader from './loaders/swagger.js';
+import expressLoader from './loaders/express.js'
+import errorLoader from './loaders/error.js';
 
 const app = express();
 

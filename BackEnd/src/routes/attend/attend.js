@@ -1,7 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 
-import AttendController from '../../controller/attend/attend.js';
+import AttendController from '../../controllers/attend/attend.js';
 
 const router = express.Router();
 

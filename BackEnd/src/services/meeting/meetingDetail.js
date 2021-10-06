@@ -1,4 +1,4 @@
-import { MeetingDetailModel } from "../../model/index.js";
+import { MeetingDetailModel } from "../../models/index.js";
 import ApiError from "../../modules/error.js"
 
 async function getMeetingDetail(id) {
