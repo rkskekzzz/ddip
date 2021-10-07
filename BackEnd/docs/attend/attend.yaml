@@ -26,6 +26,7 @@ components:
       required:
         - user_id
         - meeting_id
+        - created_at
       properties:
         user_id:
           type: string

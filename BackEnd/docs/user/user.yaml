@@ -4,14 +4,12 @@ paths:
       tags:
         - 유저
       summary: 유저를 가져옵니다.
-      description: >
-        유저를 가져옵니다. <br>
-        주어진 id의 유저 정보를 가져옵니다.
       parameters:
         - in: path
           name: id
           schema:
             type: string
+            example: user123
           required: true
           description: 유저 아이디
       responses:
@@ -75,6 +73,7 @@ paths:
           name: id
           schema:
             type: string
+          example: abc
           required: true
           description: 유저 아이디
       responses:
@@ -97,6 +96,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserInput'
+            example:
+              name: hello
       responses:
         '200':
           description: OK
@@ -104,6 +105,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              example:
+                id: abc
+                name: asdf
 
 components:
   schemas:
