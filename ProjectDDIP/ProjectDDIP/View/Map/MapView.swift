@@ -80,13 +80,7 @@ extension MapView {
             parent.mapView.addGestureRecognizer(tapGesture)
         }
 
-        
-        
-        
-        
-        
-        
-        
+
         func disposeDdipZone(with model: DdipPinModel) {
             if parent.mapViewModel.selectedPin?.id == model.id { return }
             

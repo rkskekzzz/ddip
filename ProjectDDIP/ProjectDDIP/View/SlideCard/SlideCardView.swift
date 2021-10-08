@@ -17,6 +17,7 @@ struct SlideCardView: View {
     @State private var meetingViewPosition = CardPosition.middle
     @State private var scheduleViewPosition = CardPosition.top
     @State private var touch: Bool = true
+    
     var searchViewModel: SearchViewModel = SearchViewModel()
     var meetingViewModel: MeetingViewModel
 
@@ -58,16 +59,16 @@ struct SlideCardView: View {
 //            }
         }
     }
-    
+
     private func closeMeetingView(currentPosition: CardPosition) {
         if currentPosition == .bottom || currentPosition == .min {
             slideCardState = .search
         }
     }
-    
+
     private func restoreMeetingView() {
         meetingViewPosition = .middle
     }
-    
+
 }
 

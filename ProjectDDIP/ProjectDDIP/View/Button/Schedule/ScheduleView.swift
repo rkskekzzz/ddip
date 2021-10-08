@@ -27,7 +27,6 @@ struct ScheduleView: View {
 //    }
     
     var body: some View {
-        
         NavigationView {
             //            List(mySchedule.item) { schedule in
             List {
@@ -50,7 +49,6 @@ struct ScheduleView: View {
                 presentationMode.wrappedValue.dismiss()
             }, label: { Text("back")
             }), trailing: EditButton() )
-            
         }
     }
     

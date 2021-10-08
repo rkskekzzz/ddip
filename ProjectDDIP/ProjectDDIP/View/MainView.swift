@@ -22,12 +22,12 @@ enum GesturePinState {
     case on
     case off
 }
+
 //
 //enum NetRequestState {
 //    case on
 //    case off
 //}
-
 
 struct MainView: View {
     @State private var slideCardState: SlideCardState = .search
@@ -40,7 +40,6 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-//            NetworkView(netRequestState: $netRequestState, mapViewModel: mapViewModel)
             MapView(mapViewModel: mapViewModel, gesturePinState: $gesturePinState)
             ButtonView(slideCardState: $slideCardState)
             SlideCardView(slideCardState: $slideCardState, searchViewModel: searchViewModel, meetingViewModel: meetingViewModel)
